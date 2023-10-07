@@ -61,7 +61,10 @@ function BodyContent({ contentType }: { contentType: string }) {
         {contentType === "nearBy" ? "내 주변 핫딜" : "단골 가게 핫딜"}
       </div>
       <div className="h-[65%] flex">
-        <div className="h-full w-2/5 bg-emerald-500">
+        <div
+          className="h-full w-2/5 bg-emerald-500"
+          onClick={() => navigate("/store/1")}
+        >
           <div className="h-5/6 flex items-center justify-center">사진</div>
           <div className="h-1/6 flex items-center bg-slate-300">가게이름</div>
         </div>

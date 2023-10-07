@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import Main from "../pages/Main";
 import Nearby from "../pages/Nearby";
 import Favorite from "../pages/Favorite";
+import StoreDetail from "../pages/StoreDetail";
 const Router = () => {
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
 
@@ -34,6 +35,7 @@ const Router = () => {
         <Route path="/" element={<Main />} />
         <Route path="/nearby" element={<Nearby />} />
         <Route path="/favorite" element={<Favorite />} />
+        <Route path="/store/:storeId" element={<StoreDetail />} />
       </Routes>
     </BrowserRouter>
   );
