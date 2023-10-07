@@ -6,8 +6,8 @@ interface LayoutProps {
 
 function Layout({ children }: LayoutProps) {
   return (
-    <div className="w-screen h-screen flex justify-center mb-10">
-      <div className="h-screen min-w-[672px] max-w-2xl bg-rose-400 flex flex-col overflow-auto">
+    <div className="w-screen h-screen flex justify-center">
+      <div className="min-w-[672px] max-w-2xl min-h-screen h-full flex flex-col overflow-auto shadow-2xl">
         {children}
       </div>
     </div>

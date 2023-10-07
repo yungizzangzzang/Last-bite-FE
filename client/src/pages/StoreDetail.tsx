@@ -76,8 +76,12 @@ function Body() {
   return (
     <>
       {items.map((item: any, index: number) => (
-        <div className="w-full h-[15%] flex p-2">
-          <div className="h-full w-[80%] flex flex-col justify-center gap-1">
+        <div className="w-full h-[15%] flex">
+          <div
+            className={`h-full w-[80%] flex flex-col justify-center gap-1 px-2 border-b-2
+          ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}
+          `}
+          >
             <div>{item.title}</div>
             <div>{item.content}</div>
             <div>잔여수량: {item.count}</div>
@@ -93,7 +97,9 @@ function Body() {
             </div>
           </div>
 
-          <div className="h-full w-[20%] bg-blue-400">사진</div>
+          <div className="h-full w-[20%] border-b-2 bg-blue-400 flex items-center justify-center rounded-lg">
+            사진
+          </div>
         </div>
       ))}
     </>
