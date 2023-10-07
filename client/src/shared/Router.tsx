@@ -8,6 +8,8 @@ import { isLoggedInState } from "../states/userState";
 
 import Cookies from "js-cookie";
 import Main from "../pages/Main";
+import Nearby from "../pages/Nearby";
+import Favorite from "../pages/Favorite";
 const Router = () => {
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
 
@@ -30,6 +32,8 @@ const Router = () => {
         <Route path="/login" element={<Login />} /> */}
 
         <Route path="/" element={<Main />} />
+        <Route path="/nearby" element={<Nearby />} />
+        <Route path="/favorite" element={<Favorite />} />
       </Routes>
     </BrowserRouter>
   );
