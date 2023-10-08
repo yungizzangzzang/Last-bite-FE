@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
@@ -27,8 +28,16 @@ export default StoreDetail;
 function Header() {
   const navigate = useNavigate();
   return (
-    <div className="flex h-[5%] items-center gap-6 border-b-2 border-[#C3CFD9]">
-      <div className="px-2 flex items-center">종훈 떡볶이</div>
+    <div className="flex h-[5%] items-center border-b-2 border-[#C3CFD9]">
+      <div
+        onClick={() => {
+          navigate(-1);
+        }}
+        className="px-2 flex gap-2 items-center"
+      >
+        <AiOutlineArrowLeft />
+        종훈 떡볶이
+      </div>
       <button
         onClick={() => navigate("/review/1")}
         className="h-6 text-white text-[0.8rem] bg-[#FF385C] px-2"
@@ -109,7 +118,7 @@ function Body() {
               <div className="flex gap-2 items-center">
                 <div>{item.prevPrice}</div>
                 <div>{item.price}</div>
-                <div className="flex gap-2 bg-white py-1 px-2">
+                <div className="flex gap-2 py-1 px-2">
                   <button>-</button>
                   <div>0</div>
                   <button>+</button>

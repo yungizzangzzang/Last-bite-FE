@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
@@ -27,8 +28,16 @@ export default OwnerMain;
 function Header() {
   const navigate = useNavigate();
   return (
-    <div className="flex h-[5%] items-center gap-4 border-b-2 border-[#C3CFD9]">
-      <div className="px-2 flex items-center">종훈 떡볶이</div>
+    <div className="flex h-[5%] items-center border-b-2 border-[#C3CFD9]">
+      <div
+        onClick={() => {
+          navigate(-1);
+        }}
+        className="px-2 flex gap-2 items-center"
+      >
+        <AiOutlineArrowLeft />
+        종훈 떡볶이
+      </div>
       <button
         onClick={() => navigate("/review/1")}
         className="h-6 text-white text-[0.8rem] bg-[#FF385C] px-2"

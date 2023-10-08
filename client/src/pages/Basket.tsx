@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 function Basket() {
   const navigate = useNavigate();
@@ -27,8 +28,16 @@ function Basket() {
 export default Basket;
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex h-[5%] items-center gap-6 border-b-2 border-[#C3CFD9] px-2">
+    <div
+      onClick={() => {
+        navigate(-1);
+      }}
+      className="flex h-[5%] items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
+    >
+      <AiOutlineArrowLeft />
       장바구니
     </div>
   );

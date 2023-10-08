@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
@@ -16,9 +17,17 @@ function CreateReview() {
 export default CreateReview;
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
-    <div className="border-b-2 border-[#C3CFD9] px-2 h-[5%] flex items-center">
-      {"< 리뷰 작성"}
+    <div
+      onClick={() => {
+        navigate(-1);
+      }}
+      className="border-b-2 border-[#C3CFD9] px-2 gap-2 h-[5%] flex items-center"
+    >
+      <AiOutlineArrowLeft />
+      리뷰 작성
     </div>
   );
 }

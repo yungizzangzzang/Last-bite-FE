@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
@@ -16,9 +17,16 @@ function Favorite() {
 export default Favorite;
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
-    <div className="border-b-2 border-[#C3CFD9] px-2 h-[5%] flex items-center">
-      X 단골 가게 핫딜
+    <div
+      onClick={() => {
+        navigate(-1);
+      }}
+      className="border-b-2 border-[#C3CFD9] gap-2 px-2 h-[5%] flex items-center"
+    >
+      <AiOutlineArrowLeft /> 단골 가게 핫딜
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
@@ -16,9 +17,16 @@ function Notification() {
 export default Notification;
 
 function Header() {
+  const navigate = useNavigate();
   return (
-    <div className="flex h-[5%] items-center gap-6 border-b-2 border-[#C3CFD9] px-2">
-      {"<  핫딜 알림"}
+    <div
+      onClick={() => {
+        navigate(-1);
+      }}
+      className="flex h-[5%] items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
+    >
+      <AiOutlineArrowLeft />
+      핫딜 알림
     </div>
   );
 }

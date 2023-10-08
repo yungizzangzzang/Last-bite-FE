@@ -1,3 +1,5 @@
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 
@@ -14,8 +16,15 @@ function Setting() {
 export default Setting;
 
 function Header() {
+  const navigate = useNavigate();
   return (
-    <div className="border-b-2 border-[#C3CFD9] px-2 h-[5%] flex items-center">
+    <div
+      onClick={() => {
+        navigate(-1);
+      }}
+      className="border-b-2 border-[#C3CFD9] gap-2 px-2 h-[5%] flex items-center"
+    >
+      <AiOutlineArrowLeft />
       설정
     </div>
   );
