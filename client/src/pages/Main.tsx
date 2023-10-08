@@ -74,7 +74,7 @@ function BodyContent({ contentType }: { contentType: string }) {
           <div className="flex items-center justify-center">
             <img
               className="object-center rounded-lg"
-              src={process.env.PUBLIC_URL + "/asset/img/종합스시.jpg"}
+              src={process.env.PUBLIC_URL + "/asset/img/1.jpg"}
               alt="item"
             />
           </div>
@@ -87,7 +87,7 @@ function BodyContent({ contentType }: { contentType: string }) {
           <div className="flex items-center justify-center">
             <img
               className="object-center rounded-lg"
-              src={process.env.PUBLIC_URL + "/asset/img/피자떡볶이.jpg"}
+              src={process.env.PUBLIC_URL + "/asset/img/2.jpg"}
               alt="item"
             />
           </div>
@@ -100,7 +100,7 @@ function BodyContent({ contentType }: { contentType: string }) {
           <div className="flex items-center justify-center">
             <img
               className="object-center rounded-lg"
-              src={process.env.PUBLIC_URL + "/asset/img/해물스파게티.jpg"}
+              src={process.env.PUBLIC_URL + "/asset/img/3.jpg"}
               alt="item"
             />
           </div>
