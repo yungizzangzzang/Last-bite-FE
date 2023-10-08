@@ -9,7 +9,7 @@ function StoreDetail() {
     <Layout>
       <Header />
       <Body />
-      <div className="w-[672px] fixed bottom-9 h-12 flex justify-center items-center">
+      <div className="min-w-[448px] w-[20.3%] fixed bottom-9 h-12 flex justify-center items-center">
         <button
           onClick={() => navigate("/basket")}
           className="w-full h-10 text-white bg-[#FF385C]"
@@ -31,7 +31,7 @@ function Header() {
       <div className="px-2 flex items-center">종훈 떡볶이</div>
       <button
         onClick={() => navigate("/review/1")}
-        className="w-[10%] h-6 text-white text-[0.8rem] bg-[#FF385C]"
+        className="h-6 text-white text-[0.8rem] bg-[#FF385C] px-2"
       >
         가게 리뷰
       </button>

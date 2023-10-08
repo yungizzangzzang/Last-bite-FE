@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 function Footer() {
   const navigator = useNavigate();
   return (
-    <div className="flex min-w-[672px] h-10 items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
+    <div className="flex min-w-[448px] w-[20.3%] h-10 items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
       <div
         onClick={() => navigator("/")}
         className="cursor-pointer w-1/5 h-full flex flex-1 justify-center items-center"
@@ -11,7 +11,7 @@ function Footer() {
         홈
       </div>
       <div
-        onClick={() => navigator("/mypage")}
+        onClick={() => navigator("/favorite")}
         className="cursor-pointer w-1/5 h-full flex flex-1 justify-center items-center"
       >
         마이페이지

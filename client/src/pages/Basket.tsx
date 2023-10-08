@@ -8,7 +8,7 @@ function Basket() {
     <Layout>
       <Header />
       <Body />
-      <div className="w-[672px] fixed bottom-9 h-20 flex flex-col justify-center items-center">
+      <div className="min-w-[448px] w-[20.3%] fixed bottom-9 h-20 flex flex-col justify-center items-center">
         <button
           onClick={() => navigate("/result")}
           className="w-full h-10 text-white bg-[#FF385C]"
