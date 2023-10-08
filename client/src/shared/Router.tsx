@@ -21,6 +21,7 @@ import Setting from "../pages/Setting";
 import OwnerMain from "../pages/OwnerMain";
 import OwnerNotification from "../pages/OwnerNotification";
 import OwnerResult from "../pages/OwnerResult";
+import OwnerSetting from "../pages/OwnerSetting";
 const Router = () => {
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
 
@@ -57,7 +58,7 @@ const Router = () => {
         <Route path="/owner" element={<OwnerMain />} />
         <Route path="/owner/notification" element={<OwnerNotification />} />
         <Route path="/owner/result" element={<OwnerResult />} />
-        <Route path="/owner-setting" element={<Setting />} />
+        <Route path="/owner-setting" element={<OwnerSetting />} />
       </Routes>
     </BrowserRouter>
   );

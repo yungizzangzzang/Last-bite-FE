@@ -1,7 +1,7 @@
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
 
-function Setting() {
+function OwnerSetting() {
   return (
     <Layout>
       <Header />
@@ -11,7 +11,7 @@ function Setting() {
   );
 }
 
-export default Setting;
+export default OwnerSetting;
 
 function Header() {
   return (
