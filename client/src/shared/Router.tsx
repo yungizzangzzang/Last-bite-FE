@@ -56,9 +56,9 @@ const Router = () => {
         <Route path="/setting" element={<Setting />} />
 
         <Route path="/owner" element={<OwnerMain />} />
-        <Route path="/owner/notification" element={<OwnerNotification />} />
         <Route path="/owner/result" element={<OwnerResult />} />
-        <Route path="/owner-setting" element={<OwnerSetting />} />
+        <Route path="/owner/notification" element={<OwnerNotification />} />
+        <Route path="/owner/setting" element={<OwnerSetting />} />
       </Routes>
     </BrowserRouter>
   );

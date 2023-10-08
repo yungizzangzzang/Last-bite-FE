@@ -48,14 +48,14 @@ function Body() {
         {nearbyStore.map((item: any, index: number) => (
           <div
             onClick={() => navigate("/store/1")}
-            className={`w-full h-1/5 p-2 flex items-center border-b-2 gap-2 border-[#C3CFD9] ${
+            className={`w-full h-[12%] p-2 flex items-center border-b-2 border-[#C3CFD9] gap-2 ${
               index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"
             }`}
           >
             <div className="w-[25%] h-full bg-blue-300">{item.imgurl}</div>
             <div>
-              <div>{item.title}</div>
-              <div>{item.content}</div>
+              <div className="font-semibold">{item.title}</div>
+              <div className="text-[0.75rem]">{item.content}</div>
             </div>
           </div>
         ))}

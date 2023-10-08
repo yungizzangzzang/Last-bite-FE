@@ -1,13 +1,13 @@
 import React from "react";
-import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import OwnerFooter from "../components/Layout/OwnerFooter";
 
 function OwnerResult() {
   return (
     <Layout>
       <Header />
       <Body />
-      <Footer />
+      <OwnerFooter />
     </Layout>
   );
 }

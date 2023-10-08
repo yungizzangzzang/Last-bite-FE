@@ -96,15 +96,15 @@ function Body() {
       <div className="w-full h-full mb-20 overflow-auto">
         {items.map((item: any, index: number) => (
           <div
-            className={`w-full h-[180px] flex items-center border-b-2 border-[#C3CFD9] p-2
+            className={`w-full flex items-center border-b-2 border-[#C3CFD9] p-2
              ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
           >
             <div
               className={`h-full w-[80%] flex flex-col justify-center gap-1`}
             >
-              <div>{item.title}</div>
-              <div>{item.content}</div>
-              <div>잔여수량: {item.count}</div>
+              <div className="text-[1.25rem]">{item.title}</div>
+              <div className="text-[0.75rem]">{item.content}</div>
+              <div className="text-[0.75rem]">잔여수량: {item.count}</div>
 
               <div className="flex gap-2 items-center">
                 <div>{item.prevPrice}</div>
@@ -117,7 +117,7 @@ function Body() {
               </div>
             </div>
 
-            <div className="h-[160px] w-[160px] border-b-2 bg-blue-400 flex items-center justify-center rounded-lg">
+            <div className="h-[100px] w-[100px] border-b-2 bg-blue-400 flex items-center justify-center rounded-lg">
               사진
             </div>
           </div>

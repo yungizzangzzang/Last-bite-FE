@@ -1,14 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import OwnerFooter from "../components/Layout/OwnerFooter";
 
 function OwnerNotification() {
   return (
     <Layout>
       <Header />
       <Body />
-      <Footer />
+      <OwnerFooter />
     </Layout>
   );
 }
@@ -48,7 +48,7 @@ function Body() {
         {alarms.map((alarm: any, index: number) => {
           return (
             <div
-              onClick={() => navigate("/store/1")}
+              onClick={() => navigate("/owner/result")}
               className={`cursor-pointer flex flex-col border-b-2 border-[#C3CFD9] p-4 gap-2
             ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
             >
