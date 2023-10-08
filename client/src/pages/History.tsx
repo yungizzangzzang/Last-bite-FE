@@ -82,12 +82,11 @@ function BodyMain() {
             <div>{item.createdAt} 예약 완료</div>
             <div className="flex justify-between items-center pr-10">
               <div className="flex items-center gap-2">
-                <div className="w-[160px] h-[160px] flex justify-center items-center bg-rose-400">
+                <div className="w-[100px] h-[100px] flex justify-center items-center rounded-md bg-rose-400">
                   사진
                 </div>
                 <div className="flex flex-col">
                   <div>{item.store.name}</div>
-                  <div>{item.store.description}</div>
                   <div className="bg-[#FF385C] text-white px-1">
                     {item.discount}% 할인받음
                   </div>
@@ -108,7 +107,7 @@ function BodyMain() {
                 onClick={() => {
                   navigate("/create-review");
                 }}
-                className="w-[80%] h-8 flex items-center bg-[#FF385C] text-white justify-center self-center"
+                className="w-full h-8 flex items-center bg-[#FF385C] text-white justify-center self-center"
               >
                 리뷰 작성
               </button>

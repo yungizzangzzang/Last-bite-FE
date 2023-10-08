@@ -52,8 +52,8 @@ function BodyHeader() {
 function BodyContent({ contentType }: { contentType: string }) {
   const navigate = useNavigate();
   return (
-    <div className="flex h-[40%] flex-col">
-      <div className="h-[25%] flex justify-center items-center bg-sky-300">
+    <div className="flex flex-col">
+      <div className="h-[56px] flex justify-center items-center bg-sky-300 my-6">
         광고
       </div>
       <div
@@ -66,9 +66,9 @@ function BodyContent({ contentType }: { contentType: string }) {
       >
         {contentType === "nearBy" ? "내 주변 핫딜" : "단골 가게 핫딜"}
       </div>
-      <div className="h-[65%] flex gap-2 px-2">
+      <div className="flex gap-2 px-2">
         <div
-          className="cursor-pointer h-full w-2/5 flex flex-col justify-center"
+          className="cursor-pointer w-2/5 flex flex-col justify-center gap-2"
           onClick={() => navigate("/store/1")}
         >
           <div className="flex items-center justify-center">
@@ -81,7 +81,7 @@ function BodyContent({ contentType }: { contentType: string }) {
           <div className="h-1/6 flex items-center px-2">종훈 떡볶이</div>
         </div>
         <div
-          className="cursor-pointer h-full w-2/5 flex flex-col justify-center"
+          className="cursor-pointer w-2/5 flex flex-col justify-center gap-2"
           onClick={() => navigate("/store/1")}
         >
           <div className="flex items-center justify-center">
@@ -94,7 +94,7 @@ function BodyContent({ contentType }: { contentType: string }) {
           <div className="h-1/6 flex items-center px-2">희재 분식</div>
         </div>
         <div
-          className="cursor-pointer h-full w-2/5 flex flex-col justify-center"
+          className="cursor-pointer w-2/5 flex flex-col justify-center gap-2"
           onClick={() => navigate("/store/1")}
         >
           <div className="flex items-center justify-center">

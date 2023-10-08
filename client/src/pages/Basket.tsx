@@ -8,7 +8,7 @@ function Basket() {
     <Layout>
       <Header />
       <Body />
-      <div className="min-w-[448px] w-[20.3%] fixed bottom-9 h-20 flex flex-col justify-center items-center">
+      <div className="min-w-[336px] w-[336px] fixed bottom-9 h-20 flex flex-col justify-center items-center">
         <button
           onClick={() => navigate("/result")}
           className="w-full h-10 text-white bg-[#FF385C]"
@@ -89,18 +89,18 @@ function Body() {
     <div className="w-full h-full mb-32 overflow-auto">
       {items.map((item: any, index: number) => (
         <div
-          className={`w-full h-[240px] flex flex-col p-2 border-b-2 border-[#C3CFD9]         
+          className={`w-full h-[180px] flex flex-col p-2 border-b-2 border-[#C3CFD9] pt-4       
           ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}
         `}
         >
           <div>{item.title}</div>
           <div className="flex h-full justify-around items-center">
-            <div className="h-[200px] w-[200px] bg-blue-400">사진</div>
+            <div className="h-[100px] w-[100px] bg-blue-400">사진</div>
             <div className="h-full w-[30%] flex flex-col justify-center">
               <div>가격: {item.price}원</div>
               <div>{item.price}원</div>
             </div>
-            <div className="w-[10%] h-[10%] flex gap-2 bg-white py-1 px-2 items-center">
+            <div className="flex gap-2 bg-white py-1 px-2 items-center">
               <button>-</button>
               <div>0</div>
               <button>+</button>

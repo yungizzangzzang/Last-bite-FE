@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import OwnerFooter from "../components/Layout/OwnerFooter";
 
 function OwnerMain() {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ function OwnerMain() {
     <Layout>
       <Header />
       <Body />
-      <div className="w-[672px] fixed bottom-9 h-12 flex justify-center items-center">
+      <div className="min-w-[336px] w-[336px] fixed bottom-9 h-12 flex justify-center items-center">
         <button
           onClick={() => navigate("/register-item")}
           className="w-full h-10 text-white bg-[#FF385C]"
@@ -17,7 +17,7 @@ function OwnerMain() {
           핫딜 등록하기
         </button>
       </div>
-      <Footer />
+      <OwnerFooter />
     </Layout>
   );
 }
@@ -27,11 +27,11 @@ export default OwnerMain;
 function Header() {
   const navigate = useNavigate();
   return (
-    <div className="flex h-[5%] items-center gap-6 border-b-2 border-[#C3CFD9]">
+    <div className="flex h-[5%] items-center gap-4 border-b-2 border-[#C3CFD9]">
       <div className="px-2 flex items-center">종훈 떡볶이</div>
       <button
         onClick={() => navigate("/review/1")}
-        className="w-[10%] h-6 text-white text-[0.8rem] bg-[#FF385C]"
+        className="h-6 text-white text-[0.8rem] bg-[#FF385C] px-2"
       >
         가게 리뷰
       </button>
@@ -102,9 +102,9 @@ function Body() {
               <div
                 className={`h-full w-[80%] flex flex-col justify-center gap-1`}
               >
-                <div>{item.title}</div>
-                <div>{item.content}</div>
-                <div>잔여수량: {item.count}</div>
+                <div className="text-[1.25rem]">{item.title}</div>
+                <div className="text-[0.75rem]">{item.content}</div>
+                <div className="text-[0.75rem]">잔여수량: {item.count}</div>
 
                 <div className="flex gap-2 items-center">
                   <div>{item.prevPrice}</div>
@@ -112,13 +112,10 @@ function Body() {
                 </div>
               </div>
 
-              <div className="h-[160px] w-[160px] border-b-2 bg-blue-400 flex items-center justify-center rounded-lg">
+              <div className="h-[100px] w-[100px] border-b-2 bg-blue-400 flex items-center justify-center rounded-lg">
                 사진
               </div>
             </div>
-            <button className="w-full h-10 p-2 bg-[#FF385C] text-white flex items-center mt-2 justify-center rounded-md">
-              알림보내기
-            </button>
           </div>
         ))}
       </div>

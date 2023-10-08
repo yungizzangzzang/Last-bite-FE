@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 function Footer() {
   const navigator = useNavigate();
   return (
-    <div className="flex min-w-[448px] w-[20.3%] h-10 items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
+    <div className="flex min-w-[336px] w-[336px] bg-white h-10 items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
       <div
         onClick={() => navigator("/")}
         className="cursor-pointer w-1/5 h-full flex flex-1 justify-center items-center"

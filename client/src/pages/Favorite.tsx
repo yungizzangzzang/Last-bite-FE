@@ -78,7 +78,7 @@ function Body() {
         {favoriteStore.map((item: any, index: number) => (
           <div
             onClick={() => navigate("/store/1")}
-            className={`w-full h-1/5 p-2 flex items-center border-b-2 border-[#C3CFD9] gap-2 ${
+            className={`w-full h-[12%] p-2 flex items-center border-b-2 border-[#C3CFD9] gap-2 ${
               index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"
             }`}
           >
