@@ -12,6 +12,8 @@ import Nearby from "../pages/Nearby";
 import Favorite from "../pages/Favorite";
 import StoreDetail from "../pages/StoreDetail";
 import Basket from "../pages/Basket";
+import Result from "../pages/Result";
+import Notification from "../pages/Notification";
 const Router = () => {
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
 
@@ -38,6 +40,8 @@ const Router = () => {
         <Route path="/favorite" element={<Favorite />} />
         <Route path="/store/:storeId" element={<StoreDetail />} />
         <Route path="/basket" element={<Basket />} />
+        <Route path="/result" element={<Result />} />
+        <Route path="/notification" element={<Notification />} />
       </Routes>
     </BrowserRouter>
   );
