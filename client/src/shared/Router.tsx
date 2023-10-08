@@ -14,6 +14,8 @@ import StoreDetail from "../pages/StoreDetail";
 import Basket from "../pages/Basket";
 import Result from "../pages/Result";
 import Notification from "../pages/Notification";
+import History from "../pages/History";
+import CreateReview from "../pages/CreateReview";
 const Router = () => {
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
 
@@ -42,6 +44,8 @@ const Router = () => {
         <Route path="/basket" element={<Basket />} />
         <Route path="/result" element={<Result />} />
         <Route path="/notification" element={<Notification />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/create-review" element={<CreateReview />} />
       </Routes>
     </BrowserRouter>
   );
