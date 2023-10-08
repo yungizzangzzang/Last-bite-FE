@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 
-function StoreDetail() {
+function OwnerMain() {
   const navigate = useNavigate();
   return (
     <Layout>
@@ -11,10 +11,10 @@ function StoreDetail() {
       <Body />
       <div className="w-[672px] fixed bottom-9 h-12 flex justify-center items-center">
         <button
-          onClick={() => navigate("/basket")}
+          onClick={() => navigate("/register-item")}
           className="w-full h-10 text-white bg-[#FF385C]"
         >
-          장바구니 담기
+          핫딜 등록하기
         </button>
       </div>
       <Footer />
@@ -22,7 +22,7 @@ function StoreDetail() {
   );
 }
 
-export default StoreDetail;
+export default OwnerMain;
 
 function Header() {
   const navigate = useNavigate();
@@ -90,36 +90,35 @@ function Body() {
       imgUrl: "",
     },
   ];
-
   return (
     <>
       <div className="w-full h-full mb-20 overflow-auto">
         {items.map((item: any, index: number) => (
           <div
-            className={`w-full h-[180px] flex items-center border-b-2 border-[#C3CFD9] p-2
+            className={`w-full flex flex-col justify-center border-b-2 border-[#C3CFD9] px-4 py-3
              ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
           >
-            <div
-              className={`h-full w-[80%] flex flex-col justify-center gap-1`}
-            >
-              <div>{item.title}</div>
-              <div>{item.content}</div>
-              <div>잔여수량: {item.count}</div>
+            <div className="flex items-center">
+              <div
+                className={`h-full w-[80%] flex flex-col justify-center gap-1`}
+              >
+                <div>{item.title}</div>
+                <div>{item.content}</div>
+                <div>잔여수량: {item.count}</div>
 
-              <div className="flex gap-2 items-center">
-                <div>{item.prevPrice}</div>
-                <div>{item.price}</div>
-                <div className="flex gap-2 bg-white py-1 px-2">
-                  <button>-</button>
-                  <div>0</div>
-                  <button>+</button>
+                <div className="flex gap-2 items-center">
+                  <div>{item.prevPrice}</div>
+                  <div>{item.price}</div>
                 </div>
               </div>
-            </div>
 
-            <div className="h-[160px] w-[160px] border-b-2 bg-blue-400 flex items-center justify-center rounded-lg">
-              사진
+              <div className="h-[160px] w-[160px] border-b-2 bg-blue-400 flex items-center justify-center rounded-lg">
+                사진
+              </div>
             </div>
+            <button className="w-full h-10 p-2 bg-[#FF385C] text-white flex items-center mt-2 justify-center rounded-md">
+              알림보내기
+            </button>
           </div>
         ))}
       </div>

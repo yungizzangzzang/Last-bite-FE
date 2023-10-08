@@ -23,7 +23,7 @@ function Footer() {
         장바구니
       </div>
       <div
-        onClick={() => navigator("/nocice")}
+        onClick={() => navigator("/notification")}
         className="cursor-pointer w-1/5 h-full flex flex-1 justify-center items-center"
       >
         알림

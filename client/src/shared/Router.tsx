@@ -18,6 +18,7 @@ import History from "../pages/History";
 import CreateReview from "../pages/CreateReview";
 import Mypage from "../pages/Mypage";
 import Setting from "../pages/Setting";
+import OwnerMain from "../pages/OwnerMain";
 const Router = () => {
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
 
@@ -42,7 +43,7 @@ const Router = () => {
         <Route path="/" element={<Main />} />
         <Route path="/nearby" element={<Nearby />} />
         <Route path="/favorite" element={<Favorite />} />
-        <Route path="/store/:storeId" element={<StoreDetail />} />
+        <Route path="/store/:id" element={<StoreDetail />} />
         <Route path="/basket" element={<Basket />} />
         <Route path="/result" element={<Result />} />
         <Route path="/notification" element={<Notification />} />
@@ -50,6 +51,8 @@ const Router = () => {
         <Route path="/create-review" element={<CreateReview />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/setting" element={<Setting />} />
+
+        <Route path="/owner/:id" element={<OwnerMain />} />
       </Routes>
     </BrowserRouter>
   );
