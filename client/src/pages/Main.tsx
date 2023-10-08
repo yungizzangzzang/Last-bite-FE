@@ -78,7 +78,7 @@ function BodyContent({ contentType }: { contentType: string }) {
               alt="item"
             />
           </div>
-          <div className="h-1/6 flex items-center px-2">희재 분식</div>
+          <div className="h-1/6 flex items-center px-2">종훈 떡볶이</div>
         </div>
         <div
           className="cursor-pointer h-full w-2/5 flex flex-col justify-center"
@@ -104,7 +104,7 @@ function BodyContent({ contentType }: { contentType: string }) {
               alt="item"
             />
           </div>
-          <div className="h-1/6 flex items-center px-2">희재 분식</div>
+          <div className="h-1/6 flex items-center px-2">승일 피자</div>
         </div>
       </div>
     </div>
