@@ -11,10 +11,10 @@ function Footer() {
         홈
       </div>
       <div
-        onClick={() => navigator("/favorite")}
+        onClick={() => navigator("/mypage")}
         className="cursor-pointer w-1/5 h-full flex flex-1 justify-center items-center"
       >
-        단골가게
+        마이페이지
       </div>
       <div
         onClick={() => navigator("/basket")}

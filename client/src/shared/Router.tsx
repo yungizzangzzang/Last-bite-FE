@@ -19,6 +19,8 @@ import CreateReview from "../pages/CreateReview";
 import Mypage from "../pages/Mypage";
 import Setting from "../pages/Setting";
 import OwnerMain from "../pages/OwnerMain";
+import OwnerNotification from "../pages/OwnerNotification";
+import OwnerResult from "../pages/OwnerResult";
 const Router = () => {
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
 
@@ -52,7 +54,9 @@ const Router = () => {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/setting" element={<Setting />} />
 
-        <Route path="/owner/:id" element={<OwnerMain />} />
+        <Route path="/owner" element={<OwnerMain />} />
+        <Route path="/owner/notification" element={<OwnerNotification />} />
+        <Route path="/owner/result" element={<OwnerResult />} />
       </Routes>
     </BrowserRouter>
   );
