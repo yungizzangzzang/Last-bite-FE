@@ -3,6 +3,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import { IoIosArrowDroprightCircle } from "react-icons/io";
 
 function History() {
   return (
@@ -23,7 +24,7 @@ function Header() {
       onClick={() => {
         navigate(-1);
       }}
-      className="flex h-[5%] items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
+      className="flex h-12 items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
     >
       <AiOutlineArrowLeft />
       예약 내역
@@ -87,8 +88,8 @@ function BodyMain() {
       {items.map((item: any) => {
         return (
           <div className="flex flex-col p-4 border-b-8 border-[#C3CFD9] gap-2">
-            <div>{item.createdAt} 예약 완료</div>
-            <div className="flex justify-between items-center pr-10">
+            <div className="font-semibold">{item.createdAt} 예약 완료</div>
+            <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <div className="w-[100px] h-[100px] flex justify-center items-center rounded-md bg-rose-400">
                   사진
@@ -105,7 +106,7 @@ function BodyMain() {
                   navigate("/result");
                 }}
               >
-                {">"}
+                <IoIosArrowDroprightCircle size={28} color={"#717171"} />
               </button>
             </div>
             {item.star ? (

@@ -28,7 +28,7 @@ export default OwnerMain;
 function Header() {
   const navigate = useNavigate();
   return (
-    <div className="flex h-[5%] items-center border-b-2 border-[#C3CFD9]">
+    <div className="flex h-12 items-center border-b-2 border-[#C3CFD9]">
       <div
         onClick={() => {
           navigate(-1);

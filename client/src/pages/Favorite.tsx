@@ -24,7 +24,7 @@ function Header() {
       onClick={() => {
         navigate(-1);
       }}
-      className="border-b-2 border-[#C3CFD9] gap-2 px-2 h-[5%] flex items-center"
+      className="border-b-2 border-[#C3CFD9] gap-2 px-2 h-12 flex items-center"
     >
       <AiOutlineArrowLeft /> 단골 가게 핫딜
     </div>
@@ -92,8 +92,8 @@ function Body() {
           >
             <div className="w-[25%] h-full bg-blue-300">{item.imgurl}</div>
             <div>
-              <div>{item.title}</div>
-              <div>{item.content}</div>
+              <div className="font-semibold">{item.title}</div>
+              <div className="text-[0.75rem]">{item.content}</div>
             </div>
           </div>
         ))}

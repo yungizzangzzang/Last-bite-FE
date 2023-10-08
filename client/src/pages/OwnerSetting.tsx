@@ -22,7 +22,7 @@ function Header() {
       onClick={() => {
         navigate(-1);
       }}
-      className="border-b-2 border-[#C3CFD9] gap-2 px-2 h-[5%] flex items-center"
+      className="border-b-2 border-[#C3CFD9] gap-2 px-2 h-12 flex items-center"
     >
       <AiOutlineArrowLeft />
       설정

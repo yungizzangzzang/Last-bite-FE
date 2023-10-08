@@ -9,17 +9,17 @@ function Basket() {
     <Layout>
       <Header />
       <Body />
-      <div className="min-w-[336px] w-[336px] fixed bottom-9 h-20 flex flex-col justify-center items-center">
-        <button
-          onClick={() => navigate("/result")}
-          className="w-full h-10 text-white bg-[#FF385C]"
-        >
+      <button
+        onClick={() => navigate("/result")}
+        className="min-w-[336px] w-[336px] fixed bottom-9 h-20 flex flex-col justify-center items-center"
+      >
+        <button className="w-full h-10 text-white bg-[#FF385C]">
           총 22% 할인받고 구매하기
         </button>
         <div className="flex justify-center items-center h-10 bg-white w-full">
           총액: 14,000원
         </div>
-      </div>
+      </button>
       <Footer />
     </Layout>
   );
@@ -35,7 +35,7 @@ function Header() {
       onClick={() => {
         navigate(-1);
       }}
-      className="flex h-[5%] items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
+      className="flex h-12 items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
     >
       <AiOutlineArrowLeft />
       장바구니
@@ -104,12 +104,14 @@ function Body() {
         >
           <div>{item.title}</div>
           <div className="flex h-full justify-around items-center">
-            <div className="h-[100px] w-[100px] bg-blue-400">사진</div>
+            <div className="h-[100px] w-[100px] rounded-md bg-blue-400">
+              사진
+            </div>
             <div className="h-full w-[30%] flex flex-col justify-center">
               <div>가격: {item.price}원</div>
               <div>{item.price}원</div>
             </div>
-            <div className="flex gap-2 bg-white py-1 px-2 items-center">
+            <div className="flex gap-2 py-1 px-2 items-center">
               <button>-</button>
               <div>0</div>
               <button>+</button>

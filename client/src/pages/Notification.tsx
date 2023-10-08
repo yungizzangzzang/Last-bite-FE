@@ -23,7 +23,7 @@ function Header() {
       onClick={() => {
         navigate(-1);
       }}
-      className="flex h-[5%] items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
+      className="flex h-12 items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
     >
       <AiOutlineArrowLeft />
       핫딜 알림
