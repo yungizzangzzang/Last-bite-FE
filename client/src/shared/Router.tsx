@@ -16,6 +16,8 @@ import Result from "../pages/Result";
 import Notification from "../pages/Notification";
 import History from "../pages/History";
 import CreateReview from "../pages/CreateReview";
+import Mypage from "../pages/Mypage";
+import Setting from "../pages/Setting";
 const Router = () => {
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
 
@@ -46,6 +48,8 @@ const Router = () => {
         <Route path="/notification" element={<Notification />} />
         <Route path="/history" element={<History />} />
         <Route path="/create-review" element={<CreateReview />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/setting" element={<Setting />} />
       </Routes>
     </BrowserRouter>
   );
