@@ -103,9 +103,9 @@ function Body() {
           ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}
         `}
         >
-          <div>{item.title}</div>
+          <div className="px-2">{item.title}</div>
           <div className="flex h-full justify-around items-center">
-            <div className="h-[100px] w-[100px] rounded-md bg-blue-400">
+            <div className="h-[100px] w-[100px] rounded-md flex justify-center items-center bg-blue-400">
               사진
             </div>
             <div className="h-full w-[30%] flex flex-col justify-center">

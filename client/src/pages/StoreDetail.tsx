@@ -12,7 +12,7 @@ function StoreDetail() {
     <Layout>
       <Header />
       <Body />
-      <div className="min-w-[336px] w-[336px] fixed bottom-[44px] h-12 flex justify-center items-center">
+      <div className="min-w-[336px] w-[336px] fixed bottom-[50px] h-12 flex justify-center items-center">
         <button
           onClick={() => navigate("/basket")}
           className="w-full h-10 text-white bg-[#FF385C]"

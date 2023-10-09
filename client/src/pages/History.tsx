@@ -86,10 +86,10 @@ function BodyMain() {
     >
       {items.map((item: any) => {
         return (
-          <div className="flex flex-col p-4 border-b-8 border-[#C3CFD9] gap-2">
+          <div className="flex flex-col p-4 border-b-8 border-[#C3CFD9] gap-4">
             <div className="font-semibold">{item.createdAt} 예약 완료</div>
             <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-4">
                 <div className="w-[100px] h-[100px] flex justify-center items-center rounded-md bg-rose-400">
                   사진
                 </div>
