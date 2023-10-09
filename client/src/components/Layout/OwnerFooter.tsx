@@ -7,7 +7,7 @@ import { AiOutlineSetting } from "react-icons/ai";
 function OwnerFooter() {
   const navigator = useNavigate();
   return (
-    <div className="flex min-w-[336px] w-[336px] bg-white h-10 items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
+    <div className="flex min-w-[336px] w-[336px] bg-white h-12 items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
       <div
         onClick={() => navigator("/owner")}
         className="cursor-pointer w-1/4 h-full flex flex-1 justify-center items-center"

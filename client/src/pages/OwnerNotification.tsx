@@ -49,10 +49,55 @@ function Body() {
       price: "12000",
       createdAt: "10월 07일 19:40",
     },
+    {
+      nickname: "윤기짱짱",
+      price: "14000",
+      createdAt: "10월 07일 20:00",
+    },
+    {
+      nickname: "윤기짱짱",
+      price: "19000",
+      createdAt: "10월 07일 19:48",
+    },
+    {
+      nickname: "윤기짱짱",
+      price: "12000",
+      createdAt: "10월 07일 19:40",
+    },
+    {
+      nickname: "윤기짱짱",
+      price: "14000",
+      createdAt: "10월 07일 20:00",
+    },
+    {
+      nickname: "윤기짱짱",
+      price: "19000",
+      createdAt: "10월 07일 19:48",
+    },
+    {
+      nickname: "윤기짱짱",
+      price: "12000",
+      createdAt: "10월 07일 19:40",
+    },
+    {
+      nickname: "윤기짱짱",
+      price: "14000",
+      createdAt: "10월 07일 20:00",
+    },
+    {
+      nickname: "윤기짱짱",
+      price: "19000",
+      createdAt: "10월 07일 19:48",
+    },
+    {
+      nickname: "윤기짱짱",
+      price: "12000",
+      createdAt: "10월 07일 19:40",
+    },
   ];
   return (
     <>
-      <div className="overflow-auto">
+      <div className="overflow-auto mb-[38px]">
         {alarms.map((alarm: any, index: number) => {
           return (
             <div

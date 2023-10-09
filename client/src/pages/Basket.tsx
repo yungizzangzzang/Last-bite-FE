@@ -11,7 +11,7 @@ function Basket() {
       <Body />
       <button
         onClick={() => navigate("/result")}
-        className="min-w-[336px] w-[336px] fixed bottom-9 h-20 flex flex-col justify-center items-center"
+        className="min-w-[336px] w-[336px] fixed bottom-12 h-20 flex flex-col justify-center items-center"
       >
         <button className="w-full h-10 text-white bg-[#FF385C]">
           총 22% 할인받고 구매하기

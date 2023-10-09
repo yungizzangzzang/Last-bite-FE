@@ -82,7 +82,7 @@ function Body() {
   ];
   return (
     <>
-      <div className="w-full h-full mb-[38px] overflow-auto">
+      <div className="w-full h-full mb-[46px] overflow-auto">
         {favoriteStore.map((item: any, index: number) => (
           <div
             onClick={() => navigate("/store/1")}

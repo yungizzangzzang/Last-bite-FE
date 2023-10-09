@@ -84,7 +84,7 @@ function BodyMain() {
     },
   ];
   return (
-    <div className=" overflow-auto">
+    <div className="overflow-auto mb-[46px]">
       {items.map((item: any) => {
         return (
           <div className="flex flex-col p-4 border-b-8 border-[#C3CFD9] gap-2">

@@ -98,10 +98,34 @@ function Body() {
       price: 5000,
       imgUrl: "",
     },
+    {
+      title: "종훈 떡볶이",
+      content: "매콤 달달 떡볶이, 1,000원 할인!",
+      count: 12,
+      prevPrice: 4000,
+      price: 3000,
+      imgUrl: "",
+    },
+    {
+      title: "로제 떡볶이",
+      content: "요즘 대세 떡볶이",
+      count: 3,
+      prevPrice: 6000,
+      price: 4000,
+      imgUrl: "",
+    },
+    {
+      title: "새우 튀김",
+      content: "파사삭 새우 오늘만 할인! (6ea)",
+      count: 4,
+      prevPrice: 6000,
+      price: 5000,
+      imgUrl: "",
+    },
   ];
   return (
     <>
-      <div className="w-full h-full mb-20 overflow-auto">
+      <div className="w-full h-full mb-[80px] overflow-auto">
         {items.map((item: any, index: number) => (
           <div
             className={`w-full flex flex-col justify-center border-b-2 border-[#C3CFD9] px-4 py-3
