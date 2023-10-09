@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { postAPI } from "../axios";
 
 function Login() {
   return (
@@ -24,17 +26,56 @@ function Header() {
     </>
   );
 }
+interface FormData {
+  email: string;
+  password: string;
+}
+
+interface InputFieldProps {
+  label: string;
+  name: keyof FormData;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 function Body() {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState<FormData>({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleLogin = async () => {
+    try {
+      await postAPI("/login", formData);
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
+  };
 
   return (
     <div className="flex flex-col gap-8">
-      <InputField label="이메일" />
-      <InputField label="비밀번호" />
+      <InputField
+        label="이메일"
+        name="email"
+        value={formData.email}
+        onChange={handleInputChange}
+      />
+      <InputField
+        label="비밀번호"
+        name="password"
+        value={formData.password}
+        onChange={handleInputChange}
+      />
 
       <button
-        onClick={() => navigate("/")}
+        onClick={handleLogin}
         className="flex self-center items-center justify-center rounded-md py-1 w-[200px] bg-[#4C4C4C] text-white mt-10"
       >
         로그인
@@ -43,11 +84,16 @@ function Body() {
   );
 }
 
-function InputField({ label }: { label: string }) {
+function InputField({ label, name, value, onChange }: InputFieldProps) {
   return (
     <div className="flex">
       <div className="w-[80px]">{label}</div>
-      <input className="border-2 border-[#d6d6d6]" />
+      <input
+        name={name}
+        value={value}
+        onChange={onChange}
+        className="border-2 border-[#d6d6d6]"
+      />
     </div>
   );
 }
