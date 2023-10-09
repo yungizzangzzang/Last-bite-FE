@@ -1,4 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { RiUserHeartLine } from "react-icons/ri";
+import { BiBell } from "react-icons/bi";
+import { AiOutlineSetting } from "react-icons/ai";
 
 function OwnerFooter() {
   const navigator = useNavigate();
@@ -8,25 +12,25 @@ function OwnerFooter() {
         onClick={() => navigator("/owner")}
         className="cursor-pointer w-1/4 h-full flex flex-1 justify-center items-center"
       >
-        핫딜 관리
+        <IoDocumentTextOutline size={28} />
       </div>
       <div
         onClick={() => navigator("/store-info")}
         className="cursor-pointer w-1/4 h-full flex flex-1 justify-center items-center"
       >
-        가게 정보
+        <RiUserHeartLine size={28} />
       </div>
       <div
         onClick={() => navigator("/owner/notification")}
         className="cursor-pointer w-1/4 h-full flex flex-1 justify-center items-center"
       >
-        알람
+        <BiBell size={28} />
       </div>
       <div
         onClick={() => navigator("/owner/setting")}
         className="cursor-pointer w-1/4 h-full flex flex-1 justify-center items-center"
       >
-        설정
+        <AiOutlineSetting size={28} />
       </div>
     </div>
   );

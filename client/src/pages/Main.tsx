@@ -17,8 +17,12 @@ export default Main;
 
 function Header() {
   return (
-    <div className="h-1/6 bg-blue-400 flex justify-center items-center">
-      소개
+    <div className="flex justify-center items-center">
+      <img
+        src={process.env.PUBLIC_URL + "/asset/img/banner.png"}
+        alt="banner"
+        className="w-full"
+      />
     </div>
   );
 }
@@ -35,15 +39,30 @@ function Body() {
 
 function BodyHeader() {
   return (
-    <div className="flex border-y-2 border-black">
-      <button className="flex flex-1 h-16 justify-center items-center">
-        음식점
+    <div className="flex mt-6">
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/food.png"}
+          alt="food"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">음식점</span>
       </button>
-      <button className="flex flex-1 h-16 justify-center items-center">
-        디저트
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/dessert.png"}
+          alt="dessert"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">디저트</span>
       </button>
-      <button className="flex flex-1 h-16 justify-center items-center">
-        편의점
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/convinient-store.png"}
+          alt="convinient-store"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">편의점</span>
       </button>
     </div>
   );
@@ -57,7 +76,7 @@ function BodyContent({ contentType }: { contentType: string }) {
         광고
       </div>
       <div
-        className="cursor-pointer h-[10%] flex items-center px-2 mt-2"
+        className="cursor-pointer h-[10%] flex items-center px-2 mt-2 font-semibold"
         onClick={() => {
           contentType === "nearBy"
             ? navigate("/nearby")
@@ -78,7 +97,9 @@ function BodyContent({ contentType }: { contentType: string }) {
               alt="item"
             />
           </div>
-          <div className="h-1/6 flex items-center px-2">종훈 떡볶이</div>
+          <div className="h-1/6 flex items-center text-[0.75rem]">
+            종훈 떡볶이
+          </div>
         </div>
         <div
           className="cursor-pointer w-2/5 flex flex-col justify-center gap-2"
@@ -91,7 +112,9 @@ function BodyContent({ contentType }: { contentType: string }) {
               alt="item"
             />
           </div>
-          <div className="h-1/6 flex items-center px-2">희재 분식</div>
+          <div className="h-1/6 flex items-center text-[0.75rem]">
+            희재 분식
+          </div>
         </div>
         <div
           className="cursor-pointer w-2/5 flex flex-col justify-center gap-2"
@@ -104,7 +127,9 @@ function BodyContent({ contentType }: { contentType: string }) {
               alt="item"
             />
           </div>
-          <div className="h-1/6 flex items-center px-2">승일 피자</div>
+          <div className="h-1/6 flex items-center text-[0.75rem]">
+            승일 피자
+          </div>
         </div>
       </div>
     </div>
