@@ -15,7 +15,7 @@ function OwnerFooter() {
         <IoDocumentTextOutline size={28} />
       </div>
       <div
-        onClick={() => navigator("/store-info")}
+        onClick={() => navigator("/owner/store")}
         className="cursor-pointer w-1/4 h-full flex flex-1 justify-center items-center"
       >
         <RiUserHeartLine size={28} />

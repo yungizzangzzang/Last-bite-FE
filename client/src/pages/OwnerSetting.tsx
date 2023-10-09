@@ -1,4 +1,5 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
@@ -31,6 +32,8 @@ function Header() {
 }
 
 function Body() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col gap-2">
       <div className="text-[1.25rem] font-semibold p-4">내정보</div>
@@ -45,9 +48,11 @@ function Body() {
       <button className="flex justify-between border-y-2 border-[#C3CFD9] px-4 py-2">
         <div className="flex flex-col items-start">
           <div className="font-semibold">로그아웃</div>
-          <div>계정을 로그아웃 합니다.</div>
+          <div className="text-[0.75rem]">계정을 로그아웃 합니다.</div>
         </div>
-        <button className="h-full">로그아웃 버튼</button>
+        <button onClick={() => navigate("/login")} className="h-full">
+          <FiLogOut size={24} />
+        </button>
       </button>
     </div>
   );
