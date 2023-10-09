@@ -60,7 +60,7 @@ const Router = () => {
         <Route path="/result" element={<Result />} />
         <Route path="/notification" element={<Notification />} />
         <Route path="/history" element={<History />} />
-        <Route path="/create-review" element={<CreateReview />} />
+        <Route path="/create-review/:id" element={<CreateReview />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/setting" element={<Setting />} />
 
