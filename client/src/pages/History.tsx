@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { styles } from "../utils/style";
 
 function History() {
   return (
@@ -24,7 +25,7 @@ function Header() {
       onClick={() => {
         navigate(-1);
       }}
-      className="flex h-12 items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
+      className={styles.header}
     >
       <AiOutlineArrowLeft />
       예약 내역
@@ -33,11 +34,7 @@ function Header() {
 }
 
 function Body() {
-  return (
-    <>
-      <BodyMain />
-    </>
-  );
+  return <BodyMain />;
 }
 
 function BodyMain() {
@@ -84,7 +81,9 @@ function BodyMain() {
     },
   ];
   return (
-    <div className="overflow-auto mb-[46px]">
+    <div
+      className={`overflow-auto h-full ${styles.headerMargin} ${styles.bottomMargin}`}
+    >
       {items.map((item: any) => {
         return (
           <div className="flex flex-col p-4 border-b-8 border-[#C3CFD9] gap-2">

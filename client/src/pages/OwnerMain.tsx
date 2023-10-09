@@ -3,6 +3,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
+import { styles } from "../utils/style";
 
 function OwnerMain() {
   const navigate = useNavigate();
@@ -10,7 +11,9 @@ function OwnerMain() {
     <Layout>
       <Header />
       <Body />
-      <div className="min-w-[336px] w-[336px] fixed bottom-9 h-12 flex justify-center items-center">
+      <div
+        className={`min-w-[336px] w-[336px] fixed bottom-12 h-12 flex justify-center items-center`}
+      >
         <button
           onClick={() => navigate("/register-item")}
           className="w-full h-10 text-white bg-[#FF385C]"
@@ -28,7 +31,7 @@ export default OwnerMain;
 function Header() {
   const navigate = useNavigate();
   return (
-    <div className="flex h-12 items-center border-b-2 border-[#C3CFD9]">
+    <div className={styles.header}>
       <div
         onClick={() => {
           navigate(-1);
@@ -125,7 +128,9 @@ function Body() {
   ];
   return (
     <>
-      <div className="w-full h-full mb-[80px] overflow-auto">
+      <div
+        className={`w-full h-full overflow-auto ${styles.headerMargin} mb-[92px]`}
+      >
         {items.map((item: any, index: number) => (
           <div
             className={`w-full flex flex-col justify-center border-b-2 border-[#C3CFD9] px-4 py-3
@@ -140,8 +145,16 @@ function Body() {
                 <div className="text-[0.75rem]">잔여수량: {item.count}</div>
 
                 <div className="flex gap-2 items-center">
-                  <div>{item.prevPrice}</div>
-                  <div>{item.price}</div>
+                  <div
+                    style={{
+                      textDecoration: "line-through",
+                      textDecorationColor: "red",
+                      color: "black",
+                    }}
+                  >
+                    {item.prevPrice}
+                  </div>
+                  <div className="font-semibold text-red-500">{item.price}</div>
                 </div>
               </div>
 

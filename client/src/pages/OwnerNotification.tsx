@@ -3,6 +3,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
+import { styles } from "../utils/style";
 
 function OwnerNotification() {
   return (
@@ -23,7 +24,7 @@ function Header() {
       onClick={() => {
         navigate(-1);
       }}
-      className="flex h-12 items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
+      className={styles.header}
     >
       <AiOutlineArrowLeft />
       예약 알림
@@ -97,7 +98,9 @@ function Body() {
   ];
   return (
     <>
-      <div className="overflow-auto mb-[38px]">
+      <div
+        className={`overflow-auto ${styles.headerMargin} ${styles.bottomMargin} h-full`}
+      >
         {alarms.map((alarm: any, index: number) => {
           return (
             <div

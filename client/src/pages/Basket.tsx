@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { styles } from "../utils/style";
 
 function Basket() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function Basket() {
       <Body />
       <button
         onClick={() => navigate("/result")}
-        className="min-w-[336px] w-[336px] fixed bottom-12 h-20 flex flex-col justify-center items-center"
+        className={`min-w-[336px] w-[336px] fixed ${styles.footerHeight} h-20 flex flex-col justify-center items-center`}
       >
         <button className="w-full h-10 text-white bg-[#FF385C]">
           총 22% 할인받고 구매하기
@@ -35,7 +36,7 @@ function Header() {
       onClick={() => {
         navigate(-1);
       }}
-      className="flex h-12 items-center gap-2 border-b-2 border-[#C3CFD9] px-2"
+      className={styles.header}
     >
       <AiOutlineArrowLeft />
       장바구니
@@ -54,19 +55,11 @@ function Body() {
       imgUrl: "",
     },
     {
-      title: "로제 떡볶이",
-      content: "요즘 대세 떡볶이",
-      count: 3,
-      prevPrice: 6000,
-      price: 4000,
-      imgUrl: "",
-    },
-    {
-      title: "새우 튀김",
-      content: "파사삭 새우 오늘만 할인! (6ea)",
-      count: 4,
-      prevPrice: 6000,
-      price: 5000,
+      title: "종훈 떡볶이",
+      content: "매콤 달달 떡볶이, 1,000원 할인!",
+      count: 12,
+      prevPrice: 4000,
+      price: 3000,
       imgUrl: "",
     },
     {
@@ -78,24 +71,32 @@ function Body() {
       imgUrl: "",
     },
     {
-      title: "로제 떡볶이",
-      content: "요즘 대세 떡볶이",
-      count: 3,
-      prevPrice: 6000,
-      price: 4000,
+      title: "종훈 떡볶이",
+      content: "매콤 달달 떡볶이, 1,000원 할인!",
+      count: 12,
+      prevPrice: 4000,
+      price: 3000,
       imgUrl: "",
     },
     {
-      title: "새우 튀김",
-      content: "파사삭 새우 오늘만 할인! (6ea)",
-      count: 4,
-      prevPrice: 6000,
-      price: 5000,
+      title: "종훈 떡볶이",
+      content: "매콤 달달 떡볶이, 1,000원 할인!",
+      count: 12,
+      prevPrice: 4000,
+      price: 3000,
+      imgUrl: "",
+    },
+    {
+      title: "종훈 떡볶이",
+      content: "매콤 달달 떡볶이, 1,000원 할인!",
+      count: 12,
+      prevPrice: 4000,
+      price: 3000,
       imgUrl: "",
     },
   ];
   return (
-    <div className="w-full h-full mb-32 overflow-auto">
+    <div className={`w-full ${styles.headerMargin} mb-32 overflow-auto`}>
       {items.map((item: any, index: number) => (
         <div
           className={`w-full h-[180px] flex flex-col p-2 border-b-2 border-[#C3CFD9] pt-4       

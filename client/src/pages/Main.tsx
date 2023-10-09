@@ -76,7 +76,7 @@ function BodyContent({ contentType }: { contentType: string }) {
         광고
       </div>
       <div
-        className="cursor-pointer h-[10%] flex items-center px-2 mt-2 font-semibold"
+        className="cursor-pointer h-[10%] flex items-center px-2 my-2 font-semibold"
         onClick={() => {
           contentType === "nearBy"
             ? navigate("/nearby")

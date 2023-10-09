@@ -3,6 +3,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import { styles } from "../utils/style";
 
 function CreateReview() {
   return (
@@ -24,7 +25,7 @@ function Header() {
       onClick={() => {
         navigate(-1);
       }}
-      className="h-12 border-b-2 border-[#C3CFD9] px-2 gap-2 flex items-center"
+      className={styles.header}
     >
       <AiOutlineArrowLeft />
       리뷰 작성
@@ -35,8 +36,8 @@ function Header() {
 function Body() {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col mt-10">
-      <div className="flex flex-col w-full justify-center items-center">
+    <div className={`flex flex-col ${styles.headerMargin}`}>
+      <div className="flex flex-col w-full justify-center items-center mt-10">
         <div>종훈 떡볶이</div>
         <div>22% 할인받음</div>
         <div>✩✩✩✩✩</div>

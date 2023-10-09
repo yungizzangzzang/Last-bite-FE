@@ -1,8 +1,10 @@
 import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { GoHeartFill } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import { styles } from "../utils/style";
 
 function StoreDetail() {
   const navigate = useNavigate();
@@ -10,7 +12,7 @@ function StoreDetail() {
     <Layout>
       <Header />
       <Body />
-      <div className="min-w-[336px] w-[336px] fixed bottom-9 h-12 flex justify-center items-center">
+      <div className="min-w-[336px] w-[336px] fixed bottom-[44px] h-12 flex justify-center items-center">
         <button
           onClick={() => navigate("/basket")}
           className="w-full h-10 text-white bg-[#FF385C]"
@@ -28,7 +30,7 @@ export default StoreDetail;
 function Header() {
   const navigate = useNavigate();
   return (
-    <div className="flex h-12 items-center border-b-2 border-[#C3CFD9]">
+    <div className={styles.header}>
       <div
         onClick={() => {
           navigate(-1);
@@ -36,11 +38,12 @@ function Header() {
         className="px-2 flex gap-2 items-center"
       >
         <AiOutlineArrowLeft />
-        종훈 떡볶이
+        <span> 종훈 떡볶이</span>
+        <GoHeartFill color="#FF5352" />
       </div>
       <button
         onClick={() => navigate("/review/1")}
-        className="h-6 text-white text-[0.8rem] bg-[#FF385C] px-2"
+        className="h-6 text-white text-[0.8rem] bg-[#FF385C] px-2 mx-2"
       >
         가게 리뷰
       </button>
@@ -98,11 +101,37 @@ function Body() {
       price: 5000,
       imgUrl: "",
     },
+    {
+      title: "종훈 떡볶이",
+      content: "매콤 달달 떡볶이, 1,000원 할인!",
+      count: 12,
+      prevPrice: 4000,
+      price: 3000,
+      imgUrl: "",
+    },
+    {
+      title: "로제 떡볶이",
+      content: "요즘 대세 떡볶이",
+      count: 3,
+      prevPrice: 6000,
+      price: 4000,
+      imgUrl: "",
+    },
+    {
+      title: "새우 튀김",
+      content: "파사삭 새우 오늘만 할인! (6ea)",
+      count: 4,
+      prevPrice: 6000,
+      price: 5000,
+      imgUrl: "",
+    },
   ];
 
   return (
     <>
-      <div className="w-full h-full mb-20 overflow-auto">
+      <div
+        className={`w-full h-full mb-[88px] ${styles.headerMargin} overflow-auto`}
+      >
         {items.map((item: any, index: number) => (
           <div
             className={`w-full flex items-center border-b-2 border-[#C3CFD9] p-2
@@ -116,8 +145,16 @@ function Body() {
               <div className="text-[0.75rem]">잔여수량: {item.count}</div>
 
               <div className="flex gap-2 items-center">
-                <div>{item.prevPrice}</div>
-                <div>{item.price}</div>
+                <div
+                  style={{
+                    textDecoration: "line-through",
+                    textDecorationColor: "red",
+                    color: "black",
+                  }}
+                >
+                  {item.prevPrice}
+                </div>
+                <div className="font-semibold text-red-500">{item.price}</div>
                 <div className="flex gap-2 py-1 px-2">
                   <button>-</button>
                   <div>0</div>

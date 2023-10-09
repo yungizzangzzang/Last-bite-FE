@@ -3,6 +3,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import { styles } from "../utils/style";
 
 function Nearby() {
   return (
@@ -23,7 +24,7 @@ function Header() {
       onClick={() => {
         navigate(-1);
       }}
-      className="border-b-2 border-[#C3CFD9] px-2 gap-2 h-12 flex items-center"
+      className={styles.header}
     >
       <AiOutlineArrowLeft /> 내 주변 핫딜
     </div>
@@ -51,7 +52,9 @@ function Body() {
   ];
   return (
     <>
-      <div className="w-full h-full mb-[46px] overflow-auto">
+      <div
+        className={`w-full h-full ${styles.headerMargin} ${styles.bottomMargin} overflow-auto`}
+      >
         {nearbyStore.map((item: any, index: number) => (
           <div
             onClick={() => navigate("/store/1")}
