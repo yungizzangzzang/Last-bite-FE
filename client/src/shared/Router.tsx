@@ -22,6 +22,8 @@ import OwnerMain from "../pages/OwnerMain";
 import OwnerNotification from "../pages/OwnerNotification";
 import OwnerResult from "../pages/OwnerResult";
 import OwnerSetting from "../pages/OwnerSetting";
+import Review from "../pages/Review";
+import OwnerReview from "../pages/OwnerReview";
 const Router = () => {
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
 
@@ -46,7 +48,10 @@ const Router = () => {
         <Route path="/" element={<Main />} />
         <Route path="/nearby" element={<Nearby />} />
         <Route path="/favorite" element={<Favorite />} />
+
         <Route path="/store/:id" element={<StoreDetail />} />
+        <Route path="/review/:id" element={<Review />} />
+
         <Route path="/basket" element={<Basket />} />
         <Route path="/result" element={<Result />} />
         <Route path="/notification" element={<Notification />} />
@@ -56,6 +61,8 @@ const Router = () => {
         <Route path="/setting" element={<Setting />} />
 
         <Route path="/owner" element={<OwnerMain />} />
+        <Route path="/owner/review" element={<OwnerReview />} />
+
         <Route path="/owner/result" element={<OwnerResult />} />
         <Route path="/owner/notification" element={<OwnerNotification />} />
         <Route path="/owner/setting" element={<OwnerSetting />} />

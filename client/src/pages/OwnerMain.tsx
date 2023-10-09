@@ -42,7 +42,7 @@ function Header() {
         종훈 떡볶이
       </div>
       <button
-        onClick={() => navigate("/review/1")}
+        onClick={() => navigate("/owner/review")}
         className="h-6 text-white text-[0.8rem] bg-[#FF385C] px-2"
       >
         가게 리뷰
