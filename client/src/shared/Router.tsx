@@ -1,47 +1,28 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
 
-import { isLoggedInState } from "../states/userState";
-
-import Cookies from "js-cookie";
-import Main from "../pages/Main";
-import Nearby from "../pages/Nearby";
-import Favorite from "../pages/Favorite";
-import StoreDetail from "../pages/StoreDetail";
 import Basket from "../pages/Basket";
-import Result from "../pages/Result";
-import Notification from "../pages/Notification";
-import History from "../pages/History";
 import CreateReview from "../pages/CreateReview";
+import Favorite from "../pages/Favorite";
+import History from "../pages/History";
+import Login from "../pages/Login";
+import Main from "../pages/Main";
 import Mypage from "../pages/Mypage";
-import Setting from "../pages/Setting";
+import Nearby from "../pages/Nearby";
+import Notification from "../pages/Notification";
 import OwnerMain from "../pages/OwnerMain";
 import OwnerNotification from "../pages/OwnerNotification";
 import OwnerResult from "../pages/OwnerResult";
-import OwnerSetting from "../pages/OwnerSetting";
-import Review from "../pages/Review";
 import OwnerReview from "../pages/OwnerReview";
-import RegisterItem from "../pages/RegisterItem";
+import OwnerSetting from "../pages/OwnerSetting";
 import OwnerStore from "../pages/OwnerStore";
+import RegisterItem from "../pages/RegisterItem";
+import Result from "../pages/Result";
+import Review from "../pages/Review";
+import Setting from "../pages/Setting";
 import SignUp from "../pages/SignUp";
-import Login from "../pages/Login";
+import StoreDetail from "../pages/StoreDetail";
 
 const Router = () => {
-  const setIsLoggedIn = useSetRecoilState(isLoggedInState);
-
-  useEffect(() => {
-    const kakaoToken = Cookies.get("kakao_token");
-    const accessToken = Cookies.get("accessToken");
-    const googleToken = Cookies.get("google_token");
-
-    if (kakaoToken || accessToken || googleToken) {
-      setIsLoggedIn(true);
-    } else {
-      localStorage.removeItem("user");
-    }
-  }, [setIsLoggedIn]);
-
   return (
     <BrowserRouter>
       <Routes>

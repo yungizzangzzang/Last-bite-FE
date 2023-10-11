@@ -1,6 +1,9 @@
-import Router from "./shared/Router";
-import { RecoilRoot } from "recoil";
+import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { RecoilRoot } from "recoil";
+import io, { Socket } from "socket.io-client";
+import { SocketContext } from "./contexts/SocketContext";
+import Router from "./shared/Router";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,11 +19,25 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const [socket, setSocket] = useState<Socket | null>(null);
+
+  useEffect(() => {
+    const socketInstance = io("http://localhost:8000");
+
+    setSocket(socketInstance);
+
+    return () => {
+      socketInstance.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
-          <Router />
+          <SocketContext.Provider value={socket}>
+            <Router />
+          </SocketContext.Provider>
         </RecoilRoot>
       </QueryClientProvider>
     </>
