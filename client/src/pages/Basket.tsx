@@ -6,6 +6,7 @@ import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import { SocketContext } from "../contexts/SocketContext";
 import { basketState } from "../states/basketState";
+import { User } from "../types/user";
 import { styles } from "../utils/style";
 
 function Basket() {
@@ -37,13 +38,12 @@ function Header() {
 }
 
 function Body() {
-  const items = useRecoilValue(basketState);
-
-  const socket = useContext(SocketContext);
+  type ItemCountsType = { [key: number]: number };
   const navigate = useNavigate();
 
-  type ItemCountsType = { [key: number]: number };
-
+  const items = useRecoilValue(basketState);
+  const socket = useContext(SocketContext);
+  const [user, setUser] = useState<User | null>(null);
   const [itemCounts, setItemCounts] = useState<ItemCountsType>(() => {
     const initialCounts: ItemCountsType = {};
     items.forEach((item) => {
@@ -51,6 +51,12 @@ function Body() {
     });
     return initialCounts;
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")!));
+    }
+  }, []);
 
   useEffect(() => {
     if (socket) {
@@ -99,7 +105,7 @@ function Body() {
       });
 
       socket.emit("clientOrder", {
-        userId: 6,
+        userId: user?.userId,
         storeId: items[0].storeId,
         totalPrice: totalPrice,
         discount: discountPercentage,
