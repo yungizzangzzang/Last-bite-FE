@@ -188,9 +188,8 @@ function Body() {
       }
     }
   }
-  console.log(localBasket);
+
   const handleAddToBasket = () => {
-    console.log(localBasket, basket);
     if (!localBasket.length) {
       if (basket.length > 0 && basket[0].storeId === +id!) {
         navigate("/basket");
