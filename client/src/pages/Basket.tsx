@@ -136,20 +136,22 @@ function Body() {
           </div>
         ))}
       </div>
-      <button
-        onClick={() => {
-          sendOrder();
-          navigate("/result");
-        }}
-        className={`min-w-[336px] w-[336px] fixed ${styles.footerHeight} h-20 flex flex-col justify-center items-center`}
-      >
-        <button className="w-full h-10 text-white bg-[#FF385C]">
-          총 {discountPercentage}% 할인받고 구매하기
+      {items.length !== 0 && (
+        <button
+          onClick={() => {
+            sendOrder();
+            navigate("/result");
+          }}
+          className={`min-w-[336px] w-[336px] fixed ${styles.footerHeight} h-20 flex flex-col justify-center items-center`}
+        >
+          <button className="w-full h-10 text-white bg-[#FF385C]">
+            총 {discountPercentage}% 할인받고 구매하기
+          </button>
+          <div className="flex justify-center items-center h-10 bg-white w-full">
+            총액: {totalPrice}원
+          </div>
         </button>
-        <div className="flex justify-center items-center h-10 bg-white w-full">
-          총액: {totalPrice}원
-        </div>
-      </button>
+      )}
     </>
   );
 }
