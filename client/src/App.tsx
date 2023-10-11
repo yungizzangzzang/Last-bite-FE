@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { RecoilRoot } from "recoil";
 import io, { Socket } from "socket.io-client";
 import { SocketContext } from "./contexts/SocketContext";
@@ -36,6 +38,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
           <SocketContext.Provider value={socket}>
+            <ToastContainer position="top-center" autoClose={3000} />
             <Router />
           </SocketContext.Provider>
         </RecoilRoot>

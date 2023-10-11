@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { signUpAPI } from "../api/authAPI";
 
 function SignUp() {
@@ -69,6 +70,7 @@ function Body() {
       };
 
       await signUpAPI(requestBody);
+      toast("회원가입 완료! 로그인을 진행해주세요.");
       navigate("/login");
     } catch (error) {
       console.error("Error signing up:", error);

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
 import { postAPI } from "../axios";
 import { isLoggedInState, userInfoState } from "../states/userState";
@@ -67,12 +68,15 @@ function Body() {
       };
       setUser(user);
       setIsLoggedIn(true);
+      toast("로그인 완료!");
+      localStorage.setItem("user", JSON.stringify(user));
       if (user.isClient) {
         navigate("/");
       } else {
         navigate(`/owner/${user.storeId}`);
       }
     } catch (error) {
+      toast("로그인에 실패하였습니다.");
       console.error("로그인에 실패하였습니다.", error);
     }
   };
@@ -113,7 +117,7 @@ function InputField({ label, name, value, onChange }: InputFieldProps) {
         name={name}
         value={value}
         onChange={onChange}
-        className="border-2 border-[#d6d6d6] px-2 py-1 rounded-md"
+        className="w-full border-2 border-[#d6d6d6] px-2 py-1 rounded-md "
       />
     </div>
   );
