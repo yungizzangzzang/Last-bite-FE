@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BiCamera } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { postAPI } from "../axios";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
@@ -44,8 +45,10 @@ function RegisterItem() {
     }
     try {
       await postAPI("/items", formData);
+      toast.success("핫딜 상품 등록 완료!");
       navigate(-1);
     } catch (error) {
+      toast.error("핫딜 상품 등록에 실패하였습니다.");
       console.error("핫딜상품 등록에 실패하였습니다.", error);
     }
   };

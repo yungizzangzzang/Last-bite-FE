@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { postAPI } from "../axios";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
@@ -43,8 +44,10 @@ function Body() {
   const handleSubmit = async () => {
     try {
       await postAPI(`/reviews/${id}`, { content, star });
+      toast.success("리뷰 작성 완료!");
       navigate(-1);
     } catch (error) {
+      toast.error("리뷰를 저장하는 도중 오류가 발생했습니다.");
       console.error("Error submitting the review:", error);
     }
   };

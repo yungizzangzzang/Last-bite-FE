@@ -70,9 +70,10 @@ function Body() {
       };
 
       await signUpAPI(requestBody);
-      toast("회원가입 완료! 로그인을 진행해주세요.");
+      toast.success("회원가입 완료! \n 로그인을 진행해주세요.");
       navigate("/login");
     } catch (error) {
+      toast.error("회원가입 도중 오류가 발생했습니다.");
       console.error("Error signing up:", error);
     }
   };

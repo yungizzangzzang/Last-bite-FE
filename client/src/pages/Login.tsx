@@ -68,7 +68,7 @@ function Body() {
       };
       setUser(user);
       setIsLoggedIn(true);
-      toast("로그인 완료!");
+      toast.success("로그인 완료!");
       localStorage.setItem("user", JSON.stringify(user));
       if (user.isClient) {
         navigate("/");
@@ -76,7 +76,7 @@ function Body() {
         navigate(`/owner/${user.storeId}`);
       }
     } catch (error) {
-      toast("로그인에 실패하였습니다.");
+      toast.error("로그인에 실패하였습니다.");
       console.error("로그인에 실패하였습니다.", error);
     }
   };
