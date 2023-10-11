@@ -52,7 +52,7 @@ function Body() {
 
   const handleLogin = async () => {
     try {
-      await postAPI("/login", formData);
+      await postAPI("/auth/login", formData);
       navigate("/");
     } catch (error) {
       console.error("Error logging in:", error);

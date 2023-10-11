@@ -1,9 +1,8 @@
-import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
-import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { styles } from "../utils/style";
 
 function History() {
@@ -41,42 +40,57 @@ function BodyMain() {
   const navigate = useNavigate();
   const items = [
     {
-      title: "로제 떡볶이",
+      orderId: 1,
       count: 1,
-      price: 4000,
       discount: 22,
-      star: null,
-      imgUrl: "",
+      price: 4000,
       createdAt: "2023.10.07",
       store: {
+        storeId: 1,
         name: "종훈 떡볶이",
-        description: "순대는 없어요",
+      },
+      item: {
+        name: "로제 떡볶이",
+        imgUrl: "",
+      },
+      review: {
+        star: null,
       },
     },
     {
-      title: "새우 튀김",
-      count: 2,
-      price: 10000,
-      discount: 49,
-      star: 5,
-      imgUrl: "",
-      createdAt: "2023.10.04",
-      store: {
-        name: "윤기네 치킨",
-        description: "후라이드 맛집",
-      },
-    },
-    {
-      title: "포테이토 피자",
+      orderId: 1,
       count: 1,
-      price: 12000,
-      discount: 26,
-      star: 4,
-      imgUrl: "",
-      createdAt: "2023.10.03",
+      discount: 22,
+      price: 4000,
+      createdAt: "2023.10.07",
       store: {
-        name: "승일 피자",
-        description: "파스타 맛집",
+        storeId: 1,
+        name: "종훈 떡볶이",
+      },
+      item: {
+        name: "로제 떡볶이",
+        imgUrl: "",
+      },
+      review: {
+        star: 5,
+      },
+    },
+    {
+      orderId: 1,
+      count: 1,
+      discount: 22,
+      price: 4000,
+      createdAt: "2023.10.07",
+      store: {
+        storeId: 1,
+        name: "종훈 떡볶이",
+      },
+      item: {
+        name: "로제 떡볶이",
+        imgUrl: "",
+      },
+      review: {
+        star: 4,
       },
     },
   ];
@@ -108,12 +122,12 @@ function BodyMain() {
                 <IoIosArrowDroprightCircle size={28} color={"#717171"} />
               </button>
             </div>
-            {item.star ? (
-              "⭐️".repeat(item.star)
+            {item.review.star ? (
+              "⭐️".repeat(item.review.star)
             ) : (
               <button
                 onClick={() => {
-                  navigate("/create-review");
+                  navigate(`/create-review/${item.store.storeId}`);
                 }}
                 className="w-full h-8 flex items-center bg-[#FF385C] text-white justify-center self-center"
               >

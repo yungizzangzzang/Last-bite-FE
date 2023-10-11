@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
 import { postAPI } from "../axios";
@@ -42,7 +42,7 @@ function Body() {
 
   const handleSubmit = async () => {
     try {
-      await postAPI(`/review/${id}`, { content, star });
+      await postAPI(`/reviews/${id}`, { content, star });
       navigate(-1);
     } catch (error) {
       console.error("Error submitting the review:", error);
