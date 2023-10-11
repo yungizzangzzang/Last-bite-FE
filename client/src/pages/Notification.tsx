@@ -1,9 +1,7 @@
-import { useContext, useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
-import { SocketContext } from "../contexts/SocketContext";
 import { styles } from "../utils/style";
 
 function Notification() {
@@ -35,29 +33,6 @@ function Header() {
 
 function Body() {
   const navigate = useNavigate();
-  const socket = useContext(SocketContext);
-
-  useEffect(() => {
-    if (socket) {
-      socket.emit("clientOrder", {
-        userId: 1,
-        storeId: 2,
-        totalPrice: 14000,
-        discount: 22,
-        itemList: {
-          1: 4,
-          2: 6,
-          3: 9,
-        },
-      });
-    }
-
-    return () => {
-      if (socket) {
-        socket.off();
-      }
-    };
-  }, [socket]);
 
   const alarms = [
     {
