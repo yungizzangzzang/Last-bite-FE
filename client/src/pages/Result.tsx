@@ -69,7 +69,7 @@ function BodyHeader({ totalPrice }: { totalPrice: number }) {
     <div className="flex flex-col p-4">
       <div className="font-semibold text-[#FF385C]">예약이 완료되었어요!</div>
       <div className="flex gap-10 font-bold ">
-        <div className="text-[1.25rem]">{items[0].name}</div>
+        <div className="text-[1.25rem]">종훈 떡볶이</div>
         <div className="bg-[#FF385C] text-white px-2 flex items-center">
           {discountPercentage}% 할인 받음
         </div>

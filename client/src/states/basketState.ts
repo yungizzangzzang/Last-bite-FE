@@ -8,6 +8,7 @@ type BasketItem = {
   prevPrice: number;
   price: number;
   totalAvailableCount: number;
+  imgUrl: string;
 };
 
 export const basketState = atom<BasketItem[]>({

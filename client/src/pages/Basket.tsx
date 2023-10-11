@@ -120,11 +120,23 @@ function Body() {
           >
             <div className="px-2">{item.name}</div>
             <div className="flex h-full justify-around items-center">
-              <div className="h-[100px] w-[100px] rounded-md flex justify-center items-center bg-blue-400">
-                사진
+              <div className="h-[100px] w-[100px] rounded-md flex justify-center items-center">
+                <img
+                  src={item.imgUrl}
+                  alt="item_img"
+                  className="w-full h-full rounded-md"
+                />
               </div>
               <div className="h-full w-[30%] flex flex-col justify-center">
-                <div>가격: {item.price}원</div>
+                <div
+                  style={{
+                    textDecoration: "line-through",
+                    textDecorationColor: "red",
+                    color: "black",
+                  }}
+                >
+                  {item.prevPrice}원
+                </div>
                 <div>{item.price}원</div>
               </div>
               <div className="flex gap-2 py-1 px-2 items-center">
