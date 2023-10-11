@@ -144,12 +144,12 @@ function Body() {
 function InputField({ label, name, value, onChange }: InputFieldProps) {
   return (
     <div className="flex">
-      <div className="w-[80px]">{label}</div>
+      <div className="w-[80px] flex items-center">{label}</div>
       <input
         name={name}
         value={value}
         onChange={onChange}
-        className="border-2 border-[#d6d6d6]"
+        className="border-2 border-[#d6d6d6] px-2 py-1 rounded-md"
       />
     </div>
   );

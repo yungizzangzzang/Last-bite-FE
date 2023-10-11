@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { postAPI } from "../axios";
+import { isLoggedInState, userInfoState } from "../states/userState";
 
 function Login() {
   return (
@@ -44,6 +46,8 @@ function Body() {
     email: "",
     password: "",
   });
+  const [, setUser] = useRecoilState(userInfoState);
+  const [, setIsLoggedIn] = useRecoilState(isLoggedInState);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -52,10 +56,24 @@ function Body() {
 
   const handleLogin = async () => {
     try {
-      await postAPI("/auth/login", formData);
-      navigate("/");
+      const result = await postAPI("/auth/login", formData);
+      const user = {
+        userId: result.data.data.user.userId,
+        nickname: result.data.data.user.nickname,
+        name: result.data.data.user.name,
+        isClient: result.data.data.user.isClient,
+        email: result.data.data.user.email,
+        storeId: result.data.data.user.Store?.storeId,
+      };
+      setUser(user);
+      setIsLoggedIn(true);
+      if (user.isClient) {
+        navigate("/");
+      } else {
+        navigate(`/owner/${user.storeId}`);
+      }
     } catch (error) {
-      console.error("Error logging in:", error);
+      console.error("로그인에 실패하였습니다.", error);
     }
   };
 
@@ -85,14 +103,17 @@ function Body() {
 }
 
 function InputField({ label, name, value, onChange }: InputFieldProps) {
+  const inputType = name === "password" ? "password" : "text";
+
   return (
     <div className="flex">
-      <div className="w-[80px]">{label}</div>
+      <div className="w-[80px] flex items-center">{label}</div>
       <input
+        type={inputType}
         name={name}
         value={value}
         onChange={onChange}
-        className="border-2 border-[#d6d6d6]"
+        className="border-2 border-[#d6d6d6] px-2 py-1 rounded-md"
       />
     </div>
   );

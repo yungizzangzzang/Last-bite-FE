@@ -45,14 +45,14 @@ const Router = () => {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/setting" element={<Setting />} />
 
-        <Route path="/owner" element={<OwnerMain />} />
+        <Route path="/owner/:id" element={<OwnerMain />} />
         <Route path="/register-item" element={<RegisterItem />} />
-        <Route path="/owner/review" element={<OwnerReview />} />
+        <Route path="/owner/review/:id" element={<OwnerReview />} />
 
-        <Route path="/owner/store" element={<OwnerStore />} />
+        <Route path="/owner/store/:id" element={<OwnerStore />} />
 
-        <Route path="/owner/result" element={<OwnerResult />} />
-        <Route path="/owner/notification" element={<OwnerNotification />} />
+        <Route path="/owner/result/:id" element={<OwnerResult />} />
+        <Route path="/owner/notification/:id" element={<OwnerNotification />} />
         <Route path="/owner/setting" element={<OwnerSetting />} />
       </Routes>
     </BrowserRouter>
