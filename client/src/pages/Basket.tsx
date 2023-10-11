@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import { SocketContext } from "../contexts/SocketContext";
+import { basketState } from "../states/basketState";
 import { styles } from "../utils/style";
 
 function Basket() {
@@ -34,64 +36,9 @@ function Header() {
   );
 }
 
-const items = [
-  {
-    itemId: 1,
-    storeId: 1,
-    title: "종훈 떡볶이",
-    count: 1,
-    prevPrice: 4000,
-    price: 3000,
-    imgUrl: "",
-  },
-  {
-    itemId: 2,
-    storeId: 1,
-    title: "종훈 떡볶이",
-    count: 2,
-    prevPrice: 4000,
-    price: 3000,
-    imgUrl: "",
-  },
-  {
-    itemId: 3,
-    storeId: 1,
-    title: "종훈 떡볶이",
-    count: 3,
-    prevPrice: 4000,
-    price: 3000,
-    imgUrl: "",
-  },
-  {
-    itemId: 4,
-    storeId: 1,
-    title: "종훈 떡볶이",
-    count: 4,
-    prevPrice: 4000,
-    price: 3000,
-    imgUrl: "",
-  },
-  {
-    itemId: 5,
-    storeId: 1,
-    title: "종훈 떡볶이",
-    count: 5,
-    prevPrice: 4000,
-    price: 3000,
-    imgUrl: "",
-  },
-  {
-    itemId: 6,
-    storeId: 1,
-    title: "종훈 떡볶이",
-    count: 6,
-    prevPrice: 4000,
-    price: 3000,
-    imgUrl: "",
-  },
-];
-
 function Body() {
+  const items = useRecoilValue(basketState);
+
   const socket = useContext(SocketContext);
   const navigate = useNavigate();
 
@@ -171,7 +118,7 @@ function Body() {
           ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}
         `}
           >
-            <div className="px-2">{item.title}</div>
+            <div className="px-2">{item.name}</div>
             <div className="flex h-full justify-around items-center">
               <div className="h-[100px] w-[100px] rounded-md flex justify-center items-center bg-blue-400">
                 사진
