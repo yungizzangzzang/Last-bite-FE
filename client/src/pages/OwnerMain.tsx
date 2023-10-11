@@ -1,4 +1,3 @@
-import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
@@ -12,7 +11,7 @@ function OwnerMain() {
       <Header />
       <Body />
       <div
-        className={`min-w-[336px] w-[336px] fixed bottom-12 h-12 flex justify-center items-center`}
+        className={`min-w-[336px] w-[336px] fixed bottom-[52px] h-12 flex justify-center items-center`}
       >
         <button
           onClick={() => navigate("/register-item")}
