@@ -1,12 +1,20 @@
+import { useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import { basketState } from "../states/basketState";
 import { styles } from "../utils/style";
 
 function Result() {
+  const [, setBasket] = useRecoilState(basketState);
+
+  useEffect(() => {
+    return () => {
+      setBasket([]);
+    };
+  }, [setBasket]);
   return (
     <Layout>
       <Header />
