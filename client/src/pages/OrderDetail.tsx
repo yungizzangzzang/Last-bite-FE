@@ -47,12 +47,12 @@ function Body() {
   return (
     <div className={`h-full ${styles.headerMargin}`}>
       <BodyHeader
-        discount={order.discount}
-        storeName={order.storeName}
-        createdAt={order.createdAt}
-        orderId={order.orderId}
+        discount={order?.discount}
+        storeName={order?.storeName}
+        createdAt={order?.createdAt}
+        orderId={order?.orderId}
       />
-      <BodyMain totalPrice={order.totalPrice} />
+      <BodyMain totalPrice={order?.totalPrice} />
     </div>
   );
 }

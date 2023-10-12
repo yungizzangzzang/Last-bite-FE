@@ -47,7 +47,7 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
           storeId: +storeId!,
           storeName: store.store.name,
           itemId: selectedItem.itemId,
-          name: selectedItem.title,
+          name: selectedItem.name,
           count: newCount,
           prevPrice: selectedItem.prevPrice,
           price: selectedItem.price,
