@@ -48,21 +48,24 @@ export default OwnerMain;
 function Header({ storeId, store }: { storeId: string; store: any }) {
   const navigate = useNavigate();
   return (
-    <div className={styles.header}>
+    <div className={`${styles.header}`}>
       <div
         onClick={() => {
           navigate(-1);
         }}
-        className="px-2 flex gap-2 items-center"
+        className="flex gap-2 items-center justify-between"
       >
-        <AiOutlineArrowLeft />
-        {store.name}
+        <AiOutlineArrowLeft className="cursor-pointer" />
+        <span className=" w-[136px] cursor-default"> {store.name}</span>
       </div>
       <button
         onClick={() => navigate(`/owner/review/${storeId}`)}
-        className="h-6 text-white text-[0.8rem] bg-[#FF385C] px-2"
+        className="h-6 text-white text-[0.75rem] rounded-full bg-[#FF385C] px-2 ml-[2px]"
       >
         가게 리뷰
+      </button>
+      <button className="h-6 text-white text-[0.75rem] rounded-full bg-[#788796] px-2 ml-[2px]">
+        알림 보내기
       </button>
     </div>
   );
@@ -72,7 +75,7 @@ function Body({ items }: { items: any }) {
   return (
     <>
       <div
-        className={`w-full h-full overflow-auto ${styles.headerMargin} mb-[92px]`}
+        className={`w-full h-full overflow-auto ${styles.headerMargin} mb-[92px] cursor-default`}
       >
         {items.map((item: any, index: number) => (
           <div
