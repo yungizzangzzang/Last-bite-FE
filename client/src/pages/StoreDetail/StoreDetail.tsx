@@ -25,7 +25,7 @@ function StoreDetail() {
 
   return (
     <Layout>
-      <StoreDetailHeader storeId={id!} store={store.store} />
+      <StoreDetailHeader storeId={id!} store={store} />
       <StoreDetailBody storeId={id!} store={store} />
       <Footer />
     </Layout>

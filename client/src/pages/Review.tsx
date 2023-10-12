@@ -21,21 +21,25 @@ function Review() {
     () => fetchReviewsByStoreId(id!)
   );
 
-  if (isLoading || reviewsIsLoading) return <div>로딩중...</div>;
-
   return (
     <>
       <Layout>
-        <Header storeId={id!} store={store.store} />
-        <Body reviews={reviews} />
-        <div className="min-w-[336px] w-[336px] fixed bottom-[50px] h-12 flex justify-center items-center">
-          <button
-            onClick={() => navigate(-1)}
-            className="w-full h-10 text-white bg-[#FF385C]"
-          >
-            주문하러 가기
-          </button>
-        </div>
+        <Header storeId={id!} store={store} />
+        {isLoading || reviewsIsLoading ? (
+          <div>로딩중...</div>
+        ) : (
+          <>
+            <Body reviews={reviews} />
+            <div className="min-w-[336px] w-[336px] fixed bottom-[50px] h-12 flex justify-center items-center">
+              <button
+                onClick={() => navigate(-1)}
+                className="w-full h-10 text-white bg-[#FF385C]"
+              >
+                주문하러 가기
+              </button>
+            </div>
+          </>
+        )}
         <Footer />
       </Layout>
     </>
@@ -62,7 +66,7 @@ function Header({ storeId, store }: { storeId: string; store: any }) {
     <div className={styles.header}>
       <div className="px-2 flex gap-2 items-center">
         <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-        <span> {store.name}</span>
+        <span> {store.store.name}</span>
         {isLiked ? (
           <GoHeartFill color="#FF5352" onClick={toggleLike} />
         ) : (

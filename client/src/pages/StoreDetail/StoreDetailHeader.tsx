@@ -39,14 +39,14 @@ function StoreDetailHeader({
         </div>
         <div className="flex flex-col text-[0.75rem]">
           <div className="flex items-center gap-1">
-            <span> {store.name}</span>
+            <span> {store.store.name}</span>
             {isLiked ? (
               <GoHeartFill color="#FF5352" onClick={toggleLike} />
             ) : (
               <GoHeart onClick={toggleLike} />
             )}
           </div>
-          <div className="text-[0.5rem]">{store.address}</div>
+          <div className="text-[0.5rem]">{store.store.address}</div>
         </div>
         <button
           onClick={() => navigate(`/review/${storeId}`)}
