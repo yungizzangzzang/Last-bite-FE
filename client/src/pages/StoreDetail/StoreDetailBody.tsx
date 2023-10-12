@@ -1,55 +1,13 @@
 import { useState } from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { GoHeartFill } from "react-icons/go";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import Footer from "../components/Layout/Footer";
-import Layout from "../components/Layout/Layout";
-import { items } from "../consts/items";
-import { basketState } from "../states/basketState";
-import { BasketItem } from "../types/basket";
-import { styles } from "../utils/style";
+import { items } from "../../consts/items";
+import { basketState } from "../../states/basketState";
+import { BasketItem } from "../../types/basket";
+import { styles } from "../../utils/style";
 
-function StoreDetail() {
-  return (
-    <Layout>
-      <Header />
-      <Body />
-      <Footer />
-    </Layout>
-  );
-}
-
-export default StoreDetail;
-
-function Header() {
+function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
   const navigate = useNavigate();
-  return (
-    <div className={styles.header}>
-      <div
-        onClick={() => {
-          navigate(-1);
-        }}
-        className="px-2 flex gap-2 items-center"
-      >
-        <AiOutlineArrowLeft />
-        <span> 종훈 떡볶이</span>
-        <GoHeartFill color="#FF5352" />
-      </div>
-      <button
-        onClick={() => navigate("/review/1")}
-        className="h-6 text-white text-[0.8rem] bg-[#FF385C] px-2 mx-2"
-      >
-        가게 리뷰
-      </button>
-    </div>
-  );
-}
-
-function Body() {
-  const navigate = useNavigate();
-
-  const { id } = useParams();
   const [localBasket, setLocalBasket] = useState<BasketItem[]>([]);
   const [basket, setBasket] = useRecoilState<BasketItem[]>(basketState);
   const [itemCounts, setItemCounts] = useState<{ [key: number]: number }>(
@@ -85,7 +43,7 @@ function Body() {
         setLocalBasket(updatedBasket);
       } else {
         const newItem: BasketItem = {
-          storeId: +id!,
+          storeId: +storeId!,
           itemId: selectedItem.itemId,
           name: selectedItem.title,
           count: newCount,
@@ -101,7 +59,7 @@ function Body() {
 
   const handleAddToBasket = () => {
     if (!localBasket.length) {
-      if (basket.length > 0 && basket[0].storeId === +id!) {
+      if (basket.length > 0 && basket[0].storeId === +storeId!) {
         navigate("/basket");
       } else {
         alert("상품을 담아주세요!");
@@ -166,6 +124,7 @@ function Body() {
       >
         {items.map((item: any, index: number) => (
           <div
+            key={item.itemId}
             className={`w-full flex items-center border-b-2 border-[#C3CFD9] p-2
              ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
           >
@@ -218,3 +177,5 @@ function Body() {
     </>
   );
 }
+
+export default StoreDetailBody;

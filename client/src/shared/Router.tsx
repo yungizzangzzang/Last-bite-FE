@@ -20,7 +20,7 @@ import Result from "../pages/Result";
 import Review from "../pages/Review";
 import Setting from "../pages/Setting";
 import SignUp from "../pages/SignUp";
-import StoreDetail from "../pages/StoreDetail";
+import StoreDetail from "../pages/StoreDetail/StoreDetail";
 
 const Router = () => {
   return (
