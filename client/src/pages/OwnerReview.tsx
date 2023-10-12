@@ -1,15 +1,30 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchReviewsByStoreId, fetchStoreById } from "../api/storeAPI";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
 import { styles } from "../utils/style";
 
 function OwnerReview() {
+  const { id } = useParams();
+  const { data: store, isLoading } = useQuery(["store", id], () =>
+    fetchStoreById(id!)
+  );
+
+  const { data: reviews, isLoading: reviewsIsLoading } = useQuery(
+    ["reviews", id],
+    () => fetchReviewsByStoreId(id!)
+  );
+
+  if (isLoading || reviewsIsLoading) return <div>로딩중...</div>;
+
   return (
     <>
       <Layout>
-        <Header />
-        <Body />
+        <Header storeId={id!} store={store.store} />
+        <Body reviews={reviews} />
+
         <OwnerFooter />
       </Layout>
     </>
@@ -18,7 +33,7 @@ function OwnerReview() {
 
 export default OwnerReview;
 
-function Header() {
+function Header({ storeId, store }: { storeId: string; store: any }) {
   const navigate = useNavigate();
   return (
     <div className={styles.header}>
@@ -35,69 +50,7 @@ function Header() {
   );
 }
 
-function Body() {
-  const reviews = [
-    {
-      nickname: "윤기짱짱",
-      star: 5,
-      content: "종훈 마크 인증! 떡볶이는 여기서만 먹어용~",
-    },
-    {
-      nickname: "씅두잇",
-      star: 5,
-      content: "사장님 성함이 종훈이신가요? 좋은 이름이네요",
-    },
-    {
-      nickname: "부엉희재",
-      star: 5,
-      content: "머리위에 부엉이가 날아갈 거 같은 맛이에요!",
-    },
-    {
-      nickname: "윤기짱짱",
-      star: 5,
-      content: "종훈 마크 인증! 떡볶이는 여기서만 먹어용~",
-    },
-    {
-      nickname: "씅두잇",
-      star: 5,
-      content: "사장님 성함이 종훈이신가요? 좋은 이름이네요",
-    },
-    {
-      nickname: "부엉희재",
-      star: 5,
-      content: "머리위에 부엉이가 날아갈 거 같은 맛이에요!",
-    },
-    {
-      nickname: "윤기짱짱",
-      star: 5,
-      content: "종훈 마크 인증! 떡볶이는 여기서만 먹어용~",
-    },
-    {
-      nickname: "씅두잇",
-      star: 5,
-      content: "사장님 성함이 종훈이신가요? 좋은 이름이네요",
-    },
-    {
-      nickname: "부엉희재",
-      star: 5,
-      content: "머리위에 부엉이가 날아갈 거 같은 맛이에요!",
-    },
-    {
-      nickname: "윤기짱짱",
-      star: 5,
-      content: "종훈 마크 인증! 떡볶이는 여기서만 먹어용~",
-    },
-    {
-      nickname: "씅두잇",
-      star: 5,
-      content: "사장님 성함이 종훈이신가요? 좋은 이름이네요",
-    },
-    {
-      nickname: "부엉희재",
-      star: 5,
-      content: "머리위에 부엉이가 날아갈 거 같은 맛이에요!",
-    },
-  ];
+function Body({ reviews }: { reviews: any }) {
   return (
     <div
       className={`overflow-auto ${styles.headerMargin} ${styles.bottomMargin}`}

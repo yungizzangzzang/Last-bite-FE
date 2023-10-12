@@ -20,13 +20,14 @@ function Review() {
     ["reviews", id],
     () => fetchReviewsByStoreId(id!)
   );
-  console.log(store, reviews);
-  if (isLoading) return <div>Loading...</div>;
+
+  if (isLoading || reviewsIsLoading) return <div>로딩중...</div>;
+
   return (
     <>
       <Layout>
         <Header storeId={id!} store={store.store} />
-        <Body />
+        <Body reviews={reviews} />
         <div className="min-w-[336px] w-[336px] fixed bottom-[50px] h-12 flex justify-center items-center">
           <button
             onClick={() => navigate(-1)}
@@ -72,69 +73,7 @@ function Header({ storeId, store }: { storeId: string; store: any }) {
   );
 }
 
-function Body() {
-  const reviews = [
-    {
-      nickname: "윤기짱짱",
-      star: 5,
-      content: "종훈 마크 인증! 떡볶이는 여기서만 먹어용~",
-    },
-    {
-      nickname: "씅두잇",
-      star: 5,
-      content: "사장님 성함이 종훈이신가요? 좋은 이름이네요",
-    },
-    {
-      nickname: "부엉희재",
-      star: 5,
-      content: "머리위에 부엉이가 날아갈 거 같은 맛이에요!",
-    },
-    {
-      nickname: "윤기짱짱",
-      star: 5,
-      content: "종훈 마크 인증! 떡볶이는 여기서만 먹어용~",
-    },
-    {
-      nickname: "씅두잇",
-      star: 5,
-      content: "사장님 성함이 종훈이신가요? 좋은 이름이네요",
-    },
-    {
-      nickname: "부엉희재",
-      star: 5,
-      content: "머리위에 부엉이가 날아갈 거 같은 맛이에요!",
-    },
-    {
-      nickname: "윤기짱짱",
-      star: 5,
-      content: "종훈 마크 인증! 떡볶이는 여기서만 먹어용~",
-    },
-    {
-      nickname: "씅두잇",
-      star: 5,
-      content: "사장님 성함이 종훈이신가요? 좋은 이름이네요",
-    },
-    {
-      nickname: "부엉희재",
-      star: 5,
-      content: "머리위에 부엉이가 날아갈 거 같은 맛이에요!",
-    },
-    {
-      nickname: "윤기짱짱",
-      star: 5,
-      content: "종훈 마크 인증! 떡볶이는 여기서만 먹어용~",
-    },
-    {
-      nickname: "씅두잇",
-      star: 5,
-      content: "사장님 성함이 종훈이신가요? 좋은 이름이네요",
-    },
-    {
-      nickname: "부엉희재",
-      star: 5,
-      content: "머리위에 부엉이가 날아갈 거 같은 맛이에요!",
-    },
-  ];
+function Body({ reviews }: { reviews: any }) {
   return (
     <div className={`overflow-auto ${styles.headerMargin} mb-24`}>
       {reviews.map((review: any) => {

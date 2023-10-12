@@ -13,7 +13,7 @@ function OwnerFooter() {
   return (
     <div className="flex min-w-[336px] w-[336px] bg-white h-[56px] items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
       <div
-        onClick={() => navigator(`/owner/${user.storeId}`)}
+        onClick={() => navigator(`/owner/${user.storeId || 1}`)}
         className="cursor-pointer w-1/4 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/owner" ? (
@@ -24,7 +24,7 @@ function OwnerFooter() {
         <span className="text-[0.5rem]">핫딜 관리</span>
       </div>
       <div
-        onClick={() => navigator(`/owner/store/${user.storeId}`)}
+        onClick={() => navigator(`/owner/store/${user.storeId || 1}`)}
         className="cursor-pointer w-1/4 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/owner/store" ? (
@@ -35,7 +35,7 @@ function OwnerFooter() {
         <span className="text-[0.5rem]">매장 정보</span>
       </div>
       <div
-        onClick={() => navigator(`/owner/notification/${user.storeId}`)}
+        onClick={() => navigator(`/owner/notification/${user.storeId || 1}`)}
         className="cursor-pointer w-1/4 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/owner/notification" ? (
