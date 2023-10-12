@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -66,6 +67,8 @@ function Body() {
         email: result.data.data.user.email,
         storeId: result.data.data.user.Store?.storeId,
       };
+      const accessToken = result.data.data.accessToken;
+      Cookies.set("Authorization", accessToken);
       setUser(user);
       setIsLoggedIn(true);
       toast.success("로그인 완료!");

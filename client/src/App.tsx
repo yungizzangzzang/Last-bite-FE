@@ -24,7 +24,7 @@ function App() {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const socketInstance = io("http://localhost:8000");
+    const socketInstance = io(`${process.env.REACT_APP_SERVER_URL}`);
 
     setSocket(socketInstance);
 
