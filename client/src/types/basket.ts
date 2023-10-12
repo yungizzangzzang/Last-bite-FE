@@ -1,6 +1,7 @@
 export interface BasketItem {
   itemId: number;
   storeId: number;
+  storeName: string;
   name: string;
   count: number;
   prevPrice: number;

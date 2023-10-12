@@ -45,6 +45,7 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
       } else {
         const newItem: BasketItem = {
           storeId: +storeId!,
+          storeName: store.store.name,
           itemId: selectedItem.itemId,
           name: selectedItem.title,
           count: newCount,
@@ -53,6 +54,7 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
           totalAvailableCount: selectedItem.count,
           imgUrl: selectedItem.imgUrl,
         };
+
         setLocalBasket((prevBasket) => [...prevBasket, newItem]);
       }
     }
@@ -132,7 +134,7 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
             <div
               className={`h-full w-[80%] flex flex-col justify-center gap-1`}
             >
-              <div className="text-[1.25rem]">{item.title}</div>
+              <div className="text-[1.25rem]">{item.name}</div>
               <div className="text-[0.75rem]">{item.content}</div>
               <div className="text-[0.75rem]">
                 잔여수량: {item.count - (itemCounts[item.itemId] || 0)}

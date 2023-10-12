@@ -65,17 +65,27 @@ function BodyHeader({ totalPrice }: { totalPrice: number }) {
   const discountPercentage = Math.round(
     (1 - totalPrice / totalPrevPrice) * 100
   );
+
+  const date = new Date();
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
   return (
-    <div className="flex flex-col p-4">
+    <div className="flex w-full flex-col p-4 gap-2">
       <div className="font-semibold text-[#FF385C]">예약이 완료되었어요!</div>
-      <div className="flex gap-10 font-bold ">
-        <div className="text-[1.25rem]">종훈 떡볶이</div>
-        <div className="bg-[#FF385C] text-white px-2 flex items-center">
+      <div className="flex gap-10 font-bold items-center ">
+        <div className="text-[1.25rem]">{items[0]?.storeName}</div>
+        <div className="bg-[#FF385C] w-[100px] h-6 text-[0.75rem] text-white px-2 flex items-center justify-center">
           {discountPercentage}% 할인 받음
         </div>
       </div>
-      <div>예약일시</div>
-      <div>주문번호</div>
+      <div className="text-[0.75rem]">
+        예약일시: {year}년 {month}월 {day}일 {hours}시 {minutes}분
+      </div>
     </div>
   );
 }
