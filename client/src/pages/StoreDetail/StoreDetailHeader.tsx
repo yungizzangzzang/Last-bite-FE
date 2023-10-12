@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { GoHeartFill } from "react-icons/go";
+import { GoHeart, GoHeartFill } from "react-icons/go";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { postAPI } from "../../axios";
 import { styles } from "../../utils/style";
 
 function StoreDetailHeader({
@@ -11,6 +14,18 @@ function StoreDetailHeader({
   store: any;
 }) {
   const navigate = useNavigate();
+  const [isLiked, setIsLiked] = useState(store.isLiked);
+
+  const mutation = useMutation(() => postAPI(`/likes/${storeId}`, {}), {
+    onSuccess: () => {
+      setIsLiked(!isLiked);
+    },
+  });
+
+  const toggleLike = () => {
+    mutation.mutate();
+  };
+
   return (
     <div className={styles.header}>
       <div className="flex items-center">
@@ -25,7 +40,11 @@ function StoreDetailHeader({
         <div className="flex flex-col text-[0.75rem]">
           <div className="flex items-center gap-1">
             <span> {store.name}</span>
-            <GoHeartFill color="#FF5352" />
+            {isLiked ? (
+              <GoHeartFill color="#FF5352" onClick={toggleLike} />
+            ) : (
+              <GoHeart onClick={toggleLike} />
+            )}
           </div>
           <div className="text-[0.5rem]">{store.address}</div>
         </div>
