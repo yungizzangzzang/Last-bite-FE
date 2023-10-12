@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { useMutation } from "react-query";
@@ -25,6 +25,10 @@ function StoreDetailHeader({
   const toggleLike = () => {
     mutation.mutate();
   };
+
+  useEffect(() => {
+    setIsLiked(store.isLiked);
+  }, [store.isLiked]);
 
   return (
     <div className={styles.header}>

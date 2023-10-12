@@ -1,9 +1,16 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { GoHeart, GoHeartFill } from "react-icons/go";
+import { GoHeartFill } from "react-icons/go";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { getAPI, postAPI } from "../axios";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import { styles } from "../utils/style";
+
+const fetchLikedStores = async () => {
+  const response = await getAPI("/likes");
+  return response.data.data.stores;
+};
 
 function Mypage() {
   return (
@@ -59,28 +66,40 @@ function BodyHeader() {
 }
 
 function BodyMain() {
-  const favorites = [
-    {
-      name: "윤기네 치킨",
-      isLiked: true,
-    },
-    {
-      name: "종훈 떡볶이",
-      isLiked: true,
-    },
-    {
-      name: "승일 베이커리",
-      isLiked: true,
-    },
-  ];
+  const navigate = useNavigate();
+  const {
+    data: likedStores,
+    isError,
+    isLoading,
+    refetch,
+  } = useQuery(["likedStores"], () => fetchLikedStores());
+  console.log(likedStores);
+
+  if (isLoading) {
+    return <div>로딩중...</div>;
+  }
+
+  if (isError) {
+    return <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>;
+  }
+
+  const toggleLike = async (storeId: number) => {
+    await postAPI(`/likes/${storeId}`, {});
+    refetch();
+  };
+
   return (
     <div className={`w-full overflow-auto ${styles.bottomMargin}`}>
-      {favorites.map((favorite: any) => {
+      {likedStores.map((favorite: any) => {
         return (
-          <div className="w-full h-[60px] flex items-center p-4 justify-between border-b-2 border-[#C3CFD9]">
+          <div
+            onClick={() => navigate(`/store/1`)}
+            key={favorite.latitude}
+            className="w-full h-[60px] flex items-center p-4 justify-between border-b-2 border-[#C3CFD9]"
+          >
             <div className="cursor-pointer">{favorite.name}</div>
-            <button>
-              {favorite.isLiked ? <GoHeartFill color="#FF5352" /> : <GoHeart />}
+            <button onClick={() => toggleLike(favorite.storeId)}>
+              <GoHeartFill color="#FF5352" />
             </button>
           </div>
         );
