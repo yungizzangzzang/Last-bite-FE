@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { fetchOrderById } from "../api/storeAPI";
 import { postAPI } from "../axios";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
@@ -51,11 +53,26 @@ function Body() {
     }
   };
 
+  const {
+    data: order,
+    isError,
+    isLoading,
+  } = useQuery(["order", orderId], () => fetchOrderById(orderId!));
+
+  if (isLoading) {
+    return <div>로딩중...</div>;
+  }
+
+  if (isError) {
+    return <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>;
+  }
+  console.log(order);
+
   return (
     <div className={`flex flex-col ${styles.headerMargin}`}>
       <div className="flex flex-col w-full justify-center items-center mt-10">
-        <div>종훈 떡볶이</div>
-        <div>22% 할인받음</div>
+        <div>{order.storeName}</div>
+        <div>{order.discount}% 할인받음</div>
         <div className="cursor-pointer">
           {Array(5)
             .fill(0)
@@ -67,14 +84,14 @@ function Body() {
         </div>
       </div>
       <textarea
-        className="bg-slate-300 mt-10 p-2 mx-10 resize-none h-[300px]"
+        className="bg-slate-300 rounded-md mt-10 p-2 mx-10 resize-none h-[300px]"
         maxLength={150}
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
       <button
         onClick={handleSubmit}
-        className="mt-10 w-full bg-[#FF385C] text-white font-bold h-12"
+        className="mt-10 w-[80%] flex self-center justify-center items-center rounded-full bg-[#FF385C] text-white font-bold h-8"
       >
         리뷰 등록
       </button>
