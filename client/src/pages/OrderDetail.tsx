@@ -37,7 +37,6 @@ function Header() {
 
 const fetchOneOrder = async (orderId: string) => {
   const response = await getAPI(`/order/${orderId}`);
-  console.log(response.data);
   return response.data;
 };
 

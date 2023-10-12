@@ -40,7 +40,6 @@ function Body() {
   const { data: store, isLoading } = useQuery(["store", id], () =>
     fetchStoreById(id!)
   );
-  console.log(store);
   if (isLoading) {
     return <div>로딩중...</div>;
   }

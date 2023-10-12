@@ -66,7 +66,6 @@ function Body() {
   if (isError) {
     return <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>;
   }
-  console.log(order);
 
   return (
     <div className={`flex flex-col ${styles.headerMargin}`}>
