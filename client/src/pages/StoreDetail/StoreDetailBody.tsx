@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
-import { items } from "../../consts/items";
 import { basketState } from "../../states/basketState";
 import { BasketItem } from "../../types/basket";
 import { styles } from "../../utils/style";
 
 function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
   const navigate = useNavigate();
+  const items = store.items;
   const [localBasket, setLocalBasket] = useState<BasketItem[]>([]);
   const [basket, setBasket] = useRecoilState<BasketItem[]>(basketState);
   const [itemCounts, setItemCounts] = useState<{ [key: number]: number }>(
     () => {
       const initialCounts: { [key: number]: number } = {};
-      items.forEach((item) => {
+      items.forEach((item: any) => {
         const basketItem = basket.find((bItem) => bItem.itemId === item.itemId);
 
         if (basketItem) {
@@ -27,7 +28,7 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
   );
 
   function updateLocalBasketState(itemId: number, newCount: number) {
-    const selectedItem = items.find((item) => item.itemId === itemId);
+    const selectedItem = items.find((item: any) => item.itemId === itemId);
 
     if (selectedItem) {
       const existingItemIndex = localBasket.findIndex(
@@ -62,7 +63,7 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
       if (basket.length > 0 && basket[0].storeId === +storeId!) {
         navigate("/basket");
       } else {
-        alert("상품을 담아주세요!");
+        toast.error("상품을 담아주세요!");
       }
       return;
     }
@@ -96,7 +97,7 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
   };
 
   const incrementCount = (itemId: number) => {
-    const selectedItem = items.find((item) => item.itemId === itemId);
+    const selectedItem = items.find((item: any) => item.itemId === itemId);
 
     if (selectedItem && itemCounts[itemId] < selectedItem.count) {
       setItemCounts((prev) => {
