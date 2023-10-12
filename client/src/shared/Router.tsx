@@ -9,6 +9,7 @@ import Main from "../pages/Main";
 import Mypage from "../pages/Mypage";
 import Nearby from "../pages/Nearby";
 import Notification from "../pages/Notification";
+import OrderDetail from "../pages/OrderDetail";
 import OwnerMain from "../pages/OwnerMain";
 import OwnerNotification from "../pages/OwnerNotification";
 import OwnerResult from "../pages/OwnerResult";
@@ -34,15 +35,23 @@ const Router = () => {
         <Route path="/nearby" element={<Nearby />} />
         <Route path="/favorite" element={<Favorite />} />
 
+        <Route path="/mypage" element={<Mypage />} />
+
         <Route path="/store/:id" element={<StoreDetail />} />
         <Route path="/review/:id" element={<Review />} />
 
         <Route path="/basket" element={<Basket />} />
         <Route path="/result" element={<Result />} />
+
         <Route path="/notification" element={<Notification />} />
+
         <Route path="/history" element={<History />} />
-        <Route path="/create-review/:id" element={<CreateReview />} />
-        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/order/:id" element={<OrderDetail />} />
+        <Route
+          path="/create-review/:orderId/:storeId"
+          element={<CreateReview />}
+        />
+
         <Route path="/setting" element={<Setting />} />
 
         <Route path="/owner/:id" element={<OwnerMain />} />

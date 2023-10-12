@@ -126,10 +126,16 @@ function BodyMain() {
               "⭐️".repeat(item.review.star)
             ) : (
               <button
-                onClick={() => {
-                  navigate(`/create-review/${item.store.storeId}`);
+                style={{
+                  backgroundImage:
+                    "linear-gradient(135deg, #ffd6dc 0%, #fff8e0 100%)",
                 }}
-                className="w-full h-8 flex items-center bg-[#FF385C] text-white justify-center self-center"
+                onClick={() => {
+                  navigate(
+                    `/create-review/${item.orderId}/${item.store.storeId}`
+                  );
+                }}
+                className="w-full h-8 flex items-center rounded-full justify-center self-center"
               >
                 리뷰 작성
               </button>

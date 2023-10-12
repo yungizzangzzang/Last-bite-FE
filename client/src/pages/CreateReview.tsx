@@ -37,13 +37,12 @@ function Header() {
 
 function Body() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { orderId, storeId } = useParams();
   const [star, setStar] = useState(0);
   const [content, setContent] = useState("");
-
   const handleSubmit = async () => {
     try {
-      await postAPI(`/reviews/${id}`, { content, star });
+      await postAPI(`/reviews/${orderId}/stores/${storeId}`, { content, star });
       toast.success("리뷰 작성 완료!");
       navigate(-1);
     } catch (error) {
