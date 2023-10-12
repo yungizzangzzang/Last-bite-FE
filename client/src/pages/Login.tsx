@@ -1,9 +1,10 @@
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
 import { postAPI } from "../axios";
+import { SocketContext } from "../contexts/SocketContext";
 import { isLoggedInState, userInfoState } from "../states/userState";
 
 function Login() {
@@ -50,6 +51,7 @@ function Body() {
   });
   const [, setUser] = useRecoilState(userInfoState);
   const [, setIsLoggedIn] = useRecoilState(isLoggedInState);
+  const socket = useContext(SocketContext);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -73,6 +75,11 @@ function Body() {
       setIsLoggedIn(true);
       toast.success("로그인 완료!");
       localStorage.setItem("user", JSON.stringify(user));
+
+      if (socket) {
+        socket.emit("join", user.userId);
+      }
+
       if (user.isClient) {
         navigate("/");
       } else {

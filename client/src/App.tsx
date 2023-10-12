@@ -25,8 +25,14 @@ function App() {
 
   useEffect(() => {
     const socketInstance = io(`${process.env.REACT_APP_SERVER_URL}`);
-
-    setSocket(socketInstance);
+    if (socketInstance) {
+      let user;
+      if (localStorage.getItem("user")) {
+        user = JSON.parse(localStorage.getItem("user")!);
+      }
+      socketInstance.emit("join", user.userId);
+      setSocket(socketInstance);
+    }
 
     return () => {
       socketInstance.disconnect();
