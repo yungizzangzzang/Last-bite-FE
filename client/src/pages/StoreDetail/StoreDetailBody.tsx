@@ -169,7 +169,7 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
           </div>
         ))}
       </div>
-      <div className="min-w-[336px] w-[336px] fixed bottom-[50px] h-12 flex justify-center items-center">
+      <div className="min-w-[336px] w-[336px] fixed bottom-[52px] h-12 flex justify-center items-center">
         <button
           onClick={handleAddToBasket}
           className="w-full h-10 text-white bg-[#FF385C]"

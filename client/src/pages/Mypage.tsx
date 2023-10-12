@@ -1,4 +1,3 @@
-import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
@@ -46,8 +45,10 @@ function BodyHeader() {
   return (
     <div>
       <div className="p-4 flex flex-col gap-2 border-b-2 border-[#C3CFD9]">
-        <span className="font-semibold text-[1.25rem]">윤기짱짱님</span>
-        <div className="flex justify-between font-semibold text-[1.25rem]">
+        <span className="font-semibold text-[1.25rem] cursor-default">
+          윤기짱짱님
+        </span>
+        <div className="flex justify-between font-semibold text-[1.25rem] cursor-default">
           <span>Point</span>
           <span>480,000</span>
         </div>
@@ -76,11 +77,11 @@ function BodyMain() {
     <div className={`w-full overflow-auto ${styles.bottomMargin}`}>
       {favorites.map((favorite: any) => {
         return (
-          <div className="w-full h-[80px] flex items-center p-4 justify-between border-b-2 border-[#C3CFD9]">
-            <div>{favorite.name}</div>
-            <div>
+          <div className="w-full h-[60px] flex items-center p-4 justify-between border-b-2 border-[#C3CFD9]">
+            <div className="cursor-pointer">{favorite.name}</div>
+            <button>
               {favorite.isLiked ? <GoHeartFill color="#FF5352" /> : <GoHeart />}
-            </div>
+            </button>
           </div>
         );
       })}
