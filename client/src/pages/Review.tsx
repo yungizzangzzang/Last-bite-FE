@@ -14,19 +14,6 @@ import { styles } from "../utils/style";
 function Review() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!user || !Cookies.get("Authorization")) {
-      if (
-        window.confirm("로그인이 필요한 페이지입니다. 로그인 하시겠습니까?")
-      ) {
-        navigate("/login");
-      } else {
-        navigate("/");
-      }
-    }
-  }, [navigate]);
-
   const { id } = useParams();
   const { data: store, isLoading } = useQuery(["store", id], () =>
     fetchStoreById(id!)
