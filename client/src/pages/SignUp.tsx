@@ -151,6 +151,7 @@ function InputField({ label, name, value, onChange }: InputFieldProps) {
       <input
         name={name}
         value={value}
+        type={name === "password" ? "password" : "text"}
         onChange={onChange}
         className="border-2 border-[#d6d6d6] px-2 py-1 rounded-md"
       />

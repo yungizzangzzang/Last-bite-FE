@@ -60,7 +60,7 @@ function Body() {
 
   const handleLogin = async () => {
     try {
-      const result = await postAPI("/auth/login", formData);
+      const result = await postAPI("/login", formData);
       const user = {
         userId: result.data.data.user.userId,
         nickname: result.data.data.user.nickname,
@@ -111,6 +111,14 @@ function Body() {
         className="flex self-center items-center justify-center rounded-md py-1 w-[200px] bg-[#4C4C4C] text-white mt-10"
       >
         로그인
+      </button>
+      <button
+        onClick={() => {
+          navigate("/signup");
+        }}
+        className="flex self-center items-center justify-center rounded-md py-1 w-[200px] bg-[#4C4C4C] text-white mt-10"
+      >
+        회원가입
       </button>
     </div>
   );
