@@ -9,6 +9,7 @@ import { userInfoState } from "../../states/userState";
 function OwnerFooter() {
   const navigator = useNavigate();
   const location = useLocation();
+  const isPathStartsWith = (path: string) => location.pathname.startsWith(path);
   const user = useRecoilValue(userInfoState);
   return (
     <div className="flex min-w-[336px] w-[336px] bg-white h-[56px] items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
@@ -16,7 +17,7 @@ function OwnerFooter() {
         onClick={() => navigator(`/owner/${user.storeId || 1}`)}
         className="cursor-pointer w-1/4 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
-        {location.pathname === "/owner" ? (
+        {isPathStartsWith("/owner/") ? (
           <IoDocumentText size={28} />
         ) : (
           <IoDocumentTextOutline size={28} />

@@ -2,15 +2,11 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { GoHeartFill } from "react-icons/go";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { getAPI, postAPI } from "../axios";
+import { fetchLikedStores } from "../api/storeAPI";
+import { postAPI } from "../axios";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import { styles } from "../utils/style";
-
-const fetchLikedStores = async () => {
-  const response = await getAPI("/likes");
-  return response.data.data.stores;
-};
 
 function Mypage() {
   return (
@@ -73,7 +69,6 @@ function BodyMain() {
     isLoading,
     refetch,
   } = useQuery(["likedStores"], () => fetchLikedStores());
-  console.log(likedStores);
 
   if (isLoading) {
     return <div>로딩중...</div>;

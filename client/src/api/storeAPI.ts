@@ -19,3 +19,8 @@ export const fetchHistory = async () => {
   const response = await getAPI("/orders");
   return response.data.data;
 };
+
+export const fetchLikedStores = async () => {
+  const response = await getAPI("/likes");
+  return response.data.data.stores;
+};
