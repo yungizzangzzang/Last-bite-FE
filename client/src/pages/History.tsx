@@ -14,17 +14,11 @@ function History() {
     isError,
   } = useQuery(["history"], () => fetchHistory());
 
-  if (isLoading) {
-    return <div>로딩중...</div>;
-  }
-
-  if (isError) {
-    return <div>정보를 가져오는동안 오류가 발생했습니다.</div>;
-  }
   return (
     <Layout>
       <Header />
-      <Body items={history} />
+      {isError && <div>정보를 가져오는동안 오류가 발생했습니다.</div>}
+      {isLoading ? <div>로딩중...</div> : <Body items={history} />}
       <Footer />
     </Layout>
   );
@@ -57,18 +51,22 @@ function Body({ items }: { items: any }) {
         return (
           <div
             key={item.itemId}
-            className="flex flex-col p-4 border-b-8 border-[#C3CFD9] gap-4"
+            className="flex flex-col p-4 border-b-8 border-[#C3CFD9] gap-2"
           >
-            <div className="font-semibold">{item?.createdAt} 예약 완료</div>
+            <div className="font-semibold cursor-default">
+              {item?.createdAt.split("T")[0].split("-")[0]}년{" "}
+              {item?.createdAt.split("T")[0].split("-")[1]}월{" "}
+              {item?.createdAt.split("T")[0].split("-")[2]}일 예약 완료
+            </div>
             <div className="flex justify-between items-center">
-              <div className="flex items-center gap-4">
-                <div className="w-[100px] h-[100px] flex justify-center items-center rounded-md bg-rose-400">
+              <div className="flex items-center gap-[12px]">
+                <div className="w-[100px] h-[100px] flex justify-center items-center rounded-md bg-blue-400">
                   사진
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 cursor-default">
                   <div>{item.storeName}</div>
-                  <div className="border-[#FF385C] text-[0.75rem] border-4  rounded-full px-4 py-1 ">
-                    {item?.discount}% 할인받음
+                  <div className="cursor-default border-[#FF385C] text-[0.75rem] border-2  rounded-full px-4 py-1 ">
+                    {item?.discount}% 할인 받음
                   </div>
                 </div>
               </div>
