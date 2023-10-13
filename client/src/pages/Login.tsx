@@ -60,7 +60,7 @@ function Body() {
 
   const handleLogin = async () => {
     try {
-      const result = await postAPI("/login", formData);
+      const result = await postAPI("/signin", formData);
       const user = {
         userId: result.data.data.user.userId,
         nickname: result.data.data.user.nickname,
