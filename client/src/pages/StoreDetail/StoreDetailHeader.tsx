@@ -29,6 +29,7 @@ function StoreDetailHeader({
   useEffect(() => {
     setIsLiked(store.isLiked);
   }, [store.isLiked]);
+  console.log(store);
 
   return (
     <div className={styles.header}>
