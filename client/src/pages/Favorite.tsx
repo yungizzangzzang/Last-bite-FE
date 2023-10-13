@@ -1,9 +1,12 @@
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { fetchLikedStores } from "../api/storeAPI";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import Loading from "../components/Loading";
 import { styles } from "../utils/style";
 
 function Favorite() {
@@ -50,69 +53,38 @@ function Header() {
 
 function Body() {
   const navigate = useNavigate();
-  const favoriteStore = [
-    {
-      imgUrl: "",
-      title: "종훈 떡볶이 마감 할인",
-      content: "종훈 떡볶이 3000원",
-    },
-    {
-      imgUrl: "",
-      title: "희재 피자 마감 할인",
-      content: "포테이토피자 한 판 13000원",
-    },
-    {
-      imgUrl: "",
-      title: "찬호 편의점 마감 할인",
-      content: "치킨 7000원",
-    },
-    {
-      imgUrl: "",
-      title: "종훈 떡볶이 마감 할인",
-      content: "종훈 떡볶이 3000원",
-    },
-    {
-      imgUrl: "",
-      title: "희재 피자 마감 할인",
-      content: "포테이토피자 한 판 13000원",
-    },
-    {
-      imgUrl: "",
-      title: "찬호 편의점 마감 할인",
-      content: "치킨 7000원",
-    },
-    {
-      imgUrl: "",
-      title: "종훈 떡볶이 마감 할인",
-      content: "종훈 떡볶이 3000원",
-    },
-    {
-      imgUrl: "",
-      title: "희재 피자 마감 할인",
-      content: "포테이토피자 한 판 13000원",
-    },
-    {
-      imgUrl: "",
-      title: "찬호 편의점 마감 할인",
-      content: "치킨 7000원",
-    },
-  ];
+  const {
+    data: likedStores,
+    isError,
+    isLoading,
+  } = useQuery(["likedStores"], () => fetchLikedStores());
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>;
+  }
   return (
     <>
       <div
         className={`w-full h-full ${styles.headerMargin} ${styles.bottomMargin} overflow-auto`}
       >
-        {favoriteStore.map((item: any, index: number) => (
+        {likedStores.map((item: any, index: number) => (
           <div
+            key={item.storeId}
             onClick={() => navigate("/store/1")}
             className={`w-full h-[12%] p-2 flex items-center border-b-2 border-[#C3CFD9] gap-2 ${
               index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"
             }`}
           >
-            <div className="w-[25%] h-full bg-blue-300">{item.imgurl}</div>
+            <div className="w-[25%] h-full rounded-md bg-blue-300">
+              {item.imgurl}
+            </div>
             <div>
-              <div className="font-semibold">{item.title}</div>
-              <div className="text-[0.75rem]">{item.content}</div>
+              <div className="font-semibold">{item.name}</div>
+              <div className="text-[0.75rem]">{item.address}</div>
             </div>
           </div>
         ))}
