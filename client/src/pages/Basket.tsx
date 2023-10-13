@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import NotFound from "../components/NotFound";
 import { SocketContext } from "../contexts/SocketContext";
 import { basketState } from "../states/basketState";
 import { User } from "../types/user";
@@ -116,43 +117,49 @@ function Body() {
 
   return (
     <>
-      <div className={`w-full ${styles.headerMargin} mb-32 overflow-auto`}>
-        {items.map((item: any, index: number) => (
-          <div
-            key={item.itemId}
-            className={`w-full h-[180px] flex flex-col p-2 border-b-2 border-[#C3CFD9] pt-4       
+      <div
+        className={`w-full h-full ${styles.headerMargin} mb-32 overflow-auto`}
+      >
+        {items.length === 0 ? (
+          <NotFound />
+        ) : (
+          items.map((item: any, index: number) => (
+            <div
+              key={item.itemId}
+              className={`w-full h-[180px] flex flex-col p-2 border-b-2 border-[#C3CFD9] pt-4       
           ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}
         `}
-          >
-            <div className="px-2">{item.name}</div>
-            <div className="flex h-full justify-around items-center">
-              <div className="h-[100px] w-[100px] rounded-md flex justify-center items-center">
-                <img
-                  src={item.imgUrl}
-                  alt="item_img"
-                  className="w-full h-full rounded-md"
-                />
-              </div>
-              <div className="h-full w-[30%] flex flex-col justify-center">
-                <div
-                  style={{
-                    textDecoration: "line-through",
-                    textDecorationColor: "red",
-                    color: "black",
-                  }}
-                >
-                  {item.prevPrice}원
+            >
+              <div className="px-2">{item.name}</div>
+              <div className="flex h-full justify-around items-center">
+                <div className="h-[100px] w-[100px] rounded-md flex justify-center items-center">
+                  <img
+                    src={item.imgUrl}
+                    alt="item_img"
+                    className="w-full h-full rounded-md"
+                  />
                 </div>
-                <div>{item.price}원</div>
-              </div>
-              <div className="flex gap-2 py-1 px-2 items-center">
-                <button onClick={() => decrementCount(item.itemId)}>-</button>
-                <div>{itemCounts[item.itemId]}</div>
-                <button onClick={() => incrementCount(item.itemId)}>+</button>
+                <div className="h-full w-[30%] flex flex-col justify-center">
+                  <div
+                    style={{
+                      textDecoration: "line-through",
+                      textDecorationColor: "red",
+                      color: "black",
+                    }}
+                  >
+                    {item.prevPrice}원
+                  </div>
+                  <div>{item.price}원</div>
+                </div>
+                <div className="flex gap-2 py-1 px-2 items-center">
+                  <button onClick={() => decrementCount(item.itemId)}>-</button>
+                  <div>{itemCounts[item.itemId]}</div>
+                  <button onClick={() => incrementCount(item.itemId)}>+</button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
       {items.length !== 0 && (
         <button
