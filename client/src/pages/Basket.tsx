@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useContext, useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -44,7 +45,6 @@ function Body() {
 
   const items = useRecoilValue(basketState);
   const socket = useContext(SocketContext);
-  const [user, setUser] = useState<User | null>(null);
   const [itemCounts, setItemCounts] = useState<ItemCountsType>(() => {
     const initialCounts: ItemCountsType = {};
     items.forEach((item) => {
@@ -53,6 +53,7 @@ function Body() {
     return initialCounts;
   });
 
+  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(JSON.parse(localStorage.getItem("user")!));
@@ -99,6 +100,13 @@ function Body() {
   );
 
   const sendOrder = () => {
+    if (!user || !Cookies.get("Authorization")) {
+      if (window.confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
+        navigate("/login");
+      }
+      return;
+    }
+
     if (socket) {
       const itemList: { [key: number]: number } = {};
       items.forEach((item) => {
@@ -112,6 +120,7 @@ function Body() {
         discount: discountPercentage,
         itemList: itemList,
       });
+      navigate("/result");
     }
   };
 
@@ -165,7 +174,6 @@ function Body() {
         <button
           onClick={() => {
             sendOrder();
-            navigate("/result");
           }}
           className={`min-w-[336px] w-[336px] fixed ${styles.footerHeight} h-20 flex flex-col justify-center items-center`}
         >

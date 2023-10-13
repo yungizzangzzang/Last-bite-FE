@@ -1,18 +1,19 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import Cookies from "js-cookie";
+import { BiBell, BiSolidBellRing } from "react-icons/bi";
 import { BsHouseHeart, BsHouseHeartFill } from "react-icons/bs";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { HiOutlineShoppingCart, HiShoppingCart } from "react-icons/hi";
-import { BiBell, BiSolidBellRing } from "react-icons/bi";
-import { IoDocumentTextOutline, IoDocumentText } from "react-icons/io5";
+import { IoDocumentText, IoDocumentTextOutline } from "react-icons/io5";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Footer() {
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
 
   return (
     <div className="flex min-w-[336px] w-[336px] bg-white h-[56px] items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
       <div
-        onClick={() => navigator("/")}
+        onClick={() => navigate("/")}
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/" ? (
@@ -23,7 +24,20 @@ function Footer() {
         <span className="text-[0.5rem]">홈</span>
       </div>
       <div
-        onClick={() => navigator("/mypage")}
+        onClick={() => {
+          const user = localStorage.getItem("user");
+          if (!user || !Cookies.get("Authorization")) {
+            if (
+              window.confirm(
+                "로그인이 필요한 페이지입니다. 로그인 하시겠습니까?"
+              )
+            ) {
+              navigate("/login");
+            } else {
+              navigate("/");
+            }
+          }
+        }}
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/mypage" ? (
@@ -34,7 +48,20 @@ function Footer() {
         <span className="text-[0.5rem]">마이페이지</span>
       </div>
       <div
-        onClick={() => navigator("/basket")}
+        onClick={() => {
+          const user = localStorage.getItem("user");
+          if (!user || !Cookies.get("Authorization")) {
+            if (
+              window.confirm(
+                "로그인이 필요한 페이지입니다. 로그인 하시겠습니까?"
+              )
+            ) {
+              navigate("/login");
+            } else {
+              navigate("/");
+            }
+          }
+        }}
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/basket" ? (
@@ -45,7 +72,20 @@ function Footer() {
         <span className="text-[0.5rem]">장바구니</span>
       </div>
       <div
-        onClick={() => navigator("/notification")}
+        onClick={() => {
+          const user = localStorage.getItem("user");
+          if (!user || !Cookies.get("Authorization")) {
+            if (
+              window.confirm(
+                "로그인이 필요한 페이지입니다. 로그인 하시겠습니까?"
+              )
+            ) {
+              navigate("/login");
+            } else {
+              navigate("/");
+            }
+          }
+        }}
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/notification" ? (
@@ -56,7 +96,20 @@ function Footer() {
         <span className="text-[0.5rem]">알림</span>
       </div>
       <div
-        onClick={() => navigator("/history")}
+        onClick={() => {
+          const user = localStorage.getItem("user");
+          if (!user || !Cookies.get("Authorization")) {
+            if (
+              window.confirm(
+                "로그인이 필요한 페이지입니다. 로그인 하시겠습니까?"
+              )
+            ) {
+              navigate("/login");
+            } else {
+              navigate("/");
+            }
+          }
+        }}
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/history" ? (

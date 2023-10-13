@@ -1,4 +1,5 @@
-import React from "react";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
@@ -6,6 +7,21 @@ import Layout from "../components/Layout/Layout";
 import { styles } from "../utils/style";
 
 function Favorite() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user || !Cookies.get("Authorization")) {
+      if (
+        window.confirm("로그인이 필요한 페이지입니다. 로그인 하시겠습니까?")
+      ) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [navigate]);
+
   return (
     <Layout>
       <Header />

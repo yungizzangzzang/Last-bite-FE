@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 
+import Cookies from "js-cookie";
 import { FiLogOut } from "react-icons/fi";
 import { styles } from "../utils/style";
 
@@ -51,7 +52,14 @@ function Body() {
           <div className="font-semibold">로그아웃</div>
           <div className="text-[0.75rem]">계정을 로그아웃 합니다.</div>
         </div>
-        <button onClick={() => navigate("/login")} className="h-full">
+        <button
+          onClick={() => {
+            localStorage.clear();
+            Cookies.remove("Authorization");
+            navigate("/login");
+          }}
+          className="h-full"
+        >
           <FiLogOut size={24} />
         </button>
       </button>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BiCamera } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +12,18 @@ import { styles } from "../utils/style";
 function RegisterItem() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user || !Cookies.get("Authorization")) {
+      if (
+        window.confirm("로그인이 필요한 페이지입니다. 로그인 하시겠습니까?")
+      ) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [navigate]);
   const [item, setItem] = useState({
     name: "",
     content: "",

@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
@@ -5,11 +7,25 @@ import { fetchStoreById } from "../api/storeAPI";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
 import Loading from "../components/Loading";
+import NotificationModal from "../components/Modals/NotificationModal";
 import { styles } from "../utils/style";
 
 function OwnerMain() {
-  const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user || !Cookies.get("Authorization")) {
+      if (
+        window.confirm("로그인이 필요한 페이지입니다. 로그인 하시겠습니까?")
+      ) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [navigate]);
 
   const {
     data: store,
@@ -19,15 +35,21 @@ function OwnerMain() {
 
   return (
     <Layout>
-      <Header storeId={id!} store={store.store} />
       {isError && <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>}
-      {isLoading ? <Loading /> : <Body items={store.items} />}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header storeId={id!} store={store?.store} />
+          <Body items={store.items} />
+        </>
+      )}
       <div
         className={`min-w-[336px] w-[336px] fixed bottom-[52px] h-12 flex justify-center items-center`}
       >
         <button
           onClick={() => navigate("/register-item")}
-          className="w-full h-10 text-white bg-[#FF385C]"
+          className="w-full h-10 text-white bg-[#FF385C] z-40"
         >
           핫딜 등록하기
         </button>
@@ -41,6 +63,8 @@ export default OwnerMain;
 
 function Header({ storeId, store }: { storeId: string; store: any }) {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className={`${styles.header}`}>
       <div
@@ -58,9 +82,16 @@ function Header({ storeId, store }: { storeId: string; store: any }) {
       >
         가게 리뷰
       </button>
-      <button className="h-6 text-white text-[0.75rem] rounded-full bg-[#788796] px-2 ml-[2px]">
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="h-6 text-white text-[0.75rem] rounded-full bg-[#788796] px-2 ml-[2px]"
+      >
         알림 보내기
       </button>
+      <NotificationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }

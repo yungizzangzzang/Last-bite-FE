@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { GoHeart, GoHeartFill } from "react-icons/go";
@@ -12,6 +13,20 @@ import { styles } from "../utils/style";
 
 function Review() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user || !Cookies.get("Authorization")) {
+      if (
+        window.confirm("로그인이 필요한 페이지입니다. 로그인 하시겠습니까?")
+      ) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [navigate]);
+
   const { id } = useParams();
   const { data: store, isLoading } = useQuery(["store", id], () =>
     fetchStoreById(id!)
@@ -60,6 +75,16 @@ function Header({ storeId, store }: { storeId: string; store: any }) {
   });
 
   const toggleLike = () => {
+    const user = localStorage.getItem("user");
+    if (!user || !Cookies.get("Authorization")) {
+      if (
+        window.confirm("로그인이 필요한 페이지입니다. 로그인 하시겠습니까?")
+      ) {
+        return navigate("/login");
+      } else {
+        return;
+      }
+    }
     mutation.mutate();
   };
 

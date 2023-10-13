@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +8,21 @@ import OwnerFooter from "../components/Layout/OwnerFooter";
 import { styles } from "../utils/style";
 
 function OwnerSetting() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user || !Cookies.get("Authorization")) {
+      if (
+        window.confirm("로그인이 필요한 페이지입니다. 로그인 하시겠습니까?")
+      ) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [navigate]);
+
   return (
     <Layout>
       <Header />
@@ -51,7 +68,14 @@ function Body() {
           <div className="font-semibold">로그아웃</div>
           <div className="text-[0.75rem]">계정을 로그아웃 합니다.</div>
         </div>
-        <button onClick={() => navigate("/login")} className="h-full">
+        <button
+          onClick={() => {
+            localStorage.clear();
+            Cookies.remove("Authorization");
+            navigate("/login");
+          }}
+          className="h-full"
+        >
           <FiLogOut size={24} />
         </button>
       </button>

@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { useQuery } from "react-query";
@@ -9,6 +11,19 @@ import Loading from "../components/Loading";
 import { styles } from "../utils/style";
 
 function History() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user || !Cookies.get("Authorization")) {
+      if (window.confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [navigate]);
+
   const {
     data: history,
     isLoading,

@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,6 +10,20 @@ import Loading from "../components/Loading";
 import { styles } from "../utils/style";
 
 function OwnerStore() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user || !Cookies.get("Authorization")) {
+      if (
+        window.confirm("로그인이 필요한 페이지입니다. 로그인 하시겠습니까?")
+      ) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [navigate]);
   return (
     <>
       <Layout>

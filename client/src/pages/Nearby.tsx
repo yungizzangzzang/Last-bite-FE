@@ -1,4 +1,3 @@
-import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";

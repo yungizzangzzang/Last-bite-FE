@@ -29,9 +29,9 @@ function App() {
       let user;
       if (localStorage.getItem("user")) {
         user = JSON.parse(localStorage.getItem("user")!);
+        socketInstance.emit("join", user.userId);
+        setSocket(socketInstance);
       }
-      socketInstance.emit("join", user.userId);
-      setSocket(socketInstance);
     }
 
     return () => {

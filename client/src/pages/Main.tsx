@@ -1,9 +1,12 @@
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { fetchLikedStores } from "../api/storeAPI";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import Loading from "../components/Loading";
+import { User } from "../types/user";
 
 function Main() {
   return (
@@ -72,11 +75,36 @@ function BodyHeader() {
 
 function BodyContent({ contentType }: { contentType: string }) {
   const navigate = useNavigate();
-  const {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")!));
+    }
+  }, []);
+
+  const isAuthenticated = Boolean(user && Cookies.get("Authorization"));
+  console.log(isAuthenticated);
+  let {
     data: likedStores,
     isError,
     isLoading,
-  } = useQuery(["likedStores"], () => fetchLikedStores());
+  } = useQuery(["likedStores"], () => fetchLikedStores(), {
+    enabled: isAuthenticated,
+  });
+
+  const handleContentClick = () => {
+    if (contentType === "favorite" && !isAuthenticated) {
+      if (window.confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+      return;
+    }
+
+    navigate(contentType === "nearBy" ? "/nearby" : "/favorite");
+  };
 
   if (isLoading) {
     return <Loading />;
@@ -86,6 +114,10 @@ function BodyContent({ contentType }: { contentType: string }) {
     return <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>;
   }
 
+  if (!user || !Cookies.get("Authorization")) {
+    likedStores = [];
+  }
+
   return (
     <div className="flex flex-col">
       <div className="h-[56px] flex justify-center items-center bg-sky-300 w-[80%] rounded-md self-center my-6">
@@ -93,11 +125,7 @@ function BodyContent({ contentType }: { contentType: string }) {
       </div>
       <div
         className="cursor-pointer h-[10%] flex items-center px-4 my-2 font-semibold"
-        onClick={() => {
-          contentType === "nearBy"
-            ? navigate("/nearby")
-            : navigate("/favorite");
-        }}
+        onClick={handleContentClick}
       >
         {contentType === "nearBy" ? "내 주변 핫딜" : "단골 가게 핫딜"}
       </div>
