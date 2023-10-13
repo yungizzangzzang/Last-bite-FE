@@ -36,7 +36,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
             className="mt-1 p-2 w-full h-32 resize-none border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
-        <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+        <button className="bg-blue-500 w-full text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
           전송
         </button>
       </div>

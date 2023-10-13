@@ -7,6 +7,7 @@ import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import Loading from "../components/Loading";
 import { User } from "../types/user";
+import { styles } from "../utils/style";
 
 function Main() {
   return (
@@ -34,7 +35,7 @@ function Header() {
 
 function Body() {
   return (
-    <div className="h-full">
+    <div className={`w-full h-full overflow-auto  ${styles.bottomMargin}`}>
       <BodyHeader />
       <BodyContent contentType="nearBy" />
       <BodyContent contentType="favorite" />
@@ -118,7 +119,7 @@ function BodyContent({ contentType }: { contentType: string }) {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <div className="h-[56px] flex justify-center items-center bg-sky-300 w-[80%] rounded-md self-center my-6">
         광고
       </div>

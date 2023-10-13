@@ -88,7 +88,7 @@ function Body({ items }: { items: any }) {
               </div>
               <button
                 onClick={() => {
-                  navigate(`/order/1`);
+                  navigate(`/order/${item.orderId}`);
                 }}
               >
                 <IoIosArrowDroprightCircle size={28} color={"#717171"} />
