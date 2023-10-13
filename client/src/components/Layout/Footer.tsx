@@ -23,6 +23,7 @@ function Footer() {
         )}
         <span className="text-[0.5rem]">홈</span>
       </div>
+
       <div
         onClick={() => {
           const user = localStorage.getItem("user");
@@ -32,11 +33,10 @@ function Footer() {
                 "로그인이 필요한 페이지입니다. 로그인 하시겠습니까?"
               )
             ) {
-              navigate("/login");
-            } else {
-              navigate("/");
+              return navigate("/login");
             }
           }
+          navigate("/mypage");
         }}
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
@@ -56,11 +56,10 @@ function Footer() {
                 "로그인이 필요한 페이지입니다. 로그인 하시겠습니까?"
               )
             ) {
-              navigate("/login");
-            } else {
-              navigate("/");
+              return navigate("/login");
             }
           }
+          navigate("/basket");
         }}
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
@@ -80,11 +79,10 @@ function Footer() {
                 "로그인이 필요한 페이지입니다. 로그인 하시겠습니까?"
               )
             ) {
-              navigate("/login");
-            } else {
-              navigate("/");
+              return navigate("/login");
             }
           }
+          navigate("/notification");
         }}
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
@@ -104,11 +102,10 @@ function Footer() {
                 "로그인이 필요한 페이지입니다. 로그인 하시겠습니까?"
               )
             ) {
-              navigate("/login");
-            } else {
-              navigate("/");
+              return navigate("/login");
             }
           }
+          navigate("/history");
         }}
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >

@@ -84,7 +84,6 @@ function BodyContent({ contentType }: { contentType: string }) {
   }, []);
 
   const isAuthenticated = Boolean(user && Cookies.get("Authorization"));
-  console.log(isAuthenticated);
   let {
     data: likedStores,
     isError,
