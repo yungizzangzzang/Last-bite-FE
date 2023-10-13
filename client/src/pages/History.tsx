@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchHistory } from "../api/storeAPI";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import Loading from "../components/Loading";
 import { styles } from "../utils/style";
 
 function History() {
@@ -18,7 +19,7 @@ function History() {
     <Layout>
       <Header />
       {isError && <div>정보를 가져오는동안 오류가 발생했습니다.</div>}
-      {isLoading ? <div>로딩중...</div> : <Body items={history} />}
+      {isLoading ? <Loading /> : <Body items={history} />}
       <Footer />
     </Layout>
   );

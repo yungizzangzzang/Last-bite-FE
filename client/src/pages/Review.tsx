@@ -7,6 +7,7 @@ import { fetchReviewsByStoreId, fetchStoreById } from "../api/storeAPI";
 import { postAPI } from "../axios";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import Loading from "../components/Loading";
 import { styles } from "../utils/style";
 
 function Review() {
@@ -26,7 +27,7 @@ function Review() {
       <Layout>
         <Header storeId={id!} store={store} />
         {isLoading || reviewsIsLoading ? (
-          <div>로딩중...</div>
+          <Loading />
         ) : (
           <>
             <Body reviews={reviews} />

@@ -6,6 +6,7 @@ import { fetchLikedStores } from "../api/storeAPI";
 import { postAPI } from "../axios";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import Loading from "../components/Loading";
 import { styles } from "../utils/style";
 
 function Mypage() {
@@ -71,7 +72,7 @@ function BodyMain() {
   } = useQuery(["likedStores"], () => fetchLikedStores());
 
   if (isLoading) {
-    return <div>로딩중...</div>;
+    return <Loading />;
   }
 
   if (isError) {

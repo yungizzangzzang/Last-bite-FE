@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchLikedStores } from "../api/storeAPI";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import Loading from "../components/Loading";
 
 function Main() {
   return (
@@ -78,7 +79,7 @@ function BodyContent({ contentType }: { contentType: string }) {
   } = useQuery(["likedStores"], () => fetchLikedStores());
 
   if (isLoading) {
-    return <div>로딩중...</div>;
+    return <Loading />;
   }
 
   if (isError) {

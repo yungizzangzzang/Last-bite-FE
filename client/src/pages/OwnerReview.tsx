@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchReviewsByStoreId, fetchStoreById } from "../api/storeAPI";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
+import Loading from "../components/Loading";
 import { styles } from "../utils/style";
 
 function OwnerReview() {
@@ -17,14 +18,15 @@ function OwnerReview() {
     () => fetchReviewsByStoreId(id!)
   );
 
-  if (isLoading || reviewsIsLoading) return <div>로딩중...</div>;
-
   return (
     <>
       <Layout>
         <Header storeId={id!} store={store.store} />
-        <Body reviews={reviews} />
-
+        {isLoading || reviewsIsLoading ? (
+          <Loading />
+        ) : (
+          <Body reviews={reviews} />
+        )}
         <OwnerFooter />
       </Layout>
     </>

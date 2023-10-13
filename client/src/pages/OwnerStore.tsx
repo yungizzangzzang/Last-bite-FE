@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchStoreById } from "../api/storeAPI";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
+import Loading from "../components/Loading";
 import { styles } from "../utils/style";
 
 function OwnerStore() {
@@ -41,7 +42,7 @@ function Body() {
     fetchStoreById(id!)
   );
   if (isLoading) {
-    return <div>로딩중...</div>;
+    return <Loading />;
   }
   return (
     <div className={`flex flex-col ${styles.headerMargin} p-6 gap-2`}>

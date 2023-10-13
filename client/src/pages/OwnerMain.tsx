@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchStoreById } from "../api/storeAPI";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
+import Loading from "../components/Loading";
 import { styles } from "../utils/style";
 
 function OwnerMain() {
@@ -16,18 +17,11 @@ function OwnerMain() {
     isLoading,
   } = useQuery(["store", id], () => fetchStoreById(id!));
 
-  if (isLoading) {
-    return <div>로딩중...</div>;
-  }
-
-  if (isError) {
-    return <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>;
-  }
-
   return (
     <Layout>
       <Header storeId={id!} store={store.store} />
-      <Body items={store.items} />
+      {isError && <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>}
+      {isLoading ? <Loading /> : <Body items={store.items} />}
       <div
         className={`min-w-[336px] w-[336px] fixed bottom-[52px] h-12 flex justify-center items-center`}
       >
