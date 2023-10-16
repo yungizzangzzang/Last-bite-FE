@@ -130,7 +130,7 @@ function Body() {
         className={`w-full h-full ${styles.headerMargin} mb-32 overflow-auto`}
       >
         {items.length === 0 ? (
-          <NotFound />
+          <NotFound content="장바구니에 담긴 상품이 없어요!" />
         ) : (
           items.map((item: any, index: number) => (
             <div

@@ -8,6 +8,7 @@ import { fetchHistory } from "../api/storeAPI";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import Loading from "../components/Loading";
+import NotFound from "../components/NotFound";
 import { styles } from "../utils/style";
 
 function History() {
@@ -63,52 +64,56 @@ function Body({ items }: { items: any }) {
     <div
       className={`overflow-auto h-full ${styles.headerMargin} ${styles.bottomMargin}`}
     >
-      {items?.map((item: any) => {
-        return (
-          <div
-            key={item.itemId}
-            className="flex flex-col p-4 border-b-8 border-[#C3CFD9] gap-2"
-          >
-            <div className="font-semibold cursor-default">
-              {item?.createdAt.split("T")[0].split("-")[0]}년{" "}
-              {item?.createdAt.split("T")[0].split("-")[1]}월{" "}
-              {item?.createdAt.split("T")[0].split("-")[2]}일 예약 완료
-            </div>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-[12px]">
-                <div className="w-[100px] h-[100px] flex justify-center items-center rounded-md bg-blue-400">
-                  사진
-                </div>
-                <div className="flex flex-col gap-2 cursor-default">
-                  <div>{item.storeName}</div>
-                  <div className="cursor-default border-[#FF385C] text-[0.75rem] border-2  rounded-full px-4 py-1 ">
-                    {item?.discount}% 할인 받음
+      {items?.length === 0 ? (
+        <NotFound content="주문한 내역이 없어요!" />
+      ) : (
+        items?.map((item: any) => {
+          return (
+            <div
+              key={item.itemId}
+              className="flex flex-col p-4 border-b-8 border-[#C3CFD9] gap-2"
+            >
+              <div className="font-semibold cursor-default">
+                {item?.createdAt.split("T")[0].split("-")[0]}년{" "}
+                {item?.createdAt.split("T")[0].split("-")[1]}월{" "}
+                {item?.createdAt.split("T")[0].split("-")[2]}일 예약 완료
+              </div>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-[12px]">
+                  <div className="w-[100px] h-[100px] flex justify-center items-center rounded-md bg-blue-400">
+                    사진
+                  </div>
+                  <div className="flex flex-col gap-2 cursor-default">
+                    <div>{item.storeName}</div>
+                    <div className="cursor-default border-[#FF385C] text-[0.75rem] border-2  rounded-full px-4 py-1 ">
+                      {item?.discount}% 할인 받음
+                    </div>
                   </div>
                 </div>
+                <button
+                  onClick={() => {
+                    navigate(`/order/${item.orderId}`);
+                  }}
+                >
+                  <IoIosArrowDroprightCircle size={28} color={"#717171"} />
+                </button>
               </div>
-              <button
-                onClick={() => {
-                  navigate(`/order/${item.orderId}`);
-                }}
-              >
-                <IoIosArrowDroprightCircle size={28} color={"#717171"} />
-              </button>
+              {item.star ? (
+                "⭐️".repeat(item.star)
+              ) : (
+                <button
+                  onClick={() => {
+                    navigate(`/create-review/${item.orderId}/${item.storeId}`);
+                  }}
+                  className="w-full h-8 flex items-center bg-[#FF385C] text-white rounded-full justify-center self-center"
+                >
+                  리뷰 작성
+                </button>
+              )}
             </div>
-            {item.star ? (
-              "⭐️".repeat(item.star)
-            ) : (
-              <button
-                onClick={() => {
-                  navigate(`/create-review/${item.orderId}/${item.storeId}`);
-                }}
-                className="w-full h-8 flex items-center bg-[#FF385C] text-white rounded-full justify-center self-center"
-              >
-                리뷰 작성
-              </button>
-            )}
-          </div>
-        );
-      })}
+          );
+        })
+      )}
     </div>
   );
 }

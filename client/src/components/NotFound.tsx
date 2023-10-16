@@ -1,4 +1,4 @@
-function NotFound() {
+function NotFound({ content }: { content: string }) {
   return (
     <>
       <div
@@ -8,7 +8,7 @@ function NotFound() {
           src={process.env.PUBLIC_URL + "/asset/img/notFound.png"}
           alt="not_found"
         />
-        <div className="cursor-default">장바구니에 담긴 상품이 없어요!</div>
+        <div className="cursor-default">{content}</div>
       </div>
     </>
   );
