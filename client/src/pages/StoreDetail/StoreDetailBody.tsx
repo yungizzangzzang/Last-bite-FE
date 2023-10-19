@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
@@ -9,8 +9,8 @@ import { styles } from "../../utils/style";
 function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
   const navigate = useNavigate();
   const items = store.items;
-  const [localBasket, setLocalBasket] = useState<BasketItem[]>([]);
   const [basket, setBasket] = useRecoilState<BasketItem[]>(basketState);
+  const [localBasket, setLocalBasket] = useState<BasketItem[]>(basket);
   const [itemCounts, setItemCounts] = useState<{ [key: number]: number }>(
     () => {
       const initialCounts: { [key: number]: number } = {};
@@ -26,6 +26,9 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
       return initialCounts;
     }
   );
+  useEffect(() => {
+    setLocalBasket(basket);
+  }, [basket]);
 
   function updateLocalBasketState(itemId: number, newCount: number) {
     const selectedItem = items.find((item: any) => item.itemId === itemId);
@@ -62,7 +65,8 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
 
   const handleAddToBasket = () => {
     if (!localBasket.length) {
-      if (basket.length > 0 && basket[0].storeId === +storeId!) {
+      if (localBasket.length > 0) {
+        setBasket(localBasket);
         navigate("/basket");
       } else {
         toast.error("상품을 담아주세요!");
@@ -79,7 +83,7 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
         navigate("/basket");
       }
     } else {
-      const newBasket = [...basket];
+      let newBasket = [...basket];
 
       localBasket.forEach((localItem) => {
         const existingItemIndex = newBasket.findIndex(
@@ -87,11 +91,16 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
         );
 
         if (existingItemIndex !== -1) {
-          newBasket[existingItemIndex].count += localItem.count;
+          newBasket[existingItemIndex] = {
+            ...newBasket[existingItemIndex],
+            count: newBasket[existingItemIndex].count + localItem.count,
+          };
         } else {
           newBasket.push(localItem);
         }
       });
+
+      newBasket = newBasket.filter((item) => item.count > 0);
 
       setBasket(newBasket);
       navigate("/basket");
@@ -99,23 +108,39 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
   };
 
   const incrementCount = (itemId: number) => {
-    const selectedItem = items.find((item: any) => item.itemId === itemId);
-
-    if (selectedItem && itemCounts[itemId] < selectedItem.count) {
-      setItemCounts((prev) => {
-        const updatedCounts = { ...prev, [itemId]: prev[itemId] + 1 };
-        updateLocalBasketState(itemId, updatedCounts[itemId]);
-        return updatedCounts;
-      });
-    }
+    setItemCounts((prev) => {
+      const updatedCounts = { ...prev, [itemId]: prev[itemId] + 1 };
+      updateLocalBasketState(itemId, updatedCounts[itemId]);
+      return updatedCounts;
+    });
   };
 
   const decrementCount = (itemId: number) => {
-    if (itemCounts[itemId] > 0) {
+    if (itemCounts[itemId] > 1) {
       setItemCounts((prev) => {
         const updatedCounts = { ...prev, [itemId]: prev[itemId] - 1 };
         updateLocalBasketState(itemId, updatedCounts[itemId]);
         return updatedCounts;
+      });
+
+      setBasket((prevBasket) => {
+        const updatedBasket = [...prevBasket];
+        const targetIndex = updatedBasket.findIndex(
+          (item) => item.itemId === itemId
+        );
+
+        if (targetIndex !== -1) {
+          if (itemCounts[itemId] - 1 === 0) {
+            updatedBasket.splice(targetIndex, 1);
+          } else {
+            updatedBasket[targetIndex] = {
+              ...updatedBasket[targetIndex],
+              count: itemCounts[itemId] - 1,
+            };
+          }
+          return updatedBasket;
+        }
+        return prevBasket;
       });
     }
   };
