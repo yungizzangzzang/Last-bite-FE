@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { postAPI } from "../axios";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import NotFound from "../components/NotFound";
@@ -99,7 +100,7 @@ function Body() {
     (1 - totalPrice / totalPrevPrice) * 100
   );
 
-  const sendOrder = () => {
+  const sendOrderSocket = () => {
     if (!user || !Cookies.get("Authorization")) {
       if (window.confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
         navigate("/login");
@@ -120,8 +121,26 @@ function Body() {
         discount: discountPercentage,
         itemList: itemList,
       });
+
       navigate("/result");
     }
+  };
+
+  const sendOrder = async () => {
+    const orderItems = items.map((item) => ({
+      orderId: null,
+      itemId: item.itemId,
+      count: itemCounts[item.itemId],
+    }));
+
+    const payload = {
+      storeId: items[0].storeId,
+      totalPrice: totalPrice,
+      discount: discountPercentage,
+      items: orderItems,
+    };
+
+    await postAPI("/orders", payload);
   };
 
   return (
@@ -173,6 +192,7 @@ function Body() {
       {items.length !== 0 && (
         <button
           onClick={() => {
+            sendOrderSocket();
             sendOrder();
           }}
           className={`min-w-[336px] w-[336px] fixed ${styles.footerHeight} h-20 flex flex-col justify-center items-center`}
