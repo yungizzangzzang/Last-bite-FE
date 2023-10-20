@@ -34,6 +34,8 @@ function Footer() {
               )
             ) {
               return navigate("/login");
+            } else {
+              return;
             }
           }
           navigate("/mypage");
@@ -57,6 +59,8 @@ function Footer() {
               )
             ) {
               return navigate("/login");
+            } else {
+              return;
             }
           }
           navigate("/basket");
@@ -80,6 +84,8 @@ function Footer() {
               )
             ) {
               return navigate("/login");
+            } else {
+              return;
             }
           }
           navigate("/notification");
@@ -103,6 +109,8 @@ function Footer() {
               )
             ) {
               return navigate("/login");
+            } else {
+              return;
             }
           }
           navigate("/history");
