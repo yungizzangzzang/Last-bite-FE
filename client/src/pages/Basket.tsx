@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { useContext, useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -54,7 +53,7 @@ function Body() {
     return initialCounts;
   });
 
-  const [user, setUser] = useState<User | null>(null);
+  const [, setUser] = useState<User | null>(null);
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(JSON.parse(localStorage.getItem("user")!));
@@ -100,31 +99,31 @@ function Body() {
     (1 - totalPrice / totalPrevPrice) * 100
   );
 
-  const sendOrderSocket = () => {
-    if (!user || !Cookies.get("Authorization")) {
-      if (window.confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
-        navigate("/login");
-      }
-      return;
-    }
+  // const sendOrderSocket = () => {
+  //   if (!user || !Cookies.get("Authorization")) {
+  //     if (window.confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
+  //       navigate("/login");
+  //     }
+  //     return;
+  //   }
 
-    if (socket) {
-      const itemList: { [key: number]: number } = {};
-      items.forEach((item) => {
-        itemList[item.itemId] = itemCounts[item.itemId];
-      });
+  //   if (socket) {
+  //     const itemList: { [key: number]: number } = {};
+  //     items.forEach((item) => {
+  //       itemList[item.itemId] = itemCounts[item.itemId];
+  //     });
 
-      socket.emit("clientOrder", {
-        userId: user?.userId,
-        storeId: items[0].storeId,
-        totalPrice: totalPrice,
-        discount: discountPercentage,
-        itemList: itemList,
-      });
+  //     socket.emit("clientOrder", {
+  //       userId: user?.userId,
+  //       storeId: items[0].storeId,
+  //       totalPrice: totalPrice,
+  //       discount: discountPercentage,
+  //       itemList: itemList,
+  //     });
 
-      navigate("/result");
-    }
-  };
+  //     navigate("/result");
+  //   }
+  // };
 
   const sendOrder = async () => {
     const orderItems = items.map((item) => ({
@@ -139,8 +138,12 @@ function Body() {
       discount: discountPercentage,
       items: orderItems,
     };
-
-    await postAPI("/orders", payload);
+    try {
+      await postAPI("/orders", payload);
+      navigate("/result");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -192,7 +195,7 @@ function Body() {
       {items.length !== 0 && (
         <button
           onClick={() => {
-            sendOrderSocket();
+            // sendOrderSocket();
             sendOrder();
           }}
           className={`min-w-[336px] w-[336px] fixed ${styles.footerHeight} h-20 flex flex-col justify-center items-center`}
