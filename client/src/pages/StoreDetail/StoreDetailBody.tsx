@@ -14,15 +14,20 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
   const [itemCounts, setItemCounts] = useState<{ [key: number]: number }>(
     () => {
       const initialCounts: { [key: number]: number } = {};
-      items.forEach((item: any) => {
-        const basketItem = basket.find((bItem) => bItem.itemId === item.itemId);
+      if (items.message !== "진행 중인 핫딜 정보가 없습니다.") {
+        items.forEach((item: any) => {
+          const basketItem = basket.find(
+            (bItem) => bItem.itemId === item.itemId
+          );
 
-        if (basketItem) {
-          initialCounts[item.itemId] = basketItem.count;
-        } else {
-          initialCounts[item.itemId] = 0;
-        }
-      });
+          if (basketItem) {
+            initialCounts[item.itemId] = basketItem.count;
+          } else {
+            initialCounts[item.itemId] = 0;
+          }
+        });
+      }
+
       return initialCounts;
     }
   );
@@ -150,49 +155,56 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
       <div
         className={`w-full h-full mb-[88px] ${styles.headerMargin} overflow-auto`}
       >
-        {items.map((item: any, index: number) => (
-          <div
-            key={item.itemId}
-            className={`w-full flex items-center border-b-2 border-[#C3CFD9] p-2
-             ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
-          >
+        {items.message !== "진행 중인 핫딜 정보가 없습니다." &&
+          items?.map((item: any, index: number) => (
             <div
-              className={`h-full w-[80%] flex flex-col justify-center gap-1`}
+              key={item?.itemId}
+              className={`w-full flex items-center border-b-2 border-[#C3CFD9] p-2
+             ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
             >
-              <div className="text-[1.25rem]">{item.name}</div>
-              <div className="text-[0.75rem]">{item.content}</div>
-              <div className="text-[0.75rem]">
-                잔여수량: {item.count - (itemCounts[item.itemId] || 0)}
+              <div
+                className={`h-full w-[80%] flex flex-col justify-center gap-1`}
+              >
+                <div className="text-[1.25rem]">{item?.name}</div>
+                <div className="text-[0.75rem]">{item?.content}</div>
+                <div className="text-[0.75rem]">
+                  잔여수량: {item?.count - (itemCounts[item?.itemId] || 0)}
+                </div>
+
+                <div className="flex gap-2 items-center">
+                  <div
+                    style={{
+                      textDecoration: "line-through",
+                      textDecorationColor: "red",
+                      color: "black",
+                    }}
+                  >
+                    {item?.prevPrice}
+                  </div>
+                  <div className="font-semibold text-red-500">
+                    {item?.price}
+                  </div>
+                  <div className="flex gap-2 py-1 px-2">
+                    <button onClick={() => decrementCount(item?.itemId)}>
+                      -
+                    </button>
+                    <div>{itemCounts[item?.itemId]}</div>
+                    <button onClick={() => incrementCount(item?.itemId)}>
+                      +
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              <div className="flex gap-2 items-center">
-                <div
-                  style={{
-                    textDecoration: "line-through",
-                    textDecorationColor: "red",
-                    color: "black",
-                  }}
-                >
-                  {item.prevPrice}
-                </div>
-                <div className="font-semibold text-red-500">{item.price}</div>
-                <div className="flex gap-2 py-1 px-2">
-                  <button onClick={() => decrementCount(item.itemId)}>-</button>
-                  <div>{itemCounts[item.itemId]}</div>
-                  <button onClick={() => incrementCount(item.itemId)}>+</button>
-                </div>
+              <div className="h-[100px] w-[100px] border-b-2  flex items-center justify-center rounded-lg">
+                <img
+                  src={item?.imgUrl}
+                  alt="item_img"
+                  className="w-full h-full rounded-md object-fill"
+                />
               </div>
             </div>
-
-            <div className="h-[100px] w-[100px] border-b-2  flex items-center justify-center rounded-lg">
-              <img
-                src={item.imgUrl}
-                alt="item_img"
-                className="w-full h-full rounded-md object-fill"
-              />
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
       <div className="min-w-[336px] w-[336px] fixed bottom-[52px] h-12 flex justify-center items-center">
         <button
