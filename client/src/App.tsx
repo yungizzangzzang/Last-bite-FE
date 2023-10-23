@@ -39,7 +39,8 @@ function App() {
     socketInstance.on("connect_error", () => {
       reconnectionAttempts++;
       if (reconnectionAttempts >= maxReconnectionAttempts) {
-        console.log("소켓 연결 실패");
+        console.log("소켓 연결 실패, 더 이상 연결을 시도하지 않습니다.");
+        socketInstance.close();
       }
     });
 
