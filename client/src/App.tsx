@@ -24,14 +24,33 @@ function App() {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const socketInstance = io(`${process.env.REACT_APP_SERVER_URL}`);
-    if (socketInstance) {
-      let user;
-      if (localStorage.getItem("user")) {
-        user = JSON.parse(localStorage.getItem("user")!);
-        socketInstance.emit("join", user.userId);
-        setSocket(socketInstance);
+    let reconnectionAttempts = 0;
+    const maxReconnectionAttempts = 5;
+
+    const socketOptions = {
+      reconnectionAttempts: maxReconnectionAttempts,
+    };
+
+    const socketInstance = io(
+      `${process.env.REACT_APP_SERVER_URL}`,
+      socketOptions
+    );
+
+    socketInstance.on("connect_error", () => {
+      reconnectionAttempts++;
+      if (reconnectionAttempts >= maxReconnectionAttempts) {
+        console.log("소켓 연결 실패");
       }
+    });
+
+    socketInstance.on("reconnect_failed", () => {
+      console.log("소켓 연결 실패");
+    });
+
+    if (localStorage.getItem("user")) {
+      const user = JSON.parse(localStorage.getItem("user")!);
+      socketInstance.emit("join", user.userId);
+      setSocket(socketInstance);
     }
 
     return () => {
