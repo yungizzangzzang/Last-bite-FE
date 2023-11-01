@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RecoilRoot } from "recoil";
 import io, { Socket } from "socket.io-client";
@@ -21,43 +21,72 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const contextSocket = useContext(SocketContext);
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    let reconnectionAttempts = 0;
-    const maxReconnectionAttempts = 5;
+    if (!contextSocket) {
+      let reconnectionAttempts = 0;
+      const maxReconnectionAttempts = 5;
 
-    const socketOptions = {
-      reconnectionAttempts: maxReconnectionAttempts,
-    };
+      const socketOptions = {
+        reconnectionAttempts: maxReconnectionAttempts,
+      };
 
-    const socketInstance = io(
-      `${process.env.REACT_APP_SERVER_URL}`,
-      socketOptions
-    );
+      const socketInstance = io(
+        `${process.env.REACT_APP_SERVER_URL}`,
+        socketOptions
+      );
 
-    socketInstance.on("connect_error", () => {
-      reconnectionAttempts++;
-      if (reconnectionAttempts >= maxReconnectionAttempts) {
-        console.log("소켓 연결 실패, 더 이상 연결을 시도하지 않습니다.");
-        socketInstance.close();
+      socketInstance.on("connect_error", () => {
+        reconnectionAttempts++;
+        if (reconnectionAttempts >= maxReconnectionAttempts) {
+          console.log("소켓 연결 실패, 더 이상 연결을 시도하지 않습니다.");
+          socketInstance.close();
+        }
+      });
+
+      socketInstance.on("reconnect_failed", () => {
+        console.log("소켓 연결 실패");
+      });
+
+      socketInstance.on("connect", () => {
+        console.log("소켓 연결 성공");
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              console.log(latitude, longitude);
+              socketInstance.emit("send_location", { latitude, longitude });
+            },
+            (error) => {
+              switch (error.code) {
+                case error.PERMISSION_DENIED:
+                  console.log("위치 정보 제공 동의를 거절하였습니다.");
+                  toast.error(
+                    "위치 정보 제공 동의를 거절하였습니다. 제한된 기능만 사용 가능합니다."
+                  );
+                  break;
+              }
+            }
+          );
+        } else {
+          console.log("Geolocation is not supported by this browser.");
+        }
+      });
+
+      if (localStorage.getItem("user")) {
+        const user = JSON.parse(localStorage.getItem("user")!);
+        socketInstance.emit("join", user.userId);
+        setSocket(socketInstance);
       }
-    });
 
-    socketInstance.on("reconnect_failed", () => {
-      console.log("소켓 연결 실패");
-    });
-
-    if (localStorage.getItem("user")) {
-      const user = JSON.parse(localStorage.getItem("user")!);
-      socketInstance.emit("join", user.userId);
-      setSocket(socketInstance);
+      return () => {
+        socketInstance.disconnect();
+      };
     }
-
-    return () => {
-      socketInstance.disconnect();
-    };
-  }, []);
+  }, [contextSocket]);
 
   return (
     <>
