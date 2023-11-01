@@ -1,13 +1,16 @@
 import Cookies from "js-cookie";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
+import { SocketContext } from "../contexts/SocketContext";
 import { styles } from "../utils/style";
 
 function OwnerNotification() {
+  const [alarms, setAlarms] = useState<any[]>([]);
   const navigate = useNavigate();
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -20,12 +23,25 @@ function OwnerNotification() {
         navigate("/");
       }
     }
-  }, [navigate]);
+
+    if (socket) {
+      socket.on("orderAlarmToOwner", (data) => {
+        console.log("주문 알림 데이터:", data);
+        setAlarms((prevAlarms) => [...prevAlarms, data]);
+      });
+    }
+
+    return () => {
+      if (socket) {
+        socket.off("orderAlarmToOwner");
+      }
+    };
+  }, [navigate, socket]);
 
   return (
     <Layout>
       <Header />
-      <Body />
+      <Body alarms={alarms} />
       <OwnerFooter />
     </Layout>
   );
@@ -48,70 +64,7 @@ function Header() {
   );
 }
 
-function Body() {
-  const navigate = useNavigate();
-  const alarms = [
-    {
-      nickname: "윤기짱짱",
-      price: "14000",
-      createdAt: "10월 07일 20:00",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "19000",
-      createdAt: "10월 07일 19:48",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "12000",
-      createdAt: "10월 07일 19:40",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "14000",
-      createdAt: "10월 07일 20:00",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "19000",
-      createdAt: "10월 07일 19:48",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "12000",
-      createdAt: "10월 07일 19:40",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "14000",
-      createdAt: "10월 07일 20:00",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "19000",
-      createdAt: "10월 07일 19:48",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "12000",
-      createdAt: "10월 07일 19:40",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "14000",
-      createdAt: "10월 07일 20:00",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "19000",
-      createdAt: "10월 07일 19:48",
-    },
-    {
-      nickname: "윤기짱짱",
-      price: "12000",
-      createdAt: "10월 07일 19:40",
-    },
-  ];
+function Body({ alarms }: { alarms: any }) {
   return (
     <>
       <div
@@ -120,8 +73,7 @@ function Body() {
         {alarms.map((alarm: any, index: number) => {
           return (
             <div
-              onClick={() => navigate("/owner/result")}
-              className={`cursor-pointer flex flex-col border-b-2 border-[#C3CFD9] p-4 gap-2
+              className={`flex flex-col border-b-2 border-[#C3CFD9] p-4 gap-2
             ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
             >
               <div className="text-[1.25rem] font-semibold">
