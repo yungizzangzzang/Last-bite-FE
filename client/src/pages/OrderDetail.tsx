@@ -68,7 +68,7 @@ function Body() {
         createdAt={order?.createdAt}
         orderId={order?.orderId}
       />
-      <BodyMain totalPrice={order?.totalPrice} />
+      <BodyMain order={order} />
     </div>
   );
 }
@@ -99,24 +99,35 @@ function BodyHeader({
   );
 }
 
-function BodyMain({ totalPrice }: { totalPrice: number }) {
+function BodyMain({ order }: { order: any }) {
   const items = useRecoilValue(basketState);
   return (
     <>
       <div className="border-y-8">
-        {items.map((item) => {
-          return (
-            <div className="flex flex-col p-4 border-b-2 border-[#C3CFD9]">
-              <div>
-                {item.name} {item.count}개
-              </div>
-              <div>{item.price * item.count}원</div>
-            </div>
-          );
-        })}
+        {items.length !== 0
+          ? items.map((item) => {
+              return (
+                <div className="flex flex-col p-4 border-b-2 border-[#C3CFD9]">
+                  <div>
+                    {item.name} {item.count}개
+                  </div>
+                  <div>{item.price * item.count}원</div>
+                </div>
+              );
+            })
+          : order?.items.map((item: any) => {
+              return (
+                <div className="flex flex-col p-4 border-b-2 border-[#C3CFD9]">
+                  <div>
+                    {item.name} {item.count}개
+                  </div>
+                  <div>{item.price * item.count}원</div>
+                </div>
+              );
+            })}
       </div>
       <div className="p-4 font-bold text-[1.25rem]">
-        결제 포인트 {totalPrice}원
+        결제 포인트 {order?.totalPrice}원
       </div>
     </>
   );
