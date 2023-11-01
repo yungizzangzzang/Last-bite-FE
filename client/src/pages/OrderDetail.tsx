@@ -53,8 +53,8 @@ function Header() {
 }
 
 const fetchOneOrder = async (orderId: string) => {
-  const response = await getAPI(`/order/${orderId}`);
-  return response.data;
+  const response = await getAPI(`/orders/${orderId}`);
+  return response.data.data;
 };
 
 function Body() {
