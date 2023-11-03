@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import { SocketContext } from "../contexts/SocketContext";
+import { formatCreatedAt } from "../utils/dateFormat";
 import { styles } from "../utils/style";
 
 function Notification() {
@@ -72,28 +73,13 @@ function Header() {
 function Body({ alarms }: { alarms: any }) {
   const navigate = useNavigate();
 
-  // const alarms = [
-  //   {
-  //     title: "종훈 떡볶이 마감 할인",
-  //     content: "종훈 떡볶이 3000원, 로제 떡볶이 4000원",
-  //     createdAt: "10월 07일 20:00",
-  //   },
-  //   {
-  //     title: "찬호 편의점 핫딜",
-  //     content: "1시간 한정! 유통기한 임박상품 50%할인",
-  //     createdAt: "10월 07일 19:48",
-  //   },
-  //   {
-  //     title: "승일 베이커리 마감 핫딜",
-  //     content: "인기상품 초코소라빵 40% 할인!!!",
-  //     createdAt: "10월 07일 19:40",
-  //   },
-  // ];
   return (
     <div
       className={`w-full overflow-auto ${styles.headerMargin} ${styles.bottomMargin}`}
     >
       {alarms.map((alarm: any, index: number) => {
+        const formattedCreatedAt = formatCreatedAt(alarm.createdAt);
+
         return (
           <div
             onClick={() => navigate(`/store/${alarm.storeId}`)}
@@ -102,7 +88,7 @@ function Body({ alarms }: { alarms: any }) {
           >
             <div className="text-[1.25rem] font-semibold">{alarm.title}</div>
             <div className="text-[1rem]">{alarm.content}</div>
-            <div className="text-[0.5rem]">{alarm.createdAt}</div>
+            <div className="text-[0.5rem]">{formattedCreatedAt}</div>
           </div>
         );
       })}

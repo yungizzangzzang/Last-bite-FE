@@ -8,6 +8,7 @@ import { getAPI } from "../axios";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import { basketState } from "../states/basketState";
+import { formatCreatedAt } from "../utils/dateFormat";
 import { styles } from "../utils/style";
 
 function OrderDetail() {
@@ -84,6 +85,8 @@ function BodyHeader({
   createdAt: string;
   orderId: number;
 }) {
+  const formattedCreatedAt = formatCreatedAt(createdAt);
+
   return (
     <div className="flex flex-col p-4">
       <div className="font-semibold text-[#FF385C]">예약이 완료되었어요!</div>
@@ -93,7 +96,7 @@ function BodyHeader({
           {discount}% 할인 받음
         </div>
       </div>
-      <div>예약일시: {createdAt}</div>
+      <div>예약일시: {formattedCreatedAt}</div>
       <div>주문번호: {orderId}</div>
     </div>
   );

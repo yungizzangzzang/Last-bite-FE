@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
 import { SocketContext } from "../contexts/SocketContext";
+import { formatCreatedAt } from "../utils/dateFormat";
 import { styles } from "../utils/style";
 
 interface Item {
@@ -86,7 +87,8 @@ function Body({ alarms }: BodyProps) {
       <div
         className={`overflow-auto ${styles.headerMargin} ${styles.bottomMargin} h-full`}
       >
-        {alarms?.map((alarm: any, index: number) => {
+        {alarms?.map((alarm: Alarm, index: number) => {
+          const formattedCreatedAt = formatCreatedAt(alarm.createdAt);
           return (
             <div
               key={alarm.createdAt}
@@ -96,7 +98,7 @@ function Body({ alarms }: BodyProps) {
               <div className="text-[1.25rem] font-semibold">
                 {alarm.nickname}
               </div>
-              {alarm.items.map((item: any) => {
+              {alarm.items.map((item: Item) => {
                 return (
                   <div>
                     <div>
@@ -108,7 +110,7 @@ function Body({ alarms }: BodyProps) {
               <div className="text-[1rem]">
                 결제 포인트 : {alarm.totalPrice}원
               </div>
-              <div className="text-[0.5rem]">{alarm.createdAt}</div>
+              <div className="text-[0.5rem]">{formattedCreatedAt}</div>
             </div>
           );
         })}
