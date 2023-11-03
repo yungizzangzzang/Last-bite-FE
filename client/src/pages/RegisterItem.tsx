@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BiCamera } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
@@ -7,10 +7,12 @@ import { toast } from "react-toastify";
 import { postAPI } from "../axios";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
+import { SocketContext } from "../contexts/SocketContext";
 import { styles } from "../utils/style";
 
 function RegisterItem() {
   const navigate = useNavigate();
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -24,6 +26,7 @@ function RegisterItem() {
       }
     }
   }, [navigate]);
+
   const [item, setItem] = useState({
     name: "",
     content: "",
@@ -59,6 +62,18 @@ function RegisterItem() {
     try {
       await postAPI("/items", formData);
       toast.success("핫딜 상품 등록 완료!");
+      if (socket) {
+        socket.emit("itemRegister", {
+          name: item.name,
+          content: item.content,
+          prevPrice: item.prevPrice,
+          price: item.price,
+          count: item.count,
+          startTime: item.startTime,
+          endTime: item.endTime,
+          storeId: 1,
+        });
+      }
       navigate(-1);
     } catch (error) {
       toast.error("핫딜 상품 등록에 실패하였습니다.");
