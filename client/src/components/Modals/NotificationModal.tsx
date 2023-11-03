@@ -35,7 +35,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className=" w-[300px] h-[400px] bg-white p-4 rounded-md space-y-4 relative">
+      <div className=" w-[300px] bg-white p-4 rounded-md space-y-4 relative">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-lg focus:outline-none"
@@ -62,6 +62,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
             id="message"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            className="w-full border rounded-md mt-1 p-2 outline-none resize-none h-[100px]"
           />
         </div>
         <button
