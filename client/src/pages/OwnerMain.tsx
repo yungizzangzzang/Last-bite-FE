@@ -91,6 +91,7 @@ function Header({ storeId, store }: { storeId: string; store: any }) {
       <NotificationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        storeId={+storeId}
       />
     </div>
   );
