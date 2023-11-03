@@ -96,7 +96,7 @@ function Body({ alarms }: { alarms: any }) {
       {alarms.map((alarm: any, index: number) => {
         return (
           <div
-            onClick={() => navigate("/store/1")}
+            onClick={() => navigate(`/store/${alarm.storeId}`)}
             className={`cursor-pointer flex flex-col border-b-2 border-[#C3CFD9] p-4 gap-2
             ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
           >
