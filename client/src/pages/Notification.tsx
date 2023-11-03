@@ -1,13 +1,16 @@
 import Cookies from "js-cookie";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
+import { SocketContext } from "../contexts/SocketContext";
 import { styles } from "../utils/style";
 
 function Notification() {
   const navigate = useNavigate();
+  const [alarms, setAlarms] = useState<any[]>([]);
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -21,10 +24,28 @@ function Notification() {
       }
     }
   }, [navigate]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("itemRegistered", (item) => {
+        console.log(item);
+      });
+
+      socket.on("alarmToFavoriteClient", (alarm) => {
+        setAlarms((currentAlarms) => [...currentAlarms, alarm]);
+      });
+
+      return () => {
+        socket.off("itemRegistered");
+        socket.off("alarmToFavoriteClient");
+      };
+    }
+  }, [navigate, socket]);
+
   return (
     <Layout>
       <Header />
-      <Body />
+      <Body alarms={alarms} />
       <Footer />
     </Layout>
   );
@@ -47,26 +68,26 @@ function Header() {
   );
 }
 
-function Body() {
+function Body({ alarms }: { alarms: any }) {
   const navigate = useNavigate();
 
-  const alarms = [
-    {
-      title: "종훈 떡볶이 마감 할인",
-      content: "종훈 떡볶이 3000원, 로제 떡볶이 4000원",
-      createdAt: "10월 07일 20:00",
-    },
-    {
-      title: "찬호 편의점 핫딜",
-      content: "1시간 한정! 유통기한 임박상품 50%할인",
-      createdAt: "10월 07일 19:48",
-    },
-    {
-      title: "승일 베이커리 마감 핫딜",
-      content: "인기상품 초코소라빵 40% 할인!!!",
-      createdAt: "10월 07일 19:40",
-    },
-  ];
+  // const alarms = [
+  //   {
+  //     title: "종훈 떡볶이 마감 할인",
+  //     content: "종훈 떡볶이 3000원, 로제 떡볶이 4000원",
+  //     createdAt: "10월 07일 20:00",
+  //   },
+  //   {
+  //     title: "찬호 편의점 핫딜",
+  //     content: "1시간 한정! 유통기한 임박상품 50%할인",
+  //     createdAt: "10월 07일 19:48",
+  //   },
+  //   {
+  //     title: "승일 베이커리 마감 핫딜",
+  //     content: "인기상품 초코소라빵 40% 할인!!!",
+  //     createdAt: "10월 07일 19:40",
+  //   },
+  // ];
   return (
     <div
       className={`w-full overflow-auto ${styles.headerMargin} ${styles.bottomMargin}`}
