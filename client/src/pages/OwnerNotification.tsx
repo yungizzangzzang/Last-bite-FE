@@ -7,8 +7,24 @@ import OwnerFooter from "../components/Layout/OwnerFooter";
 import { SocketContext } from "../contexts/SocketContext";
 import { styles } from "../utils/style";
 
+interface Item {
+  name: string;
+  count: number;
+}
+
+interface Alarm {
+  nickname: string;
+  items: Item[];
+  totalPrice: number;
+  createdAt: string;
+}
+
+interface BodyProps {
+  alarms: Alarm[];
+}
+
 function OwnerNotification() {
-  const [alarms, setAlarms] = useState<any[]>([]);
+  const [alarms, setAlarms] = useState<Alarm[]>([]);
   const navigate = useNavigate();
   const socket = useContext(SocketContext);
 
@@ -25,7 +41,7 @@ function OwnerNotification() {
     }
 
     if (socket) {
-      socket.on("orderAlarmToOwner", (data) => {
+      socket.on("orderAlarmToOwner", (data: Alarm) => {
         console.log("주문 알림 데이터:", data);
         setAlarms((prevAlarms) => [...prevAlarms, data]);
       });
@@ -64,22 +80,34 @@ function Header() {
   );
 }
 
-function Body({ alarms }: { alarms: any }) {
+function Body({ alarms }: BodyProps) {
   return (
     <>
       <div
         className={`overflow-auto ${styles.headerMargin} ${styles.bottomMargin} h-full`}
       >
-        {alarms.map((alarm: any, index: number) => {
+        {alarms?.map((alarm: any, index: number) => {
           return (
             <div
+              key={alarm.createdAt}
               className={`flex flex-col border-b-2 border-[#C3CFD9] p-4 gap-2
             ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
             >
               <div className="text-[1.25rem] font-semibold">
                 {alarm.nickname}
               </div>
-              <div className="text-[1rem]">{alarm.price}원</div>
+              {alarm.items.map((item: any) => {
+                return (
+                  <div>
+                    <div>
+                      {item.name} {item.count}개
+                    </div>
+                  </div>
+                );
+              })}
+              <div className="text-[1rem]">
+                결제 포인트 : {alarm.totalPrice}원
+              </div>
               <div className="text-[0.5rem]">{alarm.createdAt}</div>
             </div>
           );

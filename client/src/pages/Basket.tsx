@@ -53,25 +53,12 @@ function Body() {
     return initialCounts;
   });
 
-  const [, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(JSON.parse(localStorage.getItem("user")!));
     }
   }, []);
-
-  useEffect(() => {
-    if (socket) {
-      const handleOrderAlarm = (data: any) => {
-        console.log(data);
-      };
-
-      socket.on("orderAlarmToOwner", handleOrderAlarm);
-      return () => {
-        socket.off("orderAlarmToOwner", handleOrderAlarm);
-      };
-    }
-  }, [socket]);
 
   const incrementCount = (itemId: number) => {
     setItemCounts((prev) => ({
@@ -99,38 +86,17 @@ function Body() {
     (1 - totalPrice / totalPrevPrice) * 100
   );
 
-  // const sendOrderSocket = () => {
-  //   if (!user || !Cookies.get("Authorization")) {
-  //     if (window.confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
-  //       navigate("/login");
-  //     }
-  //     return;
-  //   }
-
-  //   if (socket) {
-  //     const itemList: { [key: number]: number } = {};
-  //     items.forEach((item) => {
-  //       itemList[item.itemId] = itemCounts[item.itemId];
-  //     });
-
-  //     socket.emit("clientOrder", {
-  //       userId: user?.userId,
-  //       storeId: items[0].storeId,
-  //       totalPrice: totalPrice,
-  //       discount: discountPercentage,
-  //       itemList: itemList,
-  //     });
-
-  //     navigate("/result");
-  //   }
-  // };
-
   const sendOrder = async () => {
     const orderItems = items.map((item) => ({
       orderId: null,
       itemId: item.itemId,
       count: itemCounts[item.itemId],
     }));
+
+    const itemList: { [key: number]: number } = {};
+    items.forEach((item) => {
+      itemList[item.itemId] = itemCounts[item.itemId];
+    });
 
     const payload = {
       storeId: items[0].storeId,
@@ -140,6 +106,17 @@ function Body() {
     };
     try {
       await postAPI("/orders", payload);
+
+      if (socket) {
+        socket.emit("clientOrder", {
+          nickname: user?.nickname,
+          storeId: items[0].storeId,
+          totalPrice: totalPrice,
+          discount: discountPercentage,
+          itemList: items,
+        });
+      }
+
       navigate("/result");
     } catch (error) {
       console.error(error);
