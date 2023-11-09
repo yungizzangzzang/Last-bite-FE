@@ -5,6 +5,14 @@ export const fetchStoreById = async (storeId: string) => {
   return response.data.data;
 };
 
+export const fetchAllStores = async (longitude: number, latitude: number) => {
+  const response = await getAPI(
+    `/stores/?longitude=${longitude}&latitude=${latitude}`
+  );
+  console.log(response);
+  return response.data.data;
+};
+
 export const fetchReviewsByStoreId = async (storeId: string) => {
   const response = await getAPI(`/reviews/${storeId}`);
   return response.data.data;

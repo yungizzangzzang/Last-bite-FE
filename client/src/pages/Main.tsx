@@ -2,7 +2,8 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { fetchLikedStores } from "../api/storeAPI";
+import { toast } from "react-toastify";
+import { fetchAllStores, fetchLikedStores } from "../api/storeAPI";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import Loading from "../components/Loading";
@@ -77,6 +78,33 @@ function BodyHeader() {
 function BodyContent({ contentType }: { contentType: string }) {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
+  const [location, setLocation] = useState<{
+    longitude: number | null;
+    latitude: number | null;
+  }>({ longitude: null, latitude: null });
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { longitude, latitude } = position.coords;
+          setLocation({ longitude, latitude });
+        },
+        (error) => {
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              console.log("위치 정보 제공 동의를 거절하였습니다.");
+              toast.error(
+                "위치 정보 제공 동의를 거절하였습니다. 제한된 기능만 사용 가능합니다."
+              );
+              break;
+          }
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  });
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
@@ -92,6 +120,20 @@ function BodyContent({ contentType }: { contentType: string }) {
   } = useQuery(["likedStores"], () => fetchLikedStores(), {
     enabled: isAuthenticated,
   });
+
+  const {
+    data: stores,
+    isError: storesIsError,
+    isLoading: storesIsLoading,
+  } = useQuery(
+    ["stores", location.longitude, location.latitude],
+    () =>
+      location.longitude && location.latitude
+        ? fetchAllStores(location.longitude, location.latitude)
+        : Promise.reject("위치 정보가 설정되지 않았습니다."),
+    {}
+  );
+  console.log(stores);
 
   const handleContentClick = () => {
     if (contentType === "favorite" && !isAuthenticated) {

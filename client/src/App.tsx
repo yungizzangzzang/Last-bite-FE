@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RecoilRoot } from "recoil";
 import io, { Socket } from "socket.io-client";
@@ -52,28 +52,6 @@ function App() {
 
       socketInstance.on("connect", () => {
         console.log("소켓 연결 성공");
-
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const { latitude, longitude } = position.coords;
-              console.log(latitude, longitude);
-              socketInstance.emit("send_location", { latitude, longitude });
-            },
-            (error) => {
-              switch (error.code) {
-                case error.PERMISSION_DENIED:
-                  console.log("위치 정보 제공 동의를 거절하였습니다.");
-                  toast.error(
-                    "위치 정보 제공 동의를 거절하였습니다. 제한된 기능만 사용 가능합니다."
-                  );
-                  break;
-              }
-            }
-          );
-        } else {
-          console.log("Geolocation is not supported by this browser.");
-        }
       });
 
       if (localStorage.getItem("user")) {
