@@ -104,7 +104,7 @@ function BodyContent({ contentType }: { contentType: string }) {
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
@@ -125,13 +125,10 @@ function BodyContent({ contentType }: { contentType: string }) {
     data: stores,
     isError: storesIsError,
     isLoading: storesIsLoading,
-  } = useQuery(
-    ["stores", location.longitude, location.latitude],
-    () =>
-      location.longitude && location.latitude
-        ? fetchAllStores(location.longitude, location.latitude)
-        : Promise.reject("위치 정보가 설정되지 않았습니다."),
-    {}
+  } = useQuery(["stores", location.longitude, location.latitude], () =>
+    location.longitude && location.latitude
+      ? fetchAllStores(location.longitude, location.latitude)
+      : Promise.reject("위치 정보가 설정되지 않았습니다.")
   );
 
   const handleContentClick = () => {
