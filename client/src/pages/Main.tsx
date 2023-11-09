@@ -133,7 +133,6 @@ function BodyContent({ contentType }: { contentType: string }) {
         : Promise.reject("위치 정보가 설정되지 않았습니다."),
     {}
   );
-  console.log(stores);
 
   const handleContentClick = () => {
     if (contentType === "favorite" && !isAuthenticated) {
@@ -148,18 +147,18 @@ function BodyContent({ contentType }: { contentType: string }) {
     navigate(contentType === "nearBy" ? "/nearby" : "/favorite");
   };
 
-  if (isLoading) {
+  if (isLoading || storesIsLoading) {
     return <Loading />;
   }
 
-  if (isError) {
+  if (isError || storesIsError) {
     return <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>;
   }
 
   if (!user || !Cookies.get("Authorization")) {
     likedStores = [];
   }
-
+  console.log(stores);
   return (
     <div className="flex flex-col ">
       <div className="h-[56px] flex justify-center items-center bg-sky-300 w-[80%] rounded-md self-center my-6">
