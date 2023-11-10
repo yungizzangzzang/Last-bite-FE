@@ -46,95 +46,129 @@ function Body() {
 }
 
 function BodyHeader() {
+  const navigate = useNavigate();
   return (
     <div className="grid grid-cols-4 grid-rows-3 mt-6 bg-white py-2 mx-2 rounded-md shadow-sm">
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
-        <img
-          src={process.env.PUBLIC_URL + "/asset/img/food.png"}
-          alt="food"
-          className="w-12 h-12"
-        />
-        <span className="text-[0.75rem]">음식점</span>
-      </button>
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+      <button
+        onClick={() => navigate("/nearby/11")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
         <img
           src={process.env.PUBLIC_URL + "/asset/img/dessert.png"}
           alt="dessert"
           className="w-12 h-12"
         />
-        <span className="text-[0.75rem]">디저트</span>
+        <span className="text-[0.75rem] font-semibold">전체</span>
       </button>
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+      <button
+        onClick={() => navigate("/nearby/0")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/snack-bar.png"}
+          alt="snack-bar"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem] font-semibold">분식</span>
+      </button>
+      <button
+        onClick={() => navigate("/nearby/2")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/fast-food.png"}
+          alt="fast-food"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem] font-semibold">양식/패스트푸드</span>
+      </button>
+      <button
+        onClick={() => navigate("/nearby/3")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/japanese-food.png"}
+          alt="japanese-food"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem] font-semibold">일식/회</span>
+      </button>
+      <button
+        onClick={() => navigate("/nearby/4")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/korean-food.png"}
+          alt="korean-food"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem] font-semibold">한식</span>
+      </button>
+      <button
+        onClick={() => navigate("/nearby/5")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/chicken.png"}
+          alt="chicken"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem] font-semibold">치킨/술안주</span>
+      </button>
+      <button
+        onClick={() => navigate("/nearby/6")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/chinese-food.png"}
+          alt="chinese-food"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem] font-semibold">중식</span>
+      </button>
+      <button
+        onClick={() => navigate("/nearby/7")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/food.png"}
+          alt="food"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem] font-semibold">고기/구이</span>
+      </button>
+      <button
+        onClick={() => navigate("/nearby/8")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/dessert.png"}
+          alt="dessert"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem] font-semibold">디저트</span>
+      </button>
+      <button
+        onClick={() => navigate("/nearby/9")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
         <img
           src={process.env.PUBLIC_URL + "/asset/img/convinient-store.png"}
           alt="convinient-store"
           className="w-12 h-12"
         />
-        <span className="text-[0.75rem]">편의점</span>
+        <span className="text-[0.75rem] font-semibold">편의점</span>
       </button>
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+      <button
+        onClick={() => navigate("/nearby/10")}
+        className="flex flex-1 h-16 justify-center items-center flex-col"
+      >
         <img
-          src={process.env.PUBLIC_URL + "/asset/img/food.png"}
-          alt="food"
+          src={process.env.PUBLIC_URL + "/asset/img/etc.png"}
+          alt="etc"
           className="w-12 h-12"
         />
-        <span className="text-[0.75rem]">음식점</span>
-      </button>
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
-        <img
-          src={process.env.PUBLIC_URL + "/asset/img/dessert.png"}
-          alt="dessert"
-          className="w-12 h-12"
-        />
-        <span className="text-[0.75rem]">디저트</span>
-      </button>
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
-        <img
-          src={process.env.PUBLIC_URL + "/asset/img/convinient-store.png"}
-          alt="convinient-store"
-          className="w-12 h-12"
-        />
-        <span className="text-[0.75rem]">편의점</span>
-      </button>
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
-        <img
-          src={process.env.PUBLIC_URL + "/asset/img/food.png"}
-          alt="food"
-          className="w-12 h-12"
-        />
-        <span className="text-[0.75rem]">음식점</span>
-      </button>
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
-        <img
-          src={process.env.PUBLIC_URL + "/asset/img/dessert.png"}
-          alt="dessert"
-          className="w-12 h-12"
-        />
-        <span className="text-[0.75rem]">디저트</span>
-      </button>
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
-        <img
-          src={process.env.PUBLIC_URL + "/asset/img/convinient-store.png"}
-          alt="convinient-store"
-          className="w-12 h-12"
-        />
-        <span className="text-[0.75rem]">편의점</span>
-      </button>
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
-        <img
-          src={process.env.PUBLIC_URL + "/asset/img/food.png"}
-          alt="food"
-          className="w-12 h-12"
-        />
-        <span className="text-[0.75rem]">음식점</span>
-      </button>
-      <button className="flex flex-1 h-16 justify-center items-center flex-col">
-        <img
-          src={process.env.PUBLIC_URL + "/asset/img/dessert.png"}
-          alt="dessert"
-          className="w-12 h-12"
-        />
-        <span className="text-[0.75rem]">디저트</span>
+        <span className="text-[0.75rem] font-semibold">기타</span>
       </button>
     </div>
   );

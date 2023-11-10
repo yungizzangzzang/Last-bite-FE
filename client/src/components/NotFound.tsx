@@ -9,7 +9,7 @@ function NotFound({ content }: { content: string }) {
           src={process.env.PUBLIC_URL + "/asset/img/notFound.png"}
           alt="not_found"
         />
-        <div className="cursor-default">{content}</div>
+        <div className="cursor-default font-semibold">{content}</div>
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import OwnerFooter from "../components/Layout/OwnerFooter";
+import NotFound from "../components/NotFound";
 import { SocketContext } from "../contexts/SocketContext";
 import { formatCreatedAt } from "../utils/dateFormat";
 import { styles } from "../utils/style";
@@ -81,38 +82,48 @@ function Header() {
 }
 
 function Body({ alarms }: BodyProps) {
+  console.log(alarms);
   return (
     <>
       <div
         className={`overflow-auto ${styles.headerMargin} ${styles.bottomMargin} h-full`}
       >
-        {alarms?.map((alarm: Alarm, index: number) => {
-          const formattedCreatedAt = formatCreatedAt(alarm.createdAt);
-          return (
-            <div
-              key={alarm.createdAt}
-              className={`flex flex-col border-b-2 border-[#C3CFD9] p-4 gap-2
+        {alarms.length ? (
+          <>
+            {" "}
+            {alarms?.map((alarm: Alarm, index: number) => {
+              const formattedCreatedAt = formatCreatedAt(alarm.createdAt);
+              return (
+                <div
+                  key={alarm.createdAt}
+                  className={`flex flex-col border-b-2 border-[#C3CFD9] p-4 gap-2
             ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
-            >
-              <div className="text-[1.25rem] font-semibold">
-                {alarm.nickname}
-              </div>
-              {alarm.items.map((item: Item) => {
-                return (
-                  <div>
-                    <div>
-                      {item.name} {item.count}개
-                    </div>
+                >
+                  <div className="text-[1.25rem] font-semibold">
+                    {alarm.nickname}
                   </div>
-                );
-              })}
-              <div className="text-[1rem]">
-                결제 포인트 : {alarm.totalPrice.toLocaleString("ko-KR")}원
-              </div>
-              <div className="text-[0.5rem]">{formattedCreatedAt}</div>
-            </div>
-          );
-        })}
+                  {alarm.items.map((item: Item) => {
+                    return (
+                      <div>
+                        <div>
+                          {item.name} {item.count}개
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <div className="text-[1rem]">
+                    결제 포인트 : {alarm.totalPrice.toLocaleString("ko-KR")}원
+                  </div>
+                  <div className="text-[0.5rem]">{formattedCreatedAt}</div>
+                </div>
+              );
+            })}
+          </>
+        ) : (
+          <>
+            <NotFound content="주문 요청이 없습니다." />
+          </>
+        )}
       </div>
     </>
   );
