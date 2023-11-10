@@ -113,7 +113,7 @@ function BodyMain({ totalPrice }: { totalPrice: number }) {
       <div className="border-y-8">
         {items.map((item) => {
           return (
-            <div className="flex flex-col p-4 border-b-2 border-[#C3CFD9]">
+            <div className="flex flex-col p-6 border-b-2 border-[#C3CFD9]">
               <div>
                 {item.name} {item.count}개
               </div>
@@ -124,7 +124,7 @@ function BodyMain({ totalPrice }: { totalPrice: number }) {
           );
         })}
       </div>
-      <div className="p-4 font-bold text-[20px]">
+      <div className="p-6 font-bold text-[20px]">
         결제 포인트 {totalPrice.toLocaleString("ko-KR")}원
       </div>
     </>

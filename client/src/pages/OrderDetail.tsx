@@ -88,16 +88,18 @@ function BodyHeader({
   const formattedCreatedAt = formatCreatedAt(createdAt);
 
   return (
-    <div className="flex flex-col p-4">
+    <div className="flex flex-col p-6 gap-1 justify-center">
       <div className="font-semibold text-[#FF385C]">예약이 완료되었어요!</div>
-      <div className="flex gap-10 font-bold ">
+      <div className="flex gap-10 font-bold items-center ">
         <div className="text-[1.25rem]">{storeName}</div>
-        <div className="bg-[#FF385C] text-white px-2 flex items-center">
+        <div className="bg-[#FF385C] w-[100px] h-6 text-[0.75rem] rounded-sm text-white px-2 flex items-center justify-center">
           {discount}% 할인 받음
         </div>
       </div>
-      <div>예약일시: {formattedCreatedAt}</div>
-      <div>주문번호: {orderId}</div>
+      <div className="text-[14px] text-[#717171]">
+        예약일시: {formattedCreatedAt}
+      </div>
+      <div className="text-[14px] text-[#717171]">주문번호: {orderId}</div>
     </div>
   );
 }
@@ -122,7 +124,7 @@ function BodyMain({ order }: { order: any }) {
             })
           : order?.items.map((item: any) => {
               return (
-                <div className="flex flex-col p-4 border-b-2 border-[#C3CFD9]">
+                <div className="flex flex-col p-6 border-b-2 border-[#C3CFD9]">
                   <div>
                     {item.name} {item.count}개
                   </div>
@@ -133,7 +135,7 @@ function BodyMain({ order }: { order: any }) {
               );
             })}
       </div>
-      <div className="p-4 font-bold text-[1.25rem]">
+      <div className="p-6 font-bold text-[1.25rem]">
         결제 포인트 {order?.totalPrice.toLocaleString("ko-KR")}원
       </div>
     </>

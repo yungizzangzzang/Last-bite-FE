@@ -43,26 +43,32 @@ function StoreDetailHeader({
 
   return (
     <div className={styles.header}>
-      <div className="flex items-center">
-        <div
-          onClick={() => {
-            navigate(-1);
-          }}
-          className="px-2 flex gap-2 items-center"
-        >
-          <AiOutlineArrowLeft />
-        </div>
-        <div className="flex flex-col text-[0.75rem]">
-          <div className="flex items-center gap-1">
-            <span> {store.store.name}</span>
-            {isLiked ? (
-              <GoHeartFill color="#FF5352" onClick={toggleLike} />
-            ) : (
-              <GoHeart onClick={toggleLike} />
-            )}
+      <div className="flex w-full items-center justify-between ">
+        <div className="px-2 flex gap-2 items-center">
+          <div
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="flex items-center"
+          >
+            <AiOutlineArrowLeft />
           </div>
-          <div className="text-[0.5rem]">{store.store.address}</div>
+          <div className="flex">
+            <div className="flex items-center gap-1">
+              <span className="cursor-default"> {store.store.name}</span>
+              {isLiked ? (
+                <GoHeartFill
+                  color="#FF5352"
+                  onClick={toggleLike}
+                  className="cursor-pointer"
+                />
+              ) : (
+                <GoHeart onClick={toggleLike} className="cursor-pointer" />
+              )}
+            </div>
+          </div>
         </div>
+
         <button
           onClick={() => navigate(`/review/${storeId}`)}
           className="h-6 text-white text-[0.8rem] rounded-sm bg-[#FF385C] px-2 mx-2 items-center"

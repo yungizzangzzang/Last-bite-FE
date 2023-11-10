@@ -7,6 +7,7 @@ import { fetchAllStores, fetchLikedStores } from "../api/storeAPI";
 import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import Loading from "../components/Loading";
+import NotFound from "../components/NotFound";
 import { User } from "../types/user";
 import { styles } from "../utils/style";
 
@@ -217,7 +218,7 @@ function BodyContent({ contentType }: { contentType: string }) {
   }
 
   if (likedStoresIsError || storesInfo.isError) {
-    return <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>;
+    return <></>;
   }
 
   if (!user || !Cookies.get("Authorization")) {
@@ -254,7 +255,7 @@ function BodyContent({ contentType }: { contentType: string }) {
             );
           })}
         </div>
-      ) : (
+      ) : isAuthenticated ? (
         <div className="grid grid-cols-3 gap-2 w-full overflow-hidden bg-white p-2 rounded-md shadow-sm">
           {likedStores.map((store: any) => {
             return (
@@ -278,6 +279,10 @@ function BodyContent({ contentType }: { contentType: string }) {
               </div>
             );
           })}
+        </div>
+      ) : (
+        <div className="gap-2 w-full overflow-hidden bg-white p-2 rounded-md shadow-sm">
+          <NotFound content="로그인 후 단골가게를 등록해주세요!" />
         </div>
       )}
     </div>
