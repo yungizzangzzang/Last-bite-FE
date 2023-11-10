@@ -32,7 +32,7 @@ const Router = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
 
-        <Route path="/nearby" element={<Nearby />} />
+        <Route path="/nearby/:id" element={<Nearby />} />
         <Route path="/favorite" element={<Favorite />} />
 
         <Route path="/mypage" element={<Mypage />} />
