@@ -65,7 +65,7 @@ function StoreDetailHeader({
         </div>
         <button
           onClick={() => navigate(`/review/${storeId}`)}
-          className="h-6 text-white text-[0.8rem] bg-[#FF385C] px-2 mx-2 items-center"
+          className="h-6 text-white text-[0.8rem] rounded-sm bg-[#FF385C] px-2 mx-2 items-center"
         >
           가게 리뷰
         </button>

@@ -99,7 +99,7 @@ function BodyHeader({ openModal }: BodyHeaderProps) {
       <div className="p-4 flex flex-col gap-2 border-b-2 border-[#C3CFD9]">
         <div className="flex justify-between items-center">
           <span className="font-semibold text-[1.25rem] cursor-default">
-            {user.nickname}님
+            {user.nickname} 님
           </span>
           <AiOutlineSetting
             onClick={() => {
@@ -111,9 +111,12 @@ function BodyHeader({ openModal }: BodyHeaderProps) {
         </div>
         <div className="flex justify-between font-semibold text-[1.25rem] cursor-default">
           <span>Point</span>
-          <span>{user.point}</span>
+          <span>{user.point.toLocaleString()}</span>
         </div>
-        <button onClick={openModal} className="flex justify-end text-[0.75rem]">
+        <button
+          onClick={openModal}
+          className="flex justify-end text-[0.75rem] text-[#FF385C]"
+        >
           충전하기
         </button>
       </div>
@@ -152,9 +155,9 @@ function BodyMain() {
             key={favorite.latitude}
             className="w-full h-[60px] flex items-center p-4 justify-between border-b-2 border-[#C3CFD9]"
           >
-            <div className="cursor-pointer">{favorite.name}</div>
+            <div className="cursor-pointer font-semibold">{favorite.name}</div>
             <button onClick={() => toggleLike(favorite.storeId)}>
-              <GoHeartFill color="#FF5352" />
+              <GoHeartFill color="#FF5352" size={20} />
             </button>
           </div>
         );

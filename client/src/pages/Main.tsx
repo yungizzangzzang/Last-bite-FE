@@ -46,7 +46,7 @@ function Body() {
 
 function BodyHeader() {
   return (
-    <div className="flex mt-6">
+    <div className="grid grid-cols-4 grid-rows-3 mt-6 bg-white py-2 mx-2 rounded-md shadow-sm">
       <button className="flex flex-1 h-16 justify-center items-center flex-col">
         <img
           src={process.env.PUBLIC_URL + "/asset/img/food.png"}
@@ -71,6 +71,70 @@ function BodyHeader() {
         />
         <span className="text-[0.75rem]">편의점</span>
       </button>
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/food.png"}
+          alt="food"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">음식점</span>
+      </button>
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/dessert.png"}
+          alt="dessert"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">디저트</span>
+      </button>
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/convinient-store.png"}
+          alt="convinient-store"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">편의점</span>
+      </button>
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/food.png"}
+          alt="food"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">음식점</span>
+      </button>
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/dessert.png"}
+          alt="dessert"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">디저트</span>
+      </button>
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/convinient-store.png"}
+          alt="convinient-store"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">편의점</span>
+      </button>
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/food.png"}
+          alt="food"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">음식점</span>
+      </button>
+      <button className="flex flex-1 h-16 justify-center items-center flex-col">
+        <img
+          src={process.env.PUBLIC_URL + "/asset/img/dessert.png"}
+          alt="dessert"
+          className="w-12 h-12"
+        />
+        <span className="text-[0.75rem]">디저트</span>
+      </button>
     </div>
   );
 }
@@ -78,6 +142,8 @@ function BodyHeader() {
 function BodyContent({ contentType }: { contentType: string }) {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
+  const [isLocationLoading, setLocationLoading] = useState(true);
+
   const [location, setLocation] = useState<{
     longitude: number | null;
     latitude: number | null;
@@ -85,10 +151,12 @@ function BodyContent({ contentType }: { contentType: string }) {
 
   useEffect(() => {
     if (navigator.geolocation) {
+      setLocationLoading(true);
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { longitude, latitude } = position.coords;
           setLocation({ longitude, latitude });
+          setLocationLoading(false);
         },
         (error) => {
           switch (error.code) {
@@ -97,12 +165,13 @@ function BodyContent({ contentType }: { contentType: string }) {
               toast.error(
                 "위치 정보 제공 동의를 거절하였습니다. 제한된 기능만 사용 가능합니다."
               );
+              setLocationLoading(false);
               break;
           }
         }
       );
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      setLocationLoading(false);
     }
   }, []);
 
@@ -115,21 +184,11 @@ function BodyContent({ contentType }: { contentType: string }) {
   const isAuthenticated = Boolean(user && Cookies.get("Authorization"));
   let {
     data: likedStores,
-    isError,
-    isLoading,
+    isError: likedStoresIsError,
+    isLoading: likedStoresIsLoading,
   } = useQuery(["likedStores"], () => fetchLikedStores(), {
     enabled: isAuthenticated,
   });
-
-  const {
-    data: stores,
-    isError: storesIsError,
-    isLoading: storesIsLoading,
-  } = useQuery(["stores", location.longitude, location.latitude], () =>
-    location.longitude && location.latitude
-      ? fetchAllStores(location.longitude, location.latitude)
-      : Promise.reject("위치 정보가 설정되지 않았습니다.")
-  );
 
   const handleContentClick = () => {
     if (contentType === "favorite" && !isAuthenticated) {
@@ -144,88 +203,77 @@ function BodyContent({ contentType }: { contentType: string }) {
     navigate(contentType === "nearBy" ? "/nearby" : "/favorite");
   };
 
-  if (isLoading || storesIsLoading) {
+  const storesInfo = useQuery(
+    ["stores"],
+    () => fetchAllStores(location.longitude, location.latitude),
+    {
+      enabled: !isLocationLoading,
+      staleTime: 1000 * 60 * 60 * 24,
+    }
+  );
+
+  if (storesInfo.isLoading || likedStoresIsLoading || isLocationLoading) {
     return <Loading />;
   }
 
-  if (isError || storesIsError) {
+  if (likedStoresIsError || storesInfo.isError) {
     return <div>가게 정보를 가져오는동안 오류가 발생했습니다.</div>;
   }
 
   if (!user || !Cookies.get("Authorization")) {
     likedStores = [];
   }
-  console.log(stores);
   return (
-    <div className="flex flex-col ">
-      <div className="h-[56px] flex justify-center items-center bg-sky-300 w-[80%] rounded-md self-center my-6">
-        광고
-      </div>
+    <div className="w-full flex flex-col px-2">
       <div
-        className="cursor-pointer h-[10%] flex items-center px-4 my-2 font-semibold"
+        className="cursor-pointer text-[14px] h-[10%] flex items-center px-2 mt-2 mb-[4px] font-semibold"
         onClick={handleContentClick}
       >
         {contentType === "nearBy" ? "내 주변 핫딜" : "단골 가게 핫딜"}
       </div>
       {contentType === "nearBy" ? (
-        <div className="flex flex-col gap-2 px-4 w-full">
-          <div
-            className="cursor-pointer bg-blue-400 flex justify-center w-2/4 rounded-full py-1 text-white"
-            onClick={() => navigate("/store/1")}
-          >
-            <div className="flex items-center justify-center">
-              {/* <img
-                className="object-center rounded-lg"
-                src={process.env.PUBLIC_URL + "/asset/img/1.jpg"}
-                alt="item"
-              /> */}
-            </div>
-            <div className="flex items-center"> 종훈 떡볶이</div>
-          </div>
-          <div
-            className="cursor-pointer bg-blue-400 flex justify-center w-2/4 rounded-full py-1 text-white"
-            onClick={() => navigate("/store/1")}
-          >
-            <div className="flex items-center justify-center">
-              {/* <img
-                className="object-center rounded-lg"
-                src={process.env.PUBLIC_URL + "/asset/img/2.jpg"}
-                alt="item"
-              /> */}
-            </div>
-            <div className="flex items-center"> 희재 분식</div>
-          </div>
-          <div
-            className="cursor-pointer bg-blue-400 flex justify-center w-2/4 rounded-full py-1 text-white"
-            onClick={() => navigate("/store/1")}
-          >
-            <div className="flex items-center justify-center">
-              {/* <img
-                className="object-center rounded-lg"
-                src={process.env.PUBLIC_URL + "/asset/img/3.jpg"}
-                alt="item"
-              /> */}
-            </div>
-            <div className="flex items-center">승일 피자</div>
-          </div>
+        <div className="grid grid-cols-3 gap-2 w-full overflow-hidden bg-white p-2 rounded-md shadow-sm">
+          {storesInfo?.data?.stores?.splice(0, 3).map((store: any) => {
+            return (
+              <div
+                key={store.id}
+                className="cursor-pointer flex flex-col justify-center rounded-full py-1"
+                onClick={() => navigate(`/store/${store.id}`)}
+              >
+                <div className="flex w-full items-center justify-center">
+                  <img
+                    className="rounded-md"
+                    src="https://mys3image.s3.ap-northeast-2.amazonaws.com/ddeok_bok_gi.jpg"
+                    alt="store_image"
+                  />
+                </div>
+                <div className="flex w-full items-center text-black text-[12px] font-semibold">
+                  {store.name}
+                </div>
+              </div>
+            );
+          })}
         </div>
       ) : (
-        <div className="flex gap-2 px-4">
+        <div className="grid grid-cols-3 gap-2 w-full overflow-hidden bg-white p-2 rounded-md shadow-sm">
           {likedStores.map((store: any) => {
             return (
               <div
+                key={store.id}
                 className="cursor-pointer w-full justify-center gap-2"
-                onClick={() => navigate(`/store/${store.storeId}`)}
+                onClick={() => navigate(`/store/${store.id}`)}
               >
                 <div className="flex flex-col">
                   <div className="flex items-center justify-center">
-                    {/* <img
-                      className="object-center rounded-lg"
-                      src={process.env.PUBLIC_URL + "/asset/img/1.jpg"}
-                      alt="item"
-                    /> */}
+                    <img
+                      className="rounded-md"
+                      src="https://mys3image.s3.ap-northeast-2.amazonaws.com/ddeok_bok_gi.jpg"
+                      alt="store_image"
+                    />
                   </div>
-                  <div className="flex items-center">{store.name}</div>
+                  <div className="flex items-center text-[12px] font-semibold">
+                    {store.name}
+                  </div>
                 </div>
               </div>
             );

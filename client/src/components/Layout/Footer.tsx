@@ -11,13 +11,13 @@ function Footer() {
   const location = useLocation();
 
   return (
-    <div className="flex min-w-[336px] w-[336px] bg-white h-[56px] items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
+    <div className="flex min-w-[336px] w-[336px] bg-gray-100 h-[56px] items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
       <div
         onClick={() => navigate("/")}
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/" ? (
-          <BsHouseHeartFill size={28} />
+          <BsHouseHeartFill size={28} className="text-[#FF385C]" />
         ) : (
           <BsHouseHeart size={28} />
         )}
@@ -43,7 +43,7 @@ function Footer() {
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/mypage" ? (
-          <GoHeartFill size={28} />
+          <GoHeartFill size={28} className="text-[#FF385C]" />
         ) : (
           <GoHeart size={28} />
         )}
@@ -68,7 +68,7 @@ function Footer() {
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/basket" ? (
-          <HiShoppingCart size={28} />
+          <HiShoppingCart size={28} className="text-[#FF385C]" />
         ) : (
           <HiOutlineShoppingCart size={28} />
         )}
@@ -93,7 +93,7 @@ function Footer() {
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/notification" ? (
-          <BiSolidBellRing size={28} />
+          <BiSolidBellRing size={28} className="text-[#FF385C]" />
         ) : (
           <BiBell size={28} />
         )}
@@ -118,7 +118,7 @@ function Footer() {
         className="cursor-pointer w-1/5 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
         {location.pathname === "/history" ? (
-          <IoDocumentText size={28} />
+          <IoDocumentText size={28} className="text-[#FF385C]" />
         ) : (
           <IoDocumentTextOutline size={28} />
         )}

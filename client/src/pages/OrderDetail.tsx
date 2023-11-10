@@ -114,7 +114,9 @@ function BodyMain({ order }: { order: any }) {
                   <div>
                     {item.name} {item.count}개
                   </div>
-                  <div>{item.price * item.count}원</div>
+                  <div>
+                    {(item.price * item.count).toLocaleString("ko-KR")}원
+                  </div>
                 </div>
               );
             })
@@ -124,13 +126,15 @@ function BodyMain({ order }: { order: any }) {
                   <div>
                     {item.name} {item.count}개
                   </div>
-                  <div>{item.price * item.count}원</div>
+                  <div>
+                    {(item.price * item.count).toLocaleString("ko-KR")}원
+                  </div>
                 </div>
               );
             })}
       </div>
       <div className="p-4 font-bold text-[1.25rem]">
-        결제 포인트 {order?.totalPrice}원
+        결제 포인트 {order?.totalPrice.toLocaleString("ko-KR")}원
       </div>
     </>
   );

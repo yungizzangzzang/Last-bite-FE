@@ -5,7 +5,10 @@ export const fetchStoreById = async (storeId: string) => {
   return response.data.data;
 };
 
-export const fetchAllStores = async (longitude: number, latitude: number) => {
+export const fetchAllStores = async (
+  longitude: number | null,
+  latitude: number | null
+) => {
   const response = await getAPI(
     `/stores/?longitude=${longitude}&latitude=${latitude}`
   );

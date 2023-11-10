@@ -68,6 +68,7 @@ function Body({ items }: { items: any }) {
         <NotFound content="주문한 내역이 없어요!" />
       ) : (
         items?.map((item: any) => {
+          console.log(item);
           return (
             <div
               key={item.itemId}
@@ -80,12 +81,18 @@ function Body({ items }: { items: any }) {
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-[12px]">
-                  <div className="w-[100px] h-[100px] flex justify-center items-center rounded-md bg-blue-400">
-                    사진
+                  <div className="w-[100px] h-[100px] flex justify-center items-center rounded-md">
+                    <img
+                      className="w-[100px] h-[100px] rounded-md object-cover"
+                      src="https://mys3image.s3.ap-northeast-2.amazonaws.com/ddeok_bok_gi.jpg"
+                      alt="store_image"
+                    />
                   </div>
                   <div className="flex flex-col gap-2 cursor-default">
-                    <div>{item.storeName}</div>
-                    <div className="cursor-default border-[#FF385C] text-[0.75rem] border-2  rounded-full px-4 py-1 ">
+                    <div className="font-semibold text-[20px]">
+                      {item.storeName}
+                    </div>
+                    <div className="cursor-default border-[#FF385C] text-[#FF385C] text-[0.75rem] border-2  rounded-sm px-4 py-1 ">
                       {item?.discount}% 할인 받음
                     </div>
                   </div>
@@ -105,7 +112,7 @@ function Body({ items }: { items: any }) {
                   onClick={() => {
                     navigate(`/create-review/${item.orderId}/${item.storeId}`);
                   }}
-                  className="w-full h-8 flex items-center bg-[#FF385C] text-white rounded-full justify-center self-center"
+                  className="w-full h-8 flex items-center bg-[#ff385c] font-semibold text-white rounded-sm justify-center self-center"
                 >
                   리뷰 작성
                 </button>

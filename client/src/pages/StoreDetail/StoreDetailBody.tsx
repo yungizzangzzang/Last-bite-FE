@@ -159,13 +159,13 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
           items?.map((item: any, index: number) => (
             <div
               key={item?.itemId}
-              className={`w-full flex items-center border-b-2 border-[#C3CFD9] p-2
+              className={`w-full flex items-center border-b-2 border-[#C3CFD9] p-6
              ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
             >
               <div
                 className={`h-full w-[80%] flex flex-col justify-center gap-1`}
               >
-                <div className="text-[1.25rem]">{item?.name}</div>
+                <div className="text-[18px] font-semibold">{item?.name}</div>
                 <div className="text-[0.75rem]">{item?.content}</div>
                 <div className="text-[0.75rem]">
                   잔여수량: {item?.count - (itemCounts[item?.itemId] || 0)}
@@ -179,10 +179,10 @@ function StoreDetailBody({ storeId, store }: { storeId: string; store: any }) {
                       color: "black",
                     }}
                   >
-                    {item?.prevPrice}
+                    {item?.prevPrice.toLocaleString("ko-KR")}
                   </div>
                   <div className="font-semibold text-red-500">
-                    {item?.price}
+                    {item?.price.toLocaleString("ko-KR")}
                   </div>
                   <div className="flex gap-2 py-1 px-2">
                     <button onClick={() => decrementCount(item?.itemId)}>

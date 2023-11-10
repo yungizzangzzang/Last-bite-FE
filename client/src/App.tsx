@@ -71,7 +71,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
           <SocketContext.Provider value={socket}>
-            <ToastContainer position="top-center" autoClose={3000} />
+            <ToastContainer position="top-center" autoClose={700} />
             <Router />
           </SocketContext.Provider>
         </RecoilRoot>

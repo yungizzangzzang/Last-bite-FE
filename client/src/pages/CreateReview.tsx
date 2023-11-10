@@ -86,29 +86,36 @@ function Body() {
   return (
     <div className={`flex flex-col ${styles.headerMargin}`}>
       <div className="flex flex-col w-full justify-center items-center mt-10">
-        <div>{order.storeName}</div>
-        <div>{order.discount}% 할인받음</div>
+        <div className="text-[28px] font-semibold">{order.storeName}</div>
+        <div className="text-[#FF385C] font-semibold">
+          {order.discount}% 할인받음
+        </div>
         <div className="cursor-pointer">
           {Array(5)
             .fill(0)
             .map((_, idx) => (
-              <span key={idx} onClick={() => setStar(idx + 1)}>
-                {idx < star ? "⭐️" : "✩"}
+              <span
+                key={idx}
+                className="text-[32px]"
+                onClick={() => setStar(idx + 1)}
+              >
+                {idx < star ? "⭐️" : "✩ "}
               </span>
             ))}
         </div>
       </div>
       <textarea
-        className="bg-slate-300 rounded-md mt-10 p-2 mx-10 resize-none h-[300px]"
+        placeholder="리뷰를 작성해주세요!"
+        className="bg-[#ced8e0] outline-none rounded-md mt-10 p-2 mx-10 resize-none h-[240px]"
         maxLength={150}
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
       <button
         onClick={handleSubmit}
-        className="mt-10 w-[80%] flex self-center justify-center items-center rounded-full bg-[#FF385C] text-white font-bold h-8"
+        className="mt-10 w-[80%] flex self-center justify-center items-center rounded-sm bg-[#FF385C] text-white font-bold h-8"
       >
-        리뷰 등록
+        리뷰 등록하기
       </button>
     </div>
   );

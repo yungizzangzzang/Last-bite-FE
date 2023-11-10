@@ -87,8 +87,10 @@ function Body({ alarms }: { alarms: any }) {
             ${index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"}`}
           >
             <div className="text-[1.25rem] font-semibold">{alarm.title}</div>
-            <div className="text-[1rem]">{alarm.content}</div>
-            <div className="text-[0.5rem]">{formattedCreatedAt}</div>
+            <div className="text-[14px]">{alarm.content}</div>
+            <div className="text-[0.5rem] text-[#717171]">
+              {formattedCreatedAt}
+            </div>
           </div>
         );
       })}

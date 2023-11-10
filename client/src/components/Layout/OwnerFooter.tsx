@@ -12,13 +12,16 @@ function OwnerFooter() {
   const isPathStartsWith = (path: string) => location.pathname.startsWith(path);
   const user = useRecoilValue(userInfoState);
   return (
-    <div className="flex min-w-[336px] w-[336px] bg-white h-[56px] items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
+    <div className="flex min-w-[336px] w-[336px] bg-gray-100 h-[56px] items-center text-black font-medium fixed bottom-0 border-t-2 border-black">
       <div
         onClick={() => navigator(`/owner/${user.storeId || 1}`)}
         className="cursor-pointer w-1/4 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
-        {isPathStartsWith("/owner/") ? (
-          <IoDocumentText size={28} />
+        {isPathStartsWith("/owner/") &&
+        !isPathStartsWith("/owner/store") &&
+        !isPathStartsWith("/owner/notification") &&
+        !isPathStartsWith("/owner/setting") ? (
+          <IoDocumentText size={28} className="text-[#ff385c]" />
         ) : (
           <IoDocumentTextOutline size={28} />
         )}
@@ -28,8 +31,8 @@ function OwnerFooter() {
         onClick={() => navigator(`/owner/store/${user.storeId || 1}`)}
         className="cursor-pointer w-1/4 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
-        {location.pathname === "/owner/store" ? (
-          <RiUserHeartFill size={28} />
+        {isPathStartsWith("/owner/store") ? (
+          <RiUserHeartFill size={28} className="text-[#ff385c]" />
         ) : (
           <RiUserHeartLine size={28} />
         )}
@@ -39,8 +42,8 @@ function OwnerFooter() {
         onClick={() => navigator(`/owner/notification/${user.storeId || 1}`)}
         className="cursor-pointer w-1/4 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
-        {location.pathname === "/owner/notification" ? (
-          <BiSolidBellRing size={28} />
+        {isPathStartsWith("/owner/notification") ? (
+          <BiSolidBellRing size={28} className="text-[#ff385c]" />
         ) : (
           <BiBell size={28} />
         )}
@@ -50,8 +53,8 @@ function OwnerFooter() {
         onClick={() => navigator("/owner/setting")}
         className="cursor-pointer w-1/4 h-full flex flex-col gap-[2px] flex-1 justify-center items-center"
       >
-        {location.pathname === "/owner/setting" ? (
-          <AiTwotoneSetting size={28} />
+        {isPathStartsWith("/owner/setting") ? (
+          <AiTwotoneSetting size={28} className="text-[#ff385c]" />
         ) : (
           <AiOutlineSetting size={28} />
         )}

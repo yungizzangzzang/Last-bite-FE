@@ -34,7 +34,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-30">
       <div className=" w-[300px] bg-white p-4 rounded-md space-y-4 relative">
         <button
           onClick={onClose}
@@ -67,7 +67,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
         </div>
         <button
           onClick={handleSendNotification}
-          className="bg-blue-500 w-full text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+          className="bg-[#ff385c] w-full text-white py-2 px-4 rounded-md focus:outline-none focus:ring focus:border-blue-300"
         >
           전송하기
         </button>

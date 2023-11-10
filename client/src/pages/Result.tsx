@@ -91,15 +91,15 @@ function BodyHeader({ totalPrice }: { totalPrice: number }) {
   const minutes = date.getMinutes().toString().padStart(2, "0");
 
   return (
-    <div className="flex w-full flex-col p-4 gap-2">
+    <div className="flex w-full flex-col px-4 gap-2 py-6">
       <div className="font-semibold text-[#FF385C]">예약이 완료되었어요!</div>
       <div className="flex gap-10 font-bold items-center ">
         <div className="text-[1.25rem]">{items[0]?.storeName}</div>
-        <div className="bg-[#FF385C] w-[100px] h-6 text-[0.75rem] text-white px-2 flex items-center justify-center">
+        <div className="bg-[#FF385C] w-[100px] h-6 text-[0.75rem] rounded-sm text-white px-2 flex items-center justify-center">
           {discountPercentage}% 할인 받음
         </div>
       </div>
-      <div className="text-[0.75rem]">
+      <div className="text-[14px] text-[#717171]">
         예약일시: {year}년 {month}월 {day}일 {hours}시 {minutes}분
       </div>
     </div>
@@ -117,13 +117,15 @@ function BodyMain({ totalPrice }: { totalPrice: number }) {
               <div>
                 {item.name} {item.count}개
               </div>
-              <div>{item.price * item.count}원</div>
+              <div className="text-[14px]">
+                {(item.price * item.count).toLocaleString("ko-KR")}원
+              </div>
             </div>
           );
         })}
       </div>
-      <div className="p-4 font-bold text-[1.25rem]">
-        결제 포인트 {totalPrice}원
+      <div className="p-4 font-bold text-[20px]">
+        결제 포인트 {totalPrice.toLocaleString("ko-KR")}원
       </div>
     </>
   );

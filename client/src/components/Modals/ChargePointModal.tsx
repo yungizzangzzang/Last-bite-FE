@@ -46,8 +46,8 @@ function ChargePointModal({
       ref={modalRef}
       className="fixed inset-0 flex items-center justify-center p-4 bg-black bg-opacity-50"
     >
-      <div className="bg-white p-8 rounded-lg shadow-x flex flex-col gap-[12px]">
-        <div>포인트 충전하기</div>
+      <div className="bg-white p-6 rounded-lg shadow-x flex flex-col gap-[16px]">
+        <div className="font-semibold">포인트 충전하기</div>
         <input
           type="text"
           value={formattedValue}
@@ -57,13 +57,13 @@ function ChargePointModal({
         <div className="flex justify-end space-x-2">
           <button
             onClick={handleSubmit}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md"
+            className="px-4 py-[4px] bg-[#ff385c] text-white rounded-md"
           >
             완료
           </button>
           <button
             onClick={closeModal}
-            className="px-4 py-2 bg-gray-300 rounded-md"
+            className="px-4 py-[4px] bg-gray-300 rounded-md"
           >
             취소
           </button>

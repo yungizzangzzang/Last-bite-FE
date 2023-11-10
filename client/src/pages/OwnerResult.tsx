@@ -85,7 +85,7 @@ function BodyMain() {
             <div>
               {item.title} {item.count}개
             </div>
-            <div>{item.price}원</div>
+            <div>{item.price.toLocaleString("ko-KR")}원</div>
           </div>
         );
       })}

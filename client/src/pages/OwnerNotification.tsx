@@ -108,7 +108,7 @@ function Body({ alarms }: BodyProps) {
                 );
               })}
               <div className="text-[1rem]">
-                결제 포인트 : {alarm.totalPrice}원
+                결제 포인트 : {alarm.totalPrice.toLocaleString("ko-KR")}원
               </div>
               <div className="text-[0.5rem]">{formattedCreatedAt}</div>
             </div>
