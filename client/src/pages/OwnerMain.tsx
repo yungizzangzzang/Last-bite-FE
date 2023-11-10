@@ -82,13 +82,9 @@ function Body({
     setShowDropdown((prev) => !prev);
   };
 
-  const editItem = (index: number) => {
-    console.log(`Editing item at index ${index}`);
-  };
+  const editItem = (index: number) => {};
 
-  const deleteItem = (index: number) => {
-    console.log(`Deleting item at index ${index}`);
-  };
+  const deleteItem = (index: number) => {};
 
   return (
     <>

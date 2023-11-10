@@ -68,7 +68,6 @@ function Body({ items }: { items: any }) {
         <NotFound content="주문한 내역이 없어요!" />
       ) : (
         items?.map((item: any) => {
-          console.log(item);
           return (
             <div
               key={item.itemId}

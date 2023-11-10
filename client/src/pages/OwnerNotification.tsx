@@ -43,7 +43,6 @@ function OwnerNotification() {
 
     if (socket) {
       socket.on("orderAlarmToOwner", (data: Alarm) => {
-        console.log("주문 알림 데이터:", data);
         setAlarms((prevAlarms) => [...prevAlarms, data]);
       });
     }

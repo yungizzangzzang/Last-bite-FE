@@ -50,9 +50,7 @@ function App() {
         console.log("소켓 연결 실패");
       });
 
-      socketInstance.on("connect", () => {
-        console.log("소켓 연결 성공");
-      });
+      socketInstance.on("connect", () => {});
 
       if (localStorage.getItem("user")) {
         const user = JSON.parse(localStorage.getItem("user")!);

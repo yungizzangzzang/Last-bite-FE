@@ -34,7 +34,6 @@ function Notification() {
 
       socket.on("alarmToFavoriteClient", (alarm) => {
         setAlarms((currentAlarms) => [...currentAlarms, alarm]);
-        console.log(alarm);
       });
 
       return () => {

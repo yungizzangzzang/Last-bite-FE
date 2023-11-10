@@ -12,7 +12,6 @@ export const fetchAllStores = async (
   const response = await getAPI(
     `/stores/?longitude=${longitude}&latitude=${latitude}`
   );
-  console.log(response);
   return response.data.data;
 };
 
