@@ -71,23 +71,33 @@ function Body() {
       <div
         className={`w-full h-full ${styles.headerMargin} ${styles.bottomMargin} overflow-auto`}
       >
-        {likedStores.map((item: any, index: number) => (
-          <div
-            key={item.storeId}
-            onClick={() => navigate("/store/1")}
-            className={`w-full h-[12%] p-2 flex items-center border-b-2 border-[#C3CFD9] gap-2 ${
-              index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"
-            }`}
-          >
-            <div className="w-[25%] h-full rounded-md bg-blue-300">
-              {item.imgurl}
+        {likedStores.map((store: any, index: number) => {
+          console.log(store);
+          return (
+            <div
+              key={store.storeId}
+              onClick={() => navigate(`/store/${store.storeId}`)}
+              className={`cursor-pointer w-full h-[12%] p-2 flex items-center border-b-2 border-[#C3CFD9] gap-2 ${
+                index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"
+              }`}
+            >
+              <div className="w-[25%] h-full rounded-md">
+                <img
+                  className="rounded-md object-cover h-full"
+                  src={
+                    store.imgUrl ??
+                    "https://mys3image.s3.ap-northeast-2.amazonaws.com/whale.png"
+                  }
+                  alt="store_image"
+                />
+              </div>
+              <div>
+                <div className="font-semibold">{store.name}</div>
+                <div className="text-[0.75rem]">{store.address}</div>
+              </div>
             </div>
-            <div>
-              <div className="font-semibold">{item.name}</div>
-              <div className="text-[0.75rem]">{item.address}</div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </>
   );

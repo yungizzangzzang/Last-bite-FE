@@ -83,7 +83,7 @@ function Body({ items }: { items: any }) {
                   <div className="w-[100px] h-[100px] flex justify-center items-center rounded-md">
                     <img
                       className="w-[100px] h-[100px] rounded-md object-cover"
-                      src="https://mys3image.s3.ap-northeast-2.amazonaws.com/ddeok_bok_gi.jpg"
+                      src={item.storeImage}
                       alt="store_image"
                     />
                   </div>

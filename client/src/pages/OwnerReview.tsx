@@ -64,7 +64,7 @@ function Header({ storeId, store }: { storeId: string; store: any }) {
         className="px-2 flex gap-2 items-center"
       >
         <AiOutlineArrowLeft />
-        <span> 종훈 떡볶이</span>
+        <span> {store.name}</span>
       </div>
     </div>
   );
@@ -77,7 +77,7 @@ function Body({ reviews }: { reviews: any }) {
     >
       {reviews.map((review: any) => {
         return (
-          <div className="flex flex-col gap-2 border-b-2 border-[#C3CFD9] p-2">
+          <div className="flex flex-col gap-2 border-b-2 border-[#C3CFD9] p-6">
             <div className="font-semibold">{review.nickname}</div>
             <div>{"⭐️".repeat(review.star)}</div>
             <div>{review.content}</div>

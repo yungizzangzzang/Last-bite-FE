@@ -192,6 +192,10 @@ function BodyContent({ contentType }: { contentType: string }) {
           const { longitude, latitude } = position.coords;
           setLocation({ longitude, latitude });
           setLocationLoading(false);
+          localStorage.setItem(
+            "location",
+            JSON.stringify({ longitude, latitude })
+          );
         },
         (error) => {
           switch (error.code) {
@@ -203,6 +207,11 @@ function BodyContent({ contentType }: { contentType: string }) {
               setLocationLoading(false);
               break;
           }
+        },
+        {
+          enableHighAccuracy: false,
+          timeout: 10000,
+          maximumAge: 600000,
         }
       );
     } else {
@@ -235,7 +244,7 @@ function BodyContent({ contentType }: { contentType: string }) {
       return;
     }
 
-    navigate(contentType === "nearBy" ? "/nearby" : "/favorite");
+    navigate(contentType === "nearBy" ? "/nearby/0" : "/favorite");
   };
 
   const storesInfo = useQuery(
@@ -260,63 +269,88 @@ function BodyContent({ contentType }: { contentType: string }) {
   }
   return (
     <div className="w-full flex flex-col px-2">
-      <div
-        className="cursor-pointer text-[14px] h-[10%] flex items-center px-2 mt-2 mb-[4px] font-semibold"
-        onClick={handleContentClick}
-      >
-        {contentType === "nearBy" ? "내 주변 핫딜" : "단골 가게 핫딜"}
-      </div>
       {contentType === "nearBy" ? (
-        <div className="grid grid-cols-3 gap-2 w-full overflow-hidden bg-white p-2 rounded-md shadow-sm">
-          {storesInfo?.data?.stores?.splice(0, 3).map((store: any) => {
-            return (
-              <div
-                key={store.id}
-                className="cursor-pointer flex flex-col justify-center rounded-full py-1"
-                onClick={() => navigate(`/store/${store.id}`)}
-              >
-                <div className="flex w-full items-center justify-center">
-                  <img
-                    className="rounded-md"
-                    src="https://mys3image.s3.ap-northeast-2.amazonaws.com/ddeok_bok_gi.jpg"
-                    alt="store_image"
-                  />
-                </div>
-                <div className="flex w-full items-center text-black text-[12px] font-semibold">
-                  {store.name}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : isAuthenticated ? (
-        <div className="grid grid-cols-3 gap-2 w-full overflow-hidden bg-white p-2 rounded-md shadow-sm">
-          {likedStores.map((store: any) => {
-            return (
-              <div
-                key={store.id}
-                className="cursor-pointer w-full justify-center gap-2"
-                onClick={() => navigate(`/store/${store.id}`)}
-              >
-                <div className="flex flex-col">
-                  <div className="flex items-center justify-center">
+        <div className="bg-white rounded-md mt-4">
+          <div
+            className="cursor-pointer text-[14px] h-[10%] flex items-center px-2 mt-2 mb-[4px] font-semibold"
+            onClick={handleContentClick}
+          >
+            내 주변 핫딜
+          </div>
+          <div className="grid grid-cols-3 gap-2 w-full overflow-hidden p-2 ">
+            {storesInfo?.data?.stores?.slice(0, 3).map((store: any) => {
+              return (
+                <div
+                  key={store.id}
+                  className="cursor-pointer flex flex-col justify-center rounded-full py-1"
+                  onClick={() => navigate(`/store/${store.id}`)}
+                >
+                  <div className="flex w-full items-center justify-center">
                     <img
                       className="rounded-md"
-                      src="https://mys3image.s3.ap-northeast-2.amazonaws.com/ddeok_bok_gi.jpg"
+                      src={
+                        store.imgUrl ??
+                        "https://mys3image.s3.ap-northeast-2.amazonaws.com/whale.png"
+                      }
                       alt="store_image"
                     />
                   </div>
-                  <div className="flex items-center text-[12px] font-semibold">
+                  <div className="flex w-full items-center text-black text-[12px] font-semibold">
                     {store.name}
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+        </div>
+      ) : isAuthenticated ? (
+        <div className="bg-white rounded-md shadow-sm mt-4">
+          <div
+            className="cursor-pointer text-[14px] h-[10%] flex items-center px-2 mt-2 mb-[4px] font-semibold"
+            onClick={handleContentClick}
+          >
+            단골가게 핫딜
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 w-full overflow-hidden p-2">
+            {likedStores.map((store: any) => {
+              return (
+                <div
+                  key={store.storeId}
+                  className="cursor-pointer w-full justify-center gap-2"
+                  onClick={() => navigate(`/store/${store.storeId}`)}
+                >
+                  <div className="flex flex-col h-full">
+                    <div className="flex items-center justify-center h-full">
+                      <img
+                        className="rounded-md object-cover h-full"
+                        src={
+                          store.imgUrl ??
+                          "https://mys3image.s3.ap-northeast-2.amazonaws.com/whale.png"
+                        }
+                        alt="store_image"
+                      />
+                    </div>
+                    <div className="flex items-center text-[12px] font-semibold">
+                      {store.name}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       ) : (
-        <div className="gap-2 w-full overflow-hidden bg-white p-2 rounded-md shadow-sm">
-          <NotFound content="로그인 후 단골가게를 등록해주세요!" />
+        <div className="bg-white rounded-md shadow-sm mt-4">
+          <div
+            className="cursor-pointer text-[14px] h-[10%] flex items-center px-2 mt-2 mb-[4px] font-semibold"
+            onClick={handleContentClick}
+          >
+            단골가게 핫딜
+          </div>
+          <div className="gap-2 w-full overflow-hidden bg-white p-2 rounded-md shadow-sm">
+            <NotFound content="로그인 후 단골가게를 등록해주세요!" />
+          </div>
         </div>
       )}
     </div>

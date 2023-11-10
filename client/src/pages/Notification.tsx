@@ -6,7 +6,6 @@ import Footer from "../components/Layout/Footer";
 import Layout from "../components/Layout/Layout";
 import NotFound from "../components/NotFound";
 import { SocketContext } from "../contexts/SocketContext";
-import { formatCreatedAt } from "../utils/dateFormat";
 import { styles } from "../utils/style";
 
 function Notification() {
@@ -29,9 +28,7 @@ function Notification() {
 
   useEffect(() => {
     if (socket) {
-      socket.on("itemRegistered", (item) => {
-        console.log(item);
-      });
+      socket.on("itemRegistered", (item) => {});
 
       socket.on("alarmToFavoriteClient", (alarm) => {
         setAlarms((currentAlarms) => [...currentAlarms, alarm]);
@@ -80,7 +77,15 @@ function Body({ alarms }: { alarms: any }) {
       {alarms.length ? (
         <>
           {alarms.map((alarm: any, index: number) => {
-            const formattedCreatedAt = formatCreatedAt(alarm.createdAt);
+            const utcDate = new Date(alarm.createdAt);
+
+            // 현지 시간으로 변환
+            utcDate.setMinutes(utcDate.getMinutes());
+
+            // 원하는 형식으로 포맷
+            const formattedCreatedAt = `${utcDate.getFullYear()}.${
+              utcDate.getMonth() + 1
+            }.${utcDate.getDate()} ${utcDate.getHours()}시 ${utcDate.getMinutes()}분`;
 
             return (
               <div

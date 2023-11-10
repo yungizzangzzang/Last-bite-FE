@@ -81,7 +81,7 @@ function Header({ storeId, store }: { storeId: string; store: any }) {
 
   return (
     <div className={styles.header}>
-      <div className="px-2 flex gap-2 items-center">
+      <div className="px-2 flex gap-[4px] items-center">
         <AiOutlineArrowLeft onClick={() => navigate(-1)} />
         <span> {store.store.name}</span>
         {isLiked ? (
@@ -99,7 +99,7 @@ function Body({ reviews }: { reviews: any }) {
     <div className={`overflow-auto ${styles.headerMargin} mb-24`}>
       {reviews.map((review: any) => {
         return (
-          <div className="flex flex-col gap-2 border-b-2 border-[#C3CFD9] p-2">
+          <div className="flex flex-col gap-2 border-b-2 border-[#C3CFD9] p-6">
             <div className="font-semibold">{review.nickname}</div>
             <div>{"⭐️".repeat(review.star)}</div>
             <div>{review.content}</div>

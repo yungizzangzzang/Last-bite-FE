@@ -44,7 +44,7 @@ function StoreDetailHeader({
   return (
     <div className={styles.header}>
       <div className="flex w-full items-center justify-between ">
-        <div className="px-2 flex gap-2 items-center">
+        <div className="px-2 flex items-center gap-1">
           <div
             onClick={() => {
               navigate(-1);

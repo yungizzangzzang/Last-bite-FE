@@ -90,14 +90,17 @@ function Body({ nearbyStores }: any) {
           <div
             key={store.id}
             onClick={() => navigate(`/store/${store.id}`)}
-            className={`w-full h-[12%] p-2 flex items-center border-b-2 border-[#C3CFD9] gap-2 ${
+            className={`cursor-pointer w-full h-[12%] p-2 flex items-center border-b-2 border-[#C3CFD9] gap-2 ${
               index % 2 === 0 ? "bg-[#F7F9FA]" : "bg-white"
             }`}
           >
             <div className="w-[80px] h-full">
               <img
-                className="w-[80px] h-[80px]"
-                src={store.imgUrl}
+                className="w-[80px] h-[80px] rounded-md"
+                src={
+                  store.imgUrl ??
+                  "https://mys3image.s3.ap-northeast-2.amazonaws.com/whale.png"
+                }
                 alt="store_image"
               />
             </div>

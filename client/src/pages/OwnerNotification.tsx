@@ -82,7 +82,6 @@ function Header() {
 }
 
 function Body({ alarms }: BodyProps) {
-  console.log(alarms);
   return (
     <>
       <div
