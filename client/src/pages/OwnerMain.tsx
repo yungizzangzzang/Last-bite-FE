@@ -60,42 +60,6 @@ function OwnerMain() {
 
 export default OwnerMain;
 
-function Header({ storeId, store }: { storeId: string; store: any }) {
-  const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  return (
-    <div className={`${styles.header}`}>
-      <div
-        onClick={() => {
-          navigate(-1);
-        }}
-        className="flex gap-2 items-center justify-between"
-      >
-        <AiOutlineArrowLeft className="cursor-pointer" />
-        <span className=" w-[136px] cursor-default"> {store.name}</span>
-      </div>
-      <button
-        onClick={() => navigate(`/owner/review/${storeId}`)}
-        className="h-6 text-white text-[0.75rem] rounded-sm bg-[#FF385C] px-2 ml-[2px]"
-      >
-        가게 리뷰
-      </button>
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="h-6 text-white text-[0.75rem] rounded-sm bg-[#788796] px-2 ml-[2px]"
-      >
-        알림 보내기
-      </button>
-      <NotificationModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        storeId={+storeId}
-      />
-    </div>
-  );
-}
-
 function Body({
   items,
   storeId,
