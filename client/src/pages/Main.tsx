@@ -287,7 +287,7 @@ function BodyContent({ contentType }: { contentType: string }) {
                 >
                   <div className="flex w-full items-center justify-center">
                     <img
-                      className="rounded-md"
+                      className="rounded-md h-[90px]"
                       src={
                         store.imgUrl ??
                         "https://mys3image.s3.ap-northeast-2.amazonaws.com/whale.png"
@@ -323,7 +323,7 @@ function BodyContent({ contentType }: { contentType: string }) {
                   <div className="flex flex-col h-full">
                     <div className="flex items-center justify-center h-full">
                       <img
-                        className="rounded-md object-cover h-full"
+                        className="rounded-md object-cover h-[90px]"
                         src={
                           store.imgUrl ??
                           "https://mys3image.s3.ap-northeast-2.amazonaws.com/whale.png"
