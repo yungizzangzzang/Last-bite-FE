@@ -106,7 +106,7 @@ function Body({ alarms }: { alarms: any }) {
         </>
       ) : (
         <div className={`h-screen pb-[52px]`}>
-          <NotFound content="핫딜 진행중인 단골가게가 없어요!" />
+          <NotFound content="단골 가게에서 온 알림이 없어요!" />
         </div>
       )}
     </div>
